@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Acl\RoleController;
 use App\Http\Controllers\User\UserProfileController;
 
 /*
@@ -28,3 +29,9 @@ Route::get('user/profile_create',[UserProfileController::class,'create'])->name(
 Route::get('user/profile_edit',[UserProfileController::class,'edit'])->name('profile_edit');  //->middleware(['password.confirm'])->name('profile');
 Route::post('user/profile',[UserProfileController::class,'store'])->name('profile');  //->middleware(['password.confirm'])->name('profile');
 Route::post('user/profile_update/{id}',[UserProfileController::class,'update'])->name('profile_update');  //->middleware(['password.confirm'])->name('profile');
+
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    // Route::resource('users', UserController::class);
+});
