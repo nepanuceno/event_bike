@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Acl\RoleController;
+use App\Http\Controllers\Acl\PermissionController;
 use App\Http\Controllers\User\UserProfileController;
 
 /*
@@ -33,5 +34,6 @@ Route::post('user/profile_update/{id}',[UserProfileController::class,'update'])-
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
     // Route::resource('users', UserController::class);
 });

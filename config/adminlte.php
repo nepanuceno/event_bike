@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
 
@@ -268,7 +268,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Papéis',
-                    'url'  => "/roles.index",
+                    'url'  => "/roles",
                 ],
                 // [
                 //     'text'    => 'level_one',
@@ -295,8 +295,8 @@ return [
                 //     ],
                 // ],
                 [
-                    'text' => 'PermissÃµes',
-                    'url'  => '#',
+                    'text' => 'Permissões',
+                    'url'  => 'permissions',
                 ],
             ],
         ],

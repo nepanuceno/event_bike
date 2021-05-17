@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 @section('content')
+
+@if(isset($profile))
 <!-- Profile Image -->
 <div class="card card-primary card-outline">
     <div class="card-body box-profile">
@@ -54,4 +56,7 @@
     <!-- /.card-body -->
 </div>
 <!-- /.card -->
+@else
+    <div class="alert alert-info" role="alert">Usuário sem Informações complementares</div>
+@endif
 @endsection

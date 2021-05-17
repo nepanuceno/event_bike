@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Profile;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -49,7 +50,11 @@ class User extends Authenticatable
 
     public function adminlte_image()
     {
-        return "/photos/".$this->profile->photo;
+        if(isset($this->profile->photo))
+            return "/photos/".$this->profile->photo;
+        else {
+            return "/photos/user.png";
+        }
     }
 
 
