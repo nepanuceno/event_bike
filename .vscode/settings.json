@@ -7,5 +7,6 @@
             "database": "${workspaceFolder:event_bike}/database/database.sqlite"
         }
     ],
-    "sqltools.useNodeRuntime": true
+    "sqltools.useNodeRuntime": true,
+    "files.encoding": "utf8"
 }

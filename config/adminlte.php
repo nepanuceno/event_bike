@@ -263,12 +263,13 @@ return [
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
         [
-            'text'    => 'Papéis e Permissões',
+            'text'    => 'Funções e Permissões',
             'icon'    => 'fas fa-fw fa-key',
             'submenu' => [
                 [
-                    'text' => 'Papéis',
+                    'text' => 'Funções',
                     'url'  => "/roles",
+                    'icon'  => "fa fa-theater-masks",
                 ],
                 // [
                 //     'text'    => 'level_one',
@@ -297,6 +298,7 @@ return [
                 [
                     'text' => 'Permissões',
                     'url'  => 'permissions',
+                    'icon'  => "fa fa-user-lock",
                 ],
             ],
         ],
