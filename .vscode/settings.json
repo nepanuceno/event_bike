@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "EventBike",
+            "database": "${workspaceFolder:event_bike}/database/database.sqlite"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
