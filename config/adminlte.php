@@ -300,6 +300,11 @@ return [
                     'url'  => 'permissions',
                     'icon'  => "fa fa-user-lock",
                 ],
+                [
+                    'text' => 'Função por Usuário',
+                    'url'  => 'role_user',
+                    'icon'  => "fa fa-user-lock",
+                ],
             ],
         ],
         // ['header' => 'labels'],

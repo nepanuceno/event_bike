@@ -58,5 +58,6 @@
 <!-- /.card -->
 @else
     <div class="alert alert-info" role="alert">Usuário sem Informações complementares</div>
+    <a class="btn btn-link" href="profile_create">Cadastrar Informações Complementares</a>
 @endif
 @endsection

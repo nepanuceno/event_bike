@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Acl\RoleController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Acl\RoleUserController;
 use App\Http\Controllers\Acl\PermissionController;
 use App\Http\Controllers\User\UserProfileController;
 
@@ -36,4 +38,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
     // Route::resource('users', UserController::class);
+    Route::resource('role_user', RoleUserController::class);
+
+    Route::get('search_user', [UserController::class, 'search']);
 });
