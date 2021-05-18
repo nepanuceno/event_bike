@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Acl\RoleController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Event\EventController;
 use App\Http\Controllers\Acl\RoleUserController;
 use App\Http\Controllers\Acl\PermissionController;
 use App\Http\Controllers\User\UserProfileController;
@@ -42,4 +43,6 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('search_user', [UserController::class, 'search']);
     Route::resource('user', UserController::class);
+
+    Route::resource('event', EventController::class);
 });

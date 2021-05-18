@@ -102,8 +102,28 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        // dd($user);
+        if($user) {
+            $photo = public_path('photos/'.$user->profile->photo);
+            if(file_exists($photo)) {
 
-        return back()->with('success','Usuário excluído com sucesso');
+                try {
+                    unlink($photo);
+                } catch (Throwable $e) {
+                    report($e);
+                    return back()->with('error',$e);
+                }
+            }
+
+            try {
+                $user->delete();
+            } catch (Throwable $e) {
+                report($e);
+                return back()->with('error',$e);
+            }
+            return back()->with('success','Usuário Ecluído com sucesso');
+        } else {
+            return back()->with('error','Usuário não encontrado');
+        }
+
     }
 }
