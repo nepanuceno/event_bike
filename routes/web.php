@@ -41,4 +41,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('role_user', RoleUserController::class);
 
     Route::get('search_user', [UserController::class, 'search']);
+    Route::resource('user', UserController::class);
 });

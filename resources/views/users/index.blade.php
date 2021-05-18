@@ -6,31 +6,24 @@
 <div class="row">
 
     <div class="col-lg-12 margin-tb">
-
         <div class="pull-left">
-
-            <h2>Users Management</h2>
-
+            <h2>Gerenciamento de Usuários</h2>
         </div>
 
         <div class="pull-right">
-
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
-
+            <a class="btn btn-success" href="{{ route('user.create') }}"> Criar novo Usuário</a>
         </div>
-
     </div>
-
 </div>
 
 
 @if ($message = Session::get('success'))
 
-<div class="alert alert-success">
+    <p id="message" style="display: none;">{{ $message }}</p>
 
-  <p>{{ $message }}</p>
-
-</div>
+    <!-- <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div> -->
 
 @endif
 
@@ -76,19 +69,12 @@
     </td>
 
     <td>
-
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-
+       <a class="btn btn-info" href="{{ route('user.show',$user->id) }}">Ver</a>
+       <!-- <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a> -->
+        {!! Form::open(['method' => 'DELETE','route' => ['user.destroy', $user->id],'style'=>'display:inline']) !!}
+            {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
-
     </td>
-
   </tr>
 
  @endforeach
@@ -99,6 +85,39 @@
 {!! $data->render() !!}
 
 
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
+@endsection
 
+@section('js')
+    <script>
+        $('.btn-danger').click(function(event){
+            event.preventDefault(); //nao deixa o botao fazer o submit
+            Swal.fire({
+                title: 'Tem certeza disso?',
+                text: "Esta ação não poderá ser revertida",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, excluir!'
+            }).then((result) => {
+                if (result.value) {
+                    this.parentNode.submit(); //submit do pai(form) do botao acionado
+                } else {
+                    console.log('Error', result)
+                }
+            });
+
+        });
+    </script>
+
+    @if ($message = Session::get('success'))
+        <script>
+            let message = document.querySelector('#message').textContent;
+            Swal.fire(
+                'Excluído!',
+                message,
+                'success'
+            )
+        </script>
+    @endif
 @endsection

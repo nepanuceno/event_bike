@@ -38,7 +38,16 @@ class RoleUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $user = User::find($request->user);
+            $user->assignRole([$request->roles]);
+
+            return back()->with('success','Vínculo efetivado com sucesso!');
+        } catch (Throwable $e) {
+            report($e);
+            return back()->with('error','Erro: '.$e);
+            // return false;
+        }
     }
 
     /**

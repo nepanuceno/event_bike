@@ -244,12 +244,12 @@ return [
         // ['header' => 'account_settings'],
         [
             'text' => 'Usuarios',
-            'url'  => 'admin/settings',
+            'url'  => 'user',
             'icon' => 'fas fa-fw fa-users',
         ],
         [
             'text' => 'Eventos',
-            'url'  => 'admin/settings',
+            'url'  => 'events',
             'icon' => 'fas fa-fw fa-flag-checkered',
         ],
         [

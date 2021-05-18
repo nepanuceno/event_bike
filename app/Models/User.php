@@ -53,13 +53,13 @@ class User extends Authenticatable
         if(isset($this->profile->photo))
             return "/photos/".$this->profile->photo;
         else {
-            return "/photos/user.png";
+            return "/photos/sem-foto.jpg";
         }
     }
-
 
     public function profile()
     {
         return $this->hasOne(Profile::class);
     }
+
 }

@@ -13,8 +13,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data = User::orderBy('id','DESC')->paginate(5);
+
+        return view('users.index',compact('data'))
+
+            ->with('i', ($request->input('page', 1) - 1) * 5);
 
     }
 
@@ -59,7 +64,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('users.show',compact('user'));
     }
 
     /**
@@ -93,6 +100,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        // dd($user);
+
+        return back()->with('success','Usuário excluído com sucesso');
     }
 }
