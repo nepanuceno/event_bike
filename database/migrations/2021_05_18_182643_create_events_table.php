@@ -18,15 +18,15 @@ class CreateEventsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('modality_id');
 
-            $table->name();
+            $table->string('name');
             $table->dateTime('date_event');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->string('adress');
             $table->string('logo');
 
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('modality_id')->references('id')->on('modalities');
+            $table->foreign('category_id')->references('id')->on('event_categories');
+            $table->foreign('modality_id')->references('id')->on('event_modalities');
 
             $table->timestamps();
         });

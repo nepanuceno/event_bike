@@ -254,7 +254,7 @@ return [
         ],
         [
             'text' => 'Categorias',
-            'url'  => 'admin/settings',
+            'url'  => 'category',
             'icon' => 'fas fa-fw fa-bicycle',
         ],
         // [
@@ -361,7 +361,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => transliterator_create_from_rules,
+            'active' => 'transliterator_create_from_rules',
             'files' => [
                 [
                     'type' => 'js',

@@ -13,7 +13,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="" method="POST" name="frm_category" id="frm_category">
+            <form action="{{ url('category') }}" method="POST" name="frm_category" id="frm_category">
                 {!! csrf_field() !!}
 
                 <div class="card-body">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Salvar Evento</button>
+                  <button type="submit" class="btn btn-primary">Salvar Categoria</button>
                 </div>
             </form>
         </div>

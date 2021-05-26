@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Event;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\EventCategory;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = EventCategory::all();
+        return view('events.category.index', compact('categories'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('events.category.create_category');
     }
 
     /**
@@ -35,7 +38,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:permissions,name',
+        ]);
+
+        EventCategory::create(['name'=>$request->input('name')]);
+
+        return redirect()->route('category.index')->with('success','Categoria criada com sucesso');
     }
 
     /**
@@ -57,7 +66,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = EventCategory::find($id);
+
+        return view('events.category.edit_category', compact('category'));
     }
 
     /**
@@ -69,7 +80,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $permission = EventCategory::find($id);
+        $permission->name = $request->input('name');
+        $permission->save();
+
+        return redirect()->route('category.index')
+            ->with('success','Categoria alterada com sucesso!');
     }
 
     /**
@@ -80,6 +100,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table("event_categories")->where('id',$id)->delete();
+        return redirect()->route('category.index')
+            ->with('success','Categoria excluída com sucesso!');
     }
 }
