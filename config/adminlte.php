@@ -257,6 +257,11 @@ return [
             'url'  => 'category',
             'icon' => 'fas fa-fw fa-bicycle',
         ],
+        [
+            'text' => 'Modalidades',
+            'url'  => 'modality',
+            'icon' => 'fas fa-fw fa-mountain',
+        ],
         // [
         //     'text' => 'change_password',
         //     'url'  => 'admin/settings',

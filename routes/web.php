@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Acl\RoleController;
+use App\Http\Controllers\ModalityController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Event\EventController;
 use App\Http\Controllers\Acl\RoleUserController;
@@ -48,4 +49,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('event', EventController::class);
 
     Route::resource('category', CategoryController::class);
+
+    Route::resource('modality', ModalityController::class);
 });
