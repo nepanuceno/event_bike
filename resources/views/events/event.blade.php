@@ -13,7 +13,9 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form>
+            <form action="" methos="POST" name="frm_event" id="frm_event">
+                {!! csrf_field() !!}
+
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Nome do Evento</label>
@@ -66,7 +68,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Criar Evento</button>
+                  <button type="submit" class="btn btn-primary">Salvar Evento</button>
                 </div>
             </form>
         </div>

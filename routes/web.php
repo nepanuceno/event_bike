@@ -6,6 +6,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Event\EventController;
 use App\Http\Controllers\Acl\RoleUserController;
 use App\Http\Controllers\Acl\PermissionController;
+use App\Http\Controllers\Event\CategoryController;
 use App\Http\Controllers\User\UserProfileController;
 
 /*
@@ -45,4 +46,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('user', UserController::class);
 
     Route::resource('event', EventController::class);
+
+    Route::resource('category', CategoryController::class);
 });

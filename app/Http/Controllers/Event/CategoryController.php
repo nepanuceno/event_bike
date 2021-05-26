@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Event;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EventController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('events.event');
+        //
     }
 
     /**
