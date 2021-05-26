@@ -151,9 +151,9 @@ class UserProfileController extends Controller
                     unlink($old_photo);
                 }
             }
-            return back()->with('success','AlteraÁ„o de Cadastro Realizado com sucesso');
+            return back()->with('success','Altera√ß√£o de Cadastro Realizado com sucesso');
         } else {
-            return back()->with('errors','Erro na alteraÁ„o');
+            return back()->with('errors','Erro na altera√ß√£o');
         }
     }
 

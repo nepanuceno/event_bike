@@ -9,7 +9,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Criar Evento<?php</h3>
+                <h3 class="card-title">Criar Evento</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -42,14 +42,25 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="modality ">Modalidade</label>
+                        <input type="text" class="form-control" id="modality " name="modality ">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categories"></label>
+                    </div>
+
+                    <div class="form-group">
                         <label for="logo">Logo do Evento</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="logo" name="logo">
+                                <input type="file" onchange="readURL(this);" class="custom-file-input" id="logo" name="logo">
                                 <label class="custom-file-label" for="exampleInputFile">Escolher Arquivo</label>
                             </div>
                         </div>
                     </div>
+
+                    <img class="float-right img-fluid img-thumbnail" src="#" id="img" alt="" style="display:none;">
 
                 </div>
                 <!-- /.card-body -->
@@ -63,8 +74,8 @@
     </div>
 </div>
 
-
 @endsection
 
 @section('js')
+<script src="{{ asset('js/preview.js') }}"></script>
 @endsection

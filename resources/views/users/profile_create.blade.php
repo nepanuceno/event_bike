@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 p-2">
-                                <img class="float-right img-fluid img-thumbnail" src="{{ isset($user->photo) ? '/photos/'.$user->photo : '/photos/sem-foto.jpg'}}" id="img" style="max-width:180px; max-height:180px">
+                                <img class="float-right img-fluid img-thumbnail" src="{{ isset($user->photo) ? '/photos/'.$user->photo : '/photos/sem-foto.jpg'}}" id="img" style="max-width:180px; max-height:180px; display:none;">
                             </div>
                         </div>
                     </div>
@@ -143,18 +143,5 @@
 @endsection
 
 @section('js')
-<script>
-    //Preview image
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#img').attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
+<script src="{{ asset('js/preview.js') }}"></script>
 @endsection
