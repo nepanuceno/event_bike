@@ -15,7 +15,7 @@
 @endif
 <div class="col-md-8">
     <div class="card">
-        <div class="card-header bg-primary">
+        <div class="card-header bg-dark">
             <h3>Criar nova Função</h3>
         </div>
 

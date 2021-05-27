@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="card">
-  <div class="card-header bg-primary">
+  <div class="card-header bg-dark">
     <h3>{{ $role->name }}</h3>
   </div>
   <div class="card-body">

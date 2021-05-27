@@ -27,7 +27,7 @@
     <!-- left column -->
     <div class="col-md-6">
         <!-- general form elements -->
-        <div class="card card-primary">
+        <div class="card card-dark">
             <div class="card-header">
                 <h3 class="card-title">Editar Categoria</h3>
             </div>
@@ -44,10 +44,9 @@
 
                     </div>
                 </div>
-                <div class="card-footer">
                     <div class="card-footer">
                         <div class="clearfix">
-                            <button type="submit" class="btn btn-secondary float-left">Salvar Categoria</button>
+                            <button type="submit" class="btn btn-primary float-left">Salvar Categoria</button>
                             <a href="{{ route('category.index') }}" type="button" class="btn btn-secondary float-right text-white">Cancelar</a>
                         </div>
                     </div>

@@ -20,7 +20,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header bg-primary">
+            <div class="card-header bg-dark">
                 <h3>Criar nova Permissão</h3>
             </div>
             <div class="card-body">

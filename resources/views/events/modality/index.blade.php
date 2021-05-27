@@ -18,7 +18,10 @@
 
 @if(!empty($modalities))
 
-<table class="table table-bordered">
+<div class="card">
+  <h5 class="card-header bg-dark">Gerenciamento de Modalidades</h5>
+  <div class="card-body">
+  <table class="table table-bordered">
   <tr>
      <th width="25px">No</th>
      <th>Nome</th>
@@ -41,6 +44,10 @@
     </tr>
     @endforeach
 </table>
+  </div>
+</div>
+
+
 @else
     <div class="alert alert-warning alert-dismissible fade show pb-3">
         <p>Não existem Modalidades cadastradas</p>

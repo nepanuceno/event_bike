@@ -25,7 +25,7 @@
     <!-- left column -->
     <div class="col-md-6">
         <!-- general form elements -->
-        <div class="card card-primary">
+        <div class="card card-dark">
             <div class="card-header">
                 <h3 class="card-title">Criar Categoria</h3>
             </div>

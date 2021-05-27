@@ -13,7 +13,7 @@
 </div>
 
 <div class="card">
-    <div class="card-header bg-primary">
+    <div class="card-header bg-dark">
     <h3>Gerenciamento de Permissões</h3>
     </div>
     <div class="card-body">

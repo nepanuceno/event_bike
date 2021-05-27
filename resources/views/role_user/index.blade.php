@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card">
-            <h5 class="card-header bg-primary">Funções por usuário</h5>
+            <h5 class="card-header bg-dark">Funções por usuário</h5>
             <div class="card-body">
                 <form action="{{ route('role_user.store') }}" method="post">
                     {!! csrf_field() !!}

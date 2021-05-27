@@ -6,7 +6,7 @@
 <div class="col-md-8">
 
     <div class="card">
-        <div class="card-header bg-primary">
+        <div class="card-header bg-dark">
             <h3>Editar Função</h3>
         </div>
         <div class="card-body">
