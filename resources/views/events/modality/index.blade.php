@@ -60,7 +60,11 @@
 @section('js')
     <script src="js/sweetalert.js"></script>
     @if ($message = Session::get('success'))
-        <script>MessageAlert('message');</script>
+    <script>MessageAlert(['message','success']);</script>
+    @endif
+
+    @if ($message = Session::get('error'))
+        <script>MessageAlert(['message','error']);</script>
     @endif
 
     <script>deleteAlert('btn-danger')</script>

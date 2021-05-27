@@ -24,33 +24,39 @@
 
     <div class="row">
         <div class="col-md-8">
-            <form action="{{ route('role_user.store') }}" method="post">
-                {!! csrf_field() !!}
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label>Ususário</label>
-                            <select class="select2bs4 select_input_users" id="user" name="user" data-placeholder="Pesquise por um usuário" style="width: 100%;">
-                            <option value="null">Pesquise por um usuário</option>
-                            </select>
+            <div class="card">
+            <h5 class="card-header bg-primary">Funções por usuário</h5>
+            <div class="card-body">
+                <form action="{{ route('role_user.store') }}" method="post">
+                    {!! csrf_field() !!}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Ususário</label>
+                                <select class="select2bs4 select_input_users" id="user" name="user" data-placeholder="Pesquise por um usuário" style="width: 100%;">
+                                <option value="null">Pesquise por um usuário</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Funções para atribuir ao Usuário</label>
+                                <select class="select2 select_input_roles" multiple="multiple" name="roles" id="roles" data-placeholder="Selecione as funções" style="width: 100%;">
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
+                    <hr>
+                    <button class="btn btn-secondary" type="submit">Atribuir Função</button>
 
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label>Funções para atribuir ao Usuário</label>
-                            <select class="select2 select_input_roles" multiple="multiple" name="roles" id="roles" data-placeholder="Selecione as funções" style="width: 100%;">
-                            @foreach ($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->name }}</option>
-                            @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                </form>
+            </div>
+        </div>
 
-                <button class="btn btn-primary" type="submit">Atribuir Função</button>
-
-            </form>
         </div>
 
     </div>

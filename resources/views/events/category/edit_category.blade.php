@@ -45,7 +45,12 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Salvar Categoria</button>
+                    <div class="card-footer">
+                        <div class="clearfix">
+                            <button type="submit" class="btn btn-secondary float-left">Salvar Categoria</button>
+                            <a href="{{ route('category.index') }}" type="button" class="btn btn-secondary float-right text-white">Cancelar</a>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

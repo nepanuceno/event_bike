@@ -25,9 +25,14 @@ function deleteAlert(params = 'btn-danger')
 function MessageAlert(params)
 {
     let message = document.querySelector('#'+params).textContent;
+
+    if(params[1] == 'success') {
+        type_message = "Sucesso"
+    }
+
     Swal.fire(
-        'Excluído!',
+        'Sucesso!',
         message,
-        'success'
+        params[1]
     )
 }

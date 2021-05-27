@@ -3,61 +3,24 @@
 
 @section('content')
 
-<div class="row">
-
-    <div class="col-lg-12 margin-tb">
-
-        <div class="pull-left">
-
-            <h2> Show Role</h2>
-
-        </div>
-
-        <div class="pull-right">
-
-            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="row">
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-
-        <div class="form-group">
-
-            <strong>Name:</strong>
-
-            {{ $role->name }}
-
-        </div>
-
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-
-        <div class="form-group">
-
-            <strong>Permissions:</strong>
-
+<div class="card">
+  <div class="card-header bg-primary">
+    <h3>{{ $role->name }}</h3>
+  </div>
+  <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item"><h4>Permissões</h4></li>
             @if(!empty($rolePermissions))
-
                 @foreach($rolePermissions as $v)
-
-                    <label class="label label-success">{{ $v->name }},</label>
-
+                    <li class="list-group-item">{{ $v->name }}</li>
                 @endforeach
-
             @endif
+        </ul>
+  </div>
 
-        </div>
-
-    </div>
-
+  <div class="card-footer text-muted">
+        <a class="btn btn-secondary" href="{{ route('roles.index') }}"> Voltar</a>
+  </div>
 </div>
 
 @endsection
