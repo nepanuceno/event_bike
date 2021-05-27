@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{ $modalities }}
+
 <div class="row pb-3">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -16,17 +16,7 @@
     </div>
 </div>
 
-@if ($message = Session::get('success'))
-    <div class="alert alert-success alert-dismissible fade show pb-3">
-        <p>{{ $message }}</p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-@endif
-
-
-@if($modalities)
+@if(!empty($modalities))
 
 <table class="table table-bordered">
   <tr>
@@ -61,4 +51,17 @@
 
 @endif
 
+@if ($message = Session::get('success'))
+    <span id="message" style="display: none">{{ $message }}</span>
+@endif
+
+@endsection
+
+@section('js')
+    <script src="js/sweetalert.js"></script>
+    @if ($message = Session::get('success'))
+        <script>MessageAlert('message');</script>
+    @endif
+
+    <script>deleteAlert('btn-danger')</script>
 @endsection

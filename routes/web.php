@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Acl\RoleController;
-use App\Http\Controllers\ModalityController;
+use App\Http\Controllers\Event\ModalityController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Event\EventController;
 use App\Http\Controllers\Acl\RoleUserController;

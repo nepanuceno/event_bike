@@ -3,6 +3,24 @@
 
 @section('content')
 
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> Houve algum problema na sua enrada de dados.<br><br>
+        <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+@endif
+
+@if ($message = Session::get('success'))
+    <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert"><span class="fas fa-close"></span></button>
+            <strong>{{ $message }}</strong>
+    </div>
+@endif
+
 <div class="row">
     <!-- left column -->
     <div class="col-md-6">
@@ -13,7 +31,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="" method="POST" name="frm_category" id="frm_category">
+            <form action="{{ url('modality') }}" method="POST" name="frm_modality" id="frm_modality">
                 {!! csrf_field() !!}
 
                 <div class="card-body">
@@ -23,7 +41,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">SAlvar Modalidade</button>
+                  <button type="submit" class="btn btn-primary">Salvar Modalidade</button>
                 </div>
             </form>
         </div>

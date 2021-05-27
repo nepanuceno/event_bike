@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Event;
 
 use Illuminate\Http\Request;
 use App\Models\EventModality;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ModalityController extends Controller
 {
@@ -16,7 +18,7 @@ class ModalityController extends Controller
     {
         $modalities = EventModality::all();
 
-        view('events.modality.index', compact('modalities'));
+        return view('events.modality.index', compact('modalities'));
     }
 
     /**
@@ -26,7 +28,7 @@ class ModalityController extends Controller
      */
     public function create()
     {
-        //
+        return view('events.modality.create_modality');
     }
 
     /**
@@ -37,7 +39,17 @@ class ModalityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:permissions,name',
+        ]);
+
+        try {
+            EventModality::create(['name'=>$request->input('name')]);
+            return redirect()->back()->with('success','Modalidade criado com sucesso!');
+        } catch (\Throwable $th) {
+            return redirect()->back('error','Erro ao criar a Modalidade! '.$th);
+            //throw $th;
+        }
     }
 
     /**
@@ -59,7 +71,8 @@ class ModalityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $modality = EventModality::find($id);
+        return view('events.modality.edit_modality', compact('modality'));
     }
 
     /**
@@ -71,7 +84,20 @@ class ModalityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        try {
+            $modality = EventModality::find($id);
+
+            $modality->name = $request->input('name');
+            $modality->save();
+
+            return redirect()->route('modality.index')->with('success', 'Modalidade atualizada com sucesso!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Houve algum problema ao atualizar a Modalidade! '.$th);
+        }
     }
 
     /**
@@ -82,6 +108,8 @@ class ModalityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table("event_modalities")->where('id',$id)->delete();
+        return redirect()->route('modality.index')
+            ->with('success','Modalidade excluída com sucesso!');
     }
 }
