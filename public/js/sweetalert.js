@@ -21,6 +21,50 @@ function deleteAlert(params = 'btn-danger')
     });
 }
 
+function confirmeUrlExcludeRoleUserAlert(params)
+{
+    Swal.fire({
+        title: 'Tem certeza?',
+        text: "Após a confirmação positiva o usuário não terá mais as permissões fornecidas por esse Perfil do sistema.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, desvincule o perfil!'
+    }).then((result) => {
+
+        console.log(result);
+        if (result.value) {
+
+            fetch('delete_roles_user/'+params[1]+'/'+params[2]).then(function(response) {
+                if(response.ok) {
+                    Swal.fire(
+                        'Desvinculado!',
+                        'O usuário desvinculado do Perfil',
+                        'success'
+                    )
+                    params[0].remove();//Exclui o botao da div
+
+                } else {
+                  console.log('Network response was not ok.');
+                  Swal.fire(
+                    'Erro ao tentar Desvincular!',
+                    'O usuário não pôde desvinculado do Perfil',
+                    'error'
+                  )
+                }
+            }).catch(function(error) {
+                console.log('There has been a problem with your fetch operation: ' + error.message);
+                Swal.fire(
+                    'Erro ao tentar Desvincular!',
+                    error.message,
+                    'error'
+                  )
+            });
+        }
+    });
+}
+
 
 function MessageAlert(params)
 {

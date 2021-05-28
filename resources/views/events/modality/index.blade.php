@@ -5,9 +5,6 @@
 
 <div class="row pb-3">
     <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Gerenciamento de Modalidades</h2>
-        </div>
         <div class="pull-right">
         @can('manager')
             <a class="btn btn-success" href="{{ route('modality.create') }}"> Criar nova Modalidade</a>

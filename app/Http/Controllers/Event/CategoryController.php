@@ -6,9 +6,24 @@ use Illuminate\Http\Request;
 use App\Models\EventCategory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        // $this->middleware('permission:permission-list|permission-create|permission-edit|permission-delete', ['only' => ['index','store']]);
+        // $this->middleware('permission:permission-create', ['only' => ['create','store']]);
+        // $this->middleware('permission:manager', ['only' => ['index','edit','update']]);
+        // $this->middleware('permission:manager', ['only' => ['destroy']]);
+        // $this->middleware('permission:manager');
+    }
+
     /**
      * Display a listing of the resource.
      *

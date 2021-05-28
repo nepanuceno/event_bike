@@ -32,8 +32,7 @@
                 <td>
                     @can('manager')
                         <a class="btn btn-primary" href="{{ route('category.edit',$category->id) }}">Editar</a>
-                    @endcan
-                    @can('manager')
+
                         {!! Form::open(['method' => 'DELETE','route' => ['category.destroy', $category->id],'style'=>'display:inline']) !!}
                             {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}

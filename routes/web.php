@@ -42,13 +42,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('permissions', PermissionController::class);
     // Route::resource('users', UserController::class);
     Route::resource('role_user', RoleUserController::class);
-
-    Route::get('search_user', [UserController::class, 'search']);
     Route::resource('user', UserController::class);
 
-    Route::resource('event', EventController::class);
+    Route::get('roles_user/{id}', [RoleUserController::class, 'roles_user']);
+    Route::get('delete_roles_user/{user}/{role}', [RoleUserController::class, 'delete_roles_user']);
+    Route::get('search_user', [UserController::class, 'search']);
 
-    Route::resource('category', CategoryController::class);
 
-    Route::resource('modality', ModalityController::class);
+    Route::group(['middkeware'=>['permission']], function(){
+        Route::resource('event', EventController::class);
+        Route::resource('category', CategoryController::class);
+        Route::resource('modality', ModalityController::class);
+    });
 });

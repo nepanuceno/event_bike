@@ -92,6 +92,42 @@ class RoleUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id and $role
+     * @return \Illuminate\Http\Response
+     */
+    public function delete_roles_user($user_id, $role)
+    {
+        $user = User::find($user_id);
+        if($user->hasRole($role)) {
+
+            try {
+                $user->removeRole($role);
+                return redirect()->back()->with('success', "Função [".$role."] desvinculada de ".$user->name);
+            } catch (\Throwable $th) {
+
+                return redirect()->back()->with('error', "Função [".$role."] não pôde ser desvinculada de ".$user->name);
+                //throw $th;
+            }
+        }
+    }
+
+    /**
+     * Roles for User the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function roles_user($id)
+    {
+        $user = User::find($id);
+        $roles = $user->getRoleNames();
+
+        return json_encode($roles);
     }
 }
