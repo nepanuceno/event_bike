@@ -40,7 +40,7 @@
 
         <div class="card-footer">
             <div class="clearfix">
-                <button type="submit" class="btn btn-secondary float-left">Salvar Função</button>
+                <button type="submit" class="btn btn-primary float-left">Salvar Função</button>
                 <a href="{{ route('roles.index') }}" type="button" class="btn btn-secondary float-right text-white">Cancelar</a>
             </div>
         </div>

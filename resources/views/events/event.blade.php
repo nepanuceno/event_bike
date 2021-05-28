@@ -45,11 +45,31 @@
 
                     <div class="form-group">
                         <label for="modality ">Modalidade</label>
-                        <input type="text" class="form-control" id="modality " name="modality ">
+                        <select class="form-control select2" id="modality " name="modality">
+                            @foreach($modalities as $modality)
+                                <option></option>
+                                <option value="{{ $modality->id }}">{{ $modality->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="categories"></label>
+                        <label for="categories">Categorias</label>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- checkbox -->
+                                <div class="form-group clearfix">
+
+                                    @foreach($categories as $category)
+                                        <div class="icheck-success">
+                                            <input type="checkbox" name="category[]" id="{{ $category->id }}">
+                                            <label for="{{ $category->id }}">{{ $category->name }}</label>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -80,4 +100,23 @@
 
 @section('js')
 <script src="{{ asset('js/preview.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: 'Selecione uma opção',
+            allowClear: true
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-orange',
+            radioClass: 'iradio_square-orange',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
 @endsection

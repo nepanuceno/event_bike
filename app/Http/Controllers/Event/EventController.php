@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Event;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\EventCategory;
+use App\Models\EventModality;
+use App\Http\Controllers\Controller;
 
 class EventController extends Controller
 {
@@ -24,7 +26,10 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('events.event');
+        $modalities = EventModality::all();
+        $categories = EventCategory::all();
+
+        return view('events.event', compact('modalities', 'categories'));
     }
 
     /**

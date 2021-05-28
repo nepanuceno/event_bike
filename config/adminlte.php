@@ -435,6 +435,21 @@ return [
                 ],
             ],
         ],
+        'iCheck' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.3/skins/all.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.3/icheck.min.js',
+                ],
+            ],
+        ],
     ],
 
     /*

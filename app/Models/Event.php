@@ -15,13 +15,13 @@ class Event extends Model
         'name'
     ];
 
-    public function categories()
+    public function category()
     {
-        return $this->belongsTo(EventCategory::class);
+        return $this->hasMany(EventCategory::class);
     }
 
     public function modality()
     {
-        return $this->belongsTo(EventModality::class);
+        return $this->belongsTo(EventModality::class); //Um evento pertence a uma modalidade
     }
 }
