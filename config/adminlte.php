@@ -268,11 +268,11 @@ return [
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
         [
-            'text'    => 'Funções e Permissões',
+            'text'    => 'Perfis e Permissões',
             'icon'    => 'fas fa-fw fa-key',
             'submenu' => [
                 [
-                    'text' => 'Funções',
+                    'text' => 'Perfis',
                     'url'  => "/roles",
                     'icon'  => "fa fa-theater-masks",
                 ],
@@ -306,7 +306,7 @@ return [
                     'icon'  => "fa fa-user-lock",
                 ],
                 [
-                    'text' => 'Função por Usuário',
+                    'text' => 'Perfis por Usuário',
                     'url'  => 'role_user',
                     'icon'  => "fa fa-user-lock",
                 ],

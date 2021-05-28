@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card">
-            <h5 class="card-header bg-dark">Funções por usuário</h5>
+            <h5 class="card-header bg-dark">Perfis por usuário</h5>
             <div class="card-body">
 
                 <div class="row">
@@ -43,7 +43,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Funções para atribuir ao Usuário</label>
+                                            <label>Perfis para atribuir ao Usuário</label>
                                             <select class="select2 select_input_roles" multiple="multiple" name="roles" id="roles" data-placeholder="Selecione as funções" style="width: 100%;">
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}">{{ $role->name }}</option>

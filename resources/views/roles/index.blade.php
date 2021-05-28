@@ -11,10 +11,9 @@
     </div>
 </nav>
 
-
-<div class="card mt-3">
-    <div class="card-header">
-        <h2>Gerenciamento de Funções</h2>
+<div class="card mt-2">
+    <div class="card-header bg-dark">
+        <h3>Gerenciamento de Perfis</h3>
     </div>
     <div class="card-body">
 
