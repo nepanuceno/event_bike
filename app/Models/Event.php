@@ -12,7 +12,7 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name', 'date', 'date_start_subscribe', 'date_end_subscribe', 'adress', 'modality', 'category','logo'
     ];
 
     public function category()

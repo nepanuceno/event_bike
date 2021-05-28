@@ -15,7 +15,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
+            // $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('modality_id');
 
             $table->string('name');
@@ -25,7 +25,7 @@ class CreateEventsTable extends Migration
             $table->string('adress');
             $table->string('logo');
 
-            $table->foreign('category_id')->references('id')->on('event_categories');
+            $table->foreign('id')->references('event_id')->on('category_has_event'); //liga events com a table pivot category_has_event
             $table->foreign('modality_id')->references('id')->on('event_modalities');
 
             $table->timestamps();

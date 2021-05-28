@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Event;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Models\EventCategory;
 use App\Models\EventModality;
@@ -40,6 +41,31 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'name'=>'required',
+            'date'=>'required',
+            'date_start_subscribe'=>'required',
+            'date_end_subscribe'=>'required',
+            'adress'=>'required',
+            'modality'=>'required',
+            'category'=>'required',
+        ]);
+
+        $event = Event::create(
+            [
+                'name' => $request->input('name'),
+                'date' => $request->input('date'),
+                'date_start_subscribe' => $request->input('date_start_subscribe'),
+                'date_end_subscribe' => $request->input('date_end_subscribe'),
+                'adress' => $request->input('adress'),
+                'modality' => $request->input('modality'),
+            ]
+        );
+
+
+        $event->syncPermissions($request->input('category'));
+
+        dd($request);
         //
     }
 

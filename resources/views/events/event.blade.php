@@ -13,42 +13,42 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="" methos="POST" name="frm_event" id="frm_event">
+            <form action="{{ url('event') }}" method="POST" name="frm_event" id="frm_event" enctype="multipart/form-data">
                 {!! csrf_field() !!}
 
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Nome do Evento</label>
-                        <input type="name" class="form-control" id="name" name="name">
+                        <input type="name" class="form-control" id="name" name="name" value="{{ old('name') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="date">Data do Evento</label>
-                        <input type="text" class="form-control" id="date" name="date">
+                        <input type="text" class="form-control" id="date" name="date" value="{{ old('date') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="date_start_subscribe">Data de início das inscrições</label>
-                        <input type="text" class="form-control" id="date_start_subscribe" name="date_start_subscribe">
+                        <input type="text" class="form-control" id="date_start_subscribe" name="date_start_subscribe" value="{{ old('date_start_subscribe') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="date_end_subscribe">Data do fim das Inscrições</label>
-                        <input type="text" class="form-control" id="date_end_subscribe" name="date_end_subscribe">
+                        <input type="text" class="form-control" id="date_end_subscribe" name="date_end_subscribe" value="{{ old('date_end_subscribe') }}">
                     </div>
 
 
                     <div class="form-group">
                         <label for="adress">Endereço do Evento</label>
-                        <input type="text" class="form-control" id="adress" name="adress">
+                        <input type="text" class="form-control" id="adress" name="adress" value="{{ old('adress') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="modality ">Modalidade</label>
-                        <select class="form-control select2" id="modality " name="modality">
+                        <select class="form-control select2" id="modality" name="modality" value="{{ old('modality') }}">
                             @foreach($modalities as $modality)
                                 <option></option>
-                                <option value="{{ $modality->id }}">{{ $modality->name }}</option>
+                                <option value="{{ $modality->id }}" {{ $modality->id == old('modality')? 'selected':'' }}>{{ $modality->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -62,7 +62,7 @@
 
                                     @foreach($categories as $category)
                                         <div class="icheck-success">
-                                            <input type="checkbox" name="category[]" id="{{ $category->id }}">
+                                            <input type="checkbox" name="category[]" id="{{ $category->id }}" value="{{ $category->id }}" {{ (is_array(old('category')) && in_array($category->id, old('category'))) ? ' checked' : '' }}>
                                             <label for="{{ $category->id }}">{{ $category->name }}</label>
                                         </div>
                                     @endforeach
@@ -76,7 +76,7 @@
                         <label for="logo">Logo do Evento</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" onchange="readURL(this);" class="custom-file-input" id="logo" name="logo">
+                                <input type="file" onchange="readURL(this);" class="custom-file-input" id="logo" name="logo" value="{{ old('logo') }}">
                                 <label class="custom-file-label" for="exampleInputFile">Escolher Arquivo</label>
                             </div>
                         </div>
