@@ -13,47 +13,43 @@
     </div>
 </div>
 
-@if(!empty($modalities))
-
-<div class="card">
-  <h5 class="card-header bg-dark">Gerenciamento de Modalidades</h5>
-  <div class="card-body">
-  <table class="table table-bordered">
-  <tr>
-     <th width="25px">No</th>
-     <th>Nome</th>
-     <th width="168px">Ação</th>
-  </tr>
-    @foreach ($modalities as $key => $modality)
-    <tr>
-        <td>{{ ++$key }}</td>
-        <td>{{ $modality->name }}</td>
-        <td>
-            @can('manager')
-                <a class="btn btn-primary" href="{{ route('modality.edit',$modality->id) }}">Editar</a>
-            @endcan
-            @can('manager')
-                {!! Form::open(['method' => 'DELETE','route' => ['modality.destroy', $modality->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
-                {!! Form::close() !!}
-            @endcan
-        </td>
-    </tr>
-    @endforeach
-</table>
-  </div>
-</div>
-
-
-@else
+@empty($modalities)
     <div class="alert alert-warning alert-dismissible fade show pb-3">
         <p>Não existem Modalidades cadastradas</p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-
-@endif
+@else
+    <div class="card">
+        <h5 class="card-header bg-dark">Gerenciamento de Modalidades</h5>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th width="25px">No</th>
+                    <th>Nome</th>
+                    <th width="168px">Ação</th>
+                </tr>
+                    @foreach ($modalities as $key => $modality)
+                    <tr>
+                        <td>{{ ++$key }}</td>
+                        <td>{{ $modality->name }}</td>
+                        <td>
+                            @can('manager')
+                                <a class="btn btn-primary" href="{{ route('modality.edit',$modality->id) }}">Editar</a>
+                            @endcan
+                            @can('manager')
+                                {!! Form::open(['method' => 'DELETE','route' => ['modality.destroy', $modality->id],'style'=>'display:inline']) !!}
+                                    {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::close() !!}
+                            @endcan
+                        </td>
+                    </tr>
+                    @endforeach
+            </table>
+        </div>
+    </div>
+@endempty
 
 @if ($message = Session::get('success'))
     <span id="message" style="display: none">{{ $message }}</span>

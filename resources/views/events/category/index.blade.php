@@ -11,47 +11,44 @@
         </div>
     </div>
 </div>
-
-@if($categories)
-
-<div class="card">
-    <div class="card-header bg-dark">
-        <h3 class="card-title">Gerenciamento de Categorias</h3>
-    </div>
-    <div class="card-body">
-        <table class="table table-bordered">
-            <tr>
-                <th width="25px">No</th>
-                <th>Nome</th>
-                <th width="168px">Ação</th>
-            </tr>
-            @foreach ($categories as $key => $category)
-            <tr>
-                <td>{{ ++$key }}</td>
-                <td>{{ $category->name }}</td>
-                <td>
-                    @can('manager')
-                        <a class="btn btn-primary" href="{{ route('category.edit',$category->id) }}">Editar</a>
-
-                        {!! Form::open(['method' => 'DELETE','route' => ['category.destroy', $category->id],'style'=>'display:inline']) !!}
-                            {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
-                        {!! Form::close() !!}
-                    @endcan
-                </td>
-            </tr>
-            @endforeach
-        </table>
-    </div>
-</div>
-@else
+@empty($categories)
     <div class="alert alert-warning alert-dismissible fade show pb-3">
         <p>Não existem Categorias cadastradas</p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+@else
+    <div class="card">
+        <div class="card-header bg-dark">
+            <h3 class="card-title">Gerenciamento de Categorias</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th width="25px">No</th>
+                    <th>Nome</th>
+                    <th width="168px">Ação</th>
+                </tr>
+                @foreach ($categories as $key => $category)
+                <tr>
+                    <td>{{ ++$key }}</td>
+                    <td>{{ $category->name }}</td>
+                    <td>
+                        @can('manager')
+                            <a class="btn btn-primary" href="{{ route('category.edit',$category->id) }}">Editar</a>
 
-@endif
+                            {!! Form::open(['method' => 'DELETE','route' => ['category.destroy', $category->id],'style'=>'display:inline']) !!}
+                                {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::close() !!}
+                        @endcan
+                    </td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
+    </div>
+@endempty
 
 
 @if ($message = Session::get('success'))

@@ -43,29 +43,28 @@ class EventController extends Controller
     {
         $this->validate($request,[
             'name'=>'required',
-            'date'=>'required',
-            'date_start_subscribe'=>'required',
-            'date_end_subscribe'=>'required',
+            'date_event'=>'required',
+            'start_date'=>'required',
+            'end_date'=>'required',
             'adress'=>'required',
-            'modality'=>'required',
+            'modality_id'=>'required',
             'category'=>'required',
         ]);
 
         $event = Event::create(
             [
                 'name' => $request->input('name'),
-                'date' => $request->input('date'),
-                'date_start_subscribe' => $request->input('date_start_subscribe'),
-                'date_end_subscribe' => $request->input('date_end_subscribe'),
+                'date_event' => $request->input('date_event'),
+                'start_date' => $request->input('start_date'),
+                'end_date' => $request->input('end_date'),
                 'adress' => $request->input('adress'),
-                'modality' => $request->input('modality'),
+                'modality_id' => $request->input('modality_id'),
             ]
         );
 
+        // $event->categories()->sync($request->input('category'));
 
-        $event->syncPermissions($request->input('category'));
-
-        dd($request);
+        // dd($request);
         //
     }
 

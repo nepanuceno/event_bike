@@ -6,6 +6,16 @@
 <div class="row">
     <!-- left column -->
     <div class="col-md-6">
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> Houve algum problema na sua enrada de dados.<br><br>
+        <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+@endif
         <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
@@ -24,17 +34,17 @@
 
                     <div class="form-group">
                         <label for="date">Data do Evento</label>
-                        <input type="text" class="form-control" id="date" name="date" value="{{ old('date') }}">
+                        <input type="text" class="form-control" id="date" name="date_event" value="{{ old('date_event') }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="date_start_subscribe">Data de início das inscrições</label>
-                        <input type="text" class="form-control" id="date_start_subscribe" name="date_start_subscribe" value="{{ old('date_start_subscribe') }}">
+                        <label for="start_date">Data de início das inscrições</label>
+                        <input type="text" class="form-control" id="start_date" name="start_date" value="{{ old('start_date') }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="date_end_subscribe">Data do fim das Inscrições</label>
-                        <input type="text" class="form-control" id="date_end_subscribe" name="date_end_subscribe" value="{{ old('date_end_subscribe') }}">
+                        <label for="end_date">Data do fim das Inscrições</label>
+                        <input type="text" class="form-control" id="end_date" name="end_date" value="{{ old('end_date') }}">
                     </div>
 
 
@@ -44,8 +54,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="modality ">Modalidade</label>
-                        <select class="form-control select2" id="modality" name="modality" value="{{ old('modality') }}">
+                        <label for="modality_id ">Modalidade</label>
+                        <select class="form-control select2" id="modality_id" name="modality_id">
                             @foreach($modalities as $modality)
                                 <option></option>
                                 <option value="{{ $modality->id }}" {{ $modality->id == old('modality')? 'selected':'' }}>{{ $modality->name }}</option>
@@ -54,23 +64,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="categories">Categorias</label>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <!-- checkbox -->
-                                <div class="form-group clearfix">
+                        <label for="category ">Categoria</label>
+                        <select class="form-control select2" id="category" name="category[]" multiple>
+                            @foreach($categories as $category)
 
-                                    @foreach($categories as $category)
-                                        <div class="icheck-success">
-                                            <input type="checkbox" name="category[]" id="{{ $category->id }}" value="{{ $category->id }}" {{ (is_array(old('category')) && in_array($category->id, old('category'))) ? ' checked' : '' }}>
-                                            <label for="{{ $category->id }}">{{ $category->name }}</label>
-                                        </div>
-                                    @endforeach
-
-                                </div>
-                            </div>
-                        </div>
+                                <option></option>
+                                <option value="{{ $category->id }}" {{ (is_array(old('category')) && in_array($category->id, old('category'))) ? ' selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
+
+
+
 
                     <div class="form-group">
                         <label for="logo">Logo do Evento</label>

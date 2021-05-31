@@ -12,12 +12,12 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'date', 'date_start_subscribe', 'date_end_subscribe', 'adress', 'modality', 'category','logo'
+        'name', 'date_event', 'start_date', 'end_date', 'adress', 'modality_id', 'category','logo'
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->hasMany(EventCategory::class);
+        return $this->belongToMany(EventCategory::class, 'category_has_event','id','event_id'); //Um evento possui muitas categorias(Inicante, Sub30, Master A ...)
     }
 
     public function modality()
