@@ -14,9 +14,8 @@ class EventCategory extends Model
         'name'
     ];
 
-
     public function events()
     {
-        return $this->belongToMany(Event::class);
+        return $this->belongsToMany(Event::class, 'category_has_event', 'category_id', 'event_id');
     }
 }

@@ -74,7 +74,6 @@
                         </select>
                     </div>
 
-
                     <div class="form-group">
                         <label for="logo">Logo do Evento</label>
                         <div class="input-group">
@@ -99,27 +98,41 @@
     </div>
 </div>
 
+@if ($message = Session::get('success'))
+    <span id="message" style="display: none">{{ $message }}</span>
+@endif
+
 @endsection
 
 @section('js')
-<script src="{{ asset('js/preview.js') }}"></script>
+    <script src="{{ asset('js/sweetalert.js') }}"></script>
 
-<script>
-    $(document).ready(function() {
-        $('.select2').select2({
-            placeholder: 'Selecione uma opção',
-            allowClear: true
-        });
-    });
-</script>
+    @if ($message = Session::get('success'))
+        <script>MessageAlert(['message','success']);</script>
+    @endif
 
-<script>
-    $(document).ready(function(){
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-orange',
-            radioClass: 'iradio_square-orange',
-            increaseArea: '20%' // optional
+    @if ($message = Session::get('error'))
+        <script>MessageAlert(['message','error']);</script>
+    @endif
+
+    <script src="{{ asset('js/preview.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: 'Selecione uma opção',
+                allowClear: true
+            });
         });
-    });
-</script>
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-orange',
+                radioClass: 'iradio_square-orange',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
 @endsection

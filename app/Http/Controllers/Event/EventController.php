@@ -17,7 +17,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::all();
+        return view('events.event.index', compact('events'));
     }
 
     /**
@@ -64,12 +65,10 @@ class EventController extends Controller
 
         try {
             $event = Event::create($inputs);
-
             $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
+            $event->categories()->sync($request->input('category'));
 
-            // $event->categories()->sync($request->input('category'));
-
-            // return back()->with('success','Evento Criado com sucesso');
+            return back()->with('success','Evento Criado com sucesso');
         } catch (\Throwable $th) {
             return back()->with('error','Erro ao cadastrar');
 
@@ -85,7 +84,9 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        $event = Event::find($id);
+
+        return view('events.event.show', compact('event'));
     }
 
     /**
@@ -96,7 +97,7 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

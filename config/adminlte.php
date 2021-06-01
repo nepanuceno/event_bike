@@ -249,7 +249,7 @@ return [
         ],
         [
             'text' => 'Eventos',
-            'url'  => 'event/create',
+            'url'  => 'event',
             'icon' => 'fas fa-fw fa-flag-checkered',
         ],
         [
