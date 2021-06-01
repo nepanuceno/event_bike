@@ -49,23 +49,32 @@ class EventController extends Controller
             'adress'=>'required',
             'modality_id'=>'required',
             'category'=>'required',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $event = Event::create(
-            [
-                'name' => $request->input('name'),
-                'date_event' => $request->input('date_event'),
-                'start_date' => $request->input('start_date'),
-                'end_date' => $request->input('end_date'),
-                'adress' => $request->input('adress'),
-                'modality_id' => $request->input('modality_id'),
-            ]
-        );
+        $inputs = [
+            'name' => $request->input('name'),
+            'date_event' => $request->input('date_event'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'adress' => $request->input('adress'),
+            'modality_id' => $request->input('modality_id'),
+            'logo' => time().'.'.$request->logo->getClientOriginalExtension(),
+        ];
 
-        // $event->categories()->sync($request->input('category'));
+        try {
+            $event = Event::create($inputs);
 
-        // dd($request);
-        //
+            $request->logo->move(public_path('logo_events'), $inputs['logo']);
+
+            // $event->categories()->sync($request->input('category'));
+
+            // return back()->with('success','Evento Criado com sucesso');
+        } catch (\Throwable $th) {
+            return back()->with('error','Erro ao cadastrar');
+
+            //throw $th;
+        }
     }
 
     /**

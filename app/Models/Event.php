@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\EventImages;
 use App\Models\EventCategory;
 use App\Models\EventModality;
 use Illuminate\Database\Eloquent\Model;
@@ -23,5 +24,10 @@ class Event extends Model
     public function modality()
     {
         return $this->belongsTo(EventModality::class); //Um evento pertence a uma modalidade
+    }
+
+    public function images()
+    {
+        return $this->hasMany(EventImages::class);
     }
 }

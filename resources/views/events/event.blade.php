@@ -58,7 +58,7 @@
                         <select class="form-control select2" id="modality_id" name="modality_id">
                             @foreach($modalities as $modality)
                                 <option></option>
-                                <option value="{{ $modality->id }}" {{ $modality->id == old('modality')? 'selected':'' }}>{{ $modality->name }}</option>
+                                <option value="{{ $modality->id }}" {{ $modality->id == old('modality_id')? 'selected':'' }}>{{ $modality->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -73,8 +73,6 @@
                             @endforeach
                         </select>
                     </div>
-
-
 
 
                     <div class="form-group">
