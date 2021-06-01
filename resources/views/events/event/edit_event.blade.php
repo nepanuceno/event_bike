@@ -23,9 +23,9 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="{{ url('event') }}" method="POST" name="frm_event" id="frm_event" enctype="multipart/form-data">
+            <form action="{{ url('event',$event->id) }}" method="POST" name="frm_event" id="frm_event" enctype="multipart/form-data">
                 {!! csrf_field() !!}
-
+                {{ method_field('PUT') }}
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Nome do Evento</label>
@@ -69,7 +69,7 @@
                             @foreach($categories as $category)
 
                                 <option></option>
-                                <option value="{{ $category->id }}" {{ (is_array($arr_categories) && in_array($category->id, $arr_categories)) ? ' selected' : '' }}>{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ $event->categories->contains($category) ? ' selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -8,16 +8,23 @@
         <div class="card" style="width: 25rem;">
             <img class="card-img-top" src="/storage/logo_events/{{ $event->logo }}" alt="Logo do Evento">
             <div class="card-body">
-                <h5 class="card-title">{{ $event->name }}</h5>
+                <h2>{{ $event->name }}</h2>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{ $event-> }}</li>
-                <li class="list-group-item">{{ $event-> }}</li>
-                <li class="list-group-item">{{ $event-> }}</li>
+                <li class="list-group-item"><strong>Data do Evento: </strong>{{ $event->date_event }}</li>
+                <li class="list-group-item"><strong>Modalidade: </strong>{{ $event->modality->name }}</li>
             </ul>
             <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <div class="bg-white clearfix">
+                    @can('manager')
+                        <a class="btn btn-secondary float-left mr-1" href="{{ route('event.edit',$event->id) }}">Editar</a>
+
+                        {!! Form::open(['method' => 'DELETE','route' => ['event.destroy', $event->id],'style'=>'display:inline']) !!}
+                            {!! Form::submit('Desativar', ['class' => 'btn btn-danger float-left']) !!}
+                        {!! Form::close() !!}
+                    @endcan
+                    <a class="btn btn-default float-right" href="{{ url()->previous() }}">Voltar</a>
+                </div>
             </div>
         </div>
     </div>

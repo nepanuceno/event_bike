@@ -97,7 +97,12 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        $event = Event::find($id);
+        $modalities = EventModality::all();
+        $categories = EventCategory::all();
 
+
+        return view('events.event.edit_event', compact('event','modalities','categories'));
     }
 
     /**
@@ -109,7 +114,50 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->hasFile('logo'));
+
+        $this->validate($request,[
+            'name'=>'required',
+            'date_event'=>'required',
+            'start_date'=>'required',
+            'end_date'=>'required',
+            'adress'=>'required',
+            'modality_id'=>'required',
+            'category'=>'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $inputs = [
+            'name' => $request->input('name'),
+            'date_event' => $request->input('date_event'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'adress' => $request->input('adress'),
+            'modality_id' => $request->input('modality_id'),
+        ];
+
+        $event = Event::find($id);
+
+        if($request->hasFile('logo')) {
+            $inputs['logo']=time().'.'.$request->logo->getClientOriginalExtension();
+            $old_logo = $event->logo;
+        }
+
+        try {
+            if($event->update($inputs)) {
+                $event->categories()->sync($request->input('category'));
+
+                if(isset($old_logo)) {
+                    unlink('storage/logo_events/'.$event->logo);
+                }
+                $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
+
+                return redirect()->back()->with('success',"Evento atualizado com sucesso!");
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('error',"Houve problema ao atualizar o evento ".$event->name.PHP_EOL.$th);
+        }
     }
 
     /**
