@@ -94,7 +94,9 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Salvar Evento</button>
+                  <button type="submit" class="btn btn-primary float-left">Salvar Evento</button>
+                  <a class="btn btn-default float-right" href="{{ url()->previous() }}">Cancelar</a>
+
                 </div>
             </form>
         </div>
