@@ -51,9 +51,9 @@ class User extends Authenticatable
     public function adminlte_image()
     {
         if(isset($this->profile->photo))
-            return "/photos/".$this->profile->photo;
+            return "/storage/photos/".$this->profile->photo;
         else {
-            return "/photos/sem-foto.jpg";
+            return "/storage/photos/sem-foto.jpg";
         }
     }
 

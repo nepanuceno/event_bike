@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 p-2">
-                                <img class="float-right img-fluid img-thumbnail" src="{{ isset($user->photo) ? '/photos/'.$user->photo : '/photos/sem-foto.jpg'}}" id="img" style="max-width:180px; max-height:180px; display:none;">
+                                <img class="float-right img-fluid img-thumbnail" src="{{ isset($user->photo) ? 'storage/photos/'.$user->photo : 'storage/photos/sem-foto.jpg'}}" id="img" style="max-width:180px; max-height:180px; display:none;">
                             </div>
                         </div>
                     </div>

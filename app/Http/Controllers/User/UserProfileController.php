@@ -74,7 +74,7 @@ class UserProfileController extends Controller
         // dd($input);
 
         if(Profile::create($input)) {
-            $request->photo->move(public_path('photos'), $input['photo']);
+            $request->photo->move(public_path('storage/photos'), $input['photo']);
             return back()->with('success','Cadastro Realizado com sucesso');
         } else {
             return back()->with('error','Erro ao cadastrar');
@@ -145,8 +145,8 @@ class UserProfileController extends Controller
 
         if($profile->update($input)) {
             if($request->photo) {
-                $request->photo->move(public_path('photos'), $input['photo']);
-                $old_photo = public_path('/photos/').$old_photo;
+                $request->photo->move(public_path('storage/photos'), $input['photo']);
+                $old_photo = public_path('storage/photos/').$old_photo;
                 if(file_exists($old_photo)) {
                     unlink($old_photo);
                 }

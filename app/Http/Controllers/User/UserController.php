@@ -103,7 +103,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if($user) {
-            $photo = public_path('photos/'.$user->profile->photo);
+            $photo = public_path('storage/photos/'.$user->profile->photo);
             if(file_exists($photo)) {
 
                 try {

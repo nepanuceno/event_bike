@@ -65,7 +65,7 @@ class EventController extends Controller
         try {
             $event = Event::create($inputs);
 
-            $request->logo->move(public_path('logo_events'), $inputs['logo']);
+            $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
 
             // $event->categories()->sync($request->input('category'));
 
