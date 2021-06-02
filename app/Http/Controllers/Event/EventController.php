@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Event;
 
-use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Event;
+use App\Models\EventImages;
 use App\Models\EventCategory;
 use App\Models\EventModality;
-use App\Http\Controllers\Controller;
 
 class EventController extends Controller
 {
@@ -31,7 +32,7 @@ class EventController extends Controller
         $modalities = EventModality::all();
         $categories = EventCategory::all();
 
-        return view('events.event', compact('modalities', 'categories'));
+        return view('events.event.create_event', compact('modalities', 'categories'));
     }
 
     /**
@@ -114,8 +115,6 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->hasFile('logo'));
-
         $this->validate($request,[
             'name'=>'required',
             'date_event'=>'required',
@@ -180,5 +179,24 @@ class EventController extends Controller
 
         return redirect()->back()->with('success',"Evento desativado com sucesso");
 
+    }
+
+    public function upload(Request $request, $id)
+    {
+        $name_file = $request->file->getClientOriginalName();
+        $event = Event::find($id);
+        $image_event = new EventImages;
+
+        $image_name = md5($name_file).'.'.$request->file->getClientOriginalExtension();
+
+        $image_event->event_id = $id;
+        $image_event->image = $image_name;
+
+
+        if($image_event->save()){
+            $request->file->move(public_path('storage/event_images'), $image_name);
+        } else {
+            echo "Errou feio";
+        }
     }
 }

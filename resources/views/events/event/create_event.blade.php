@@ -34,17 +34,17 @@
 
                     <div class="form-group">
                         <label for="date">Data do Evento</label>
-                        <input type="text" class="form-control" id="date" name="date_event" value="{{ old('date_event') }}">
+                        <input type="text" class="form-control datemask" id="date" name="date_event" value="{{ old('date_event') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="start_date">Data de início das inscrições</label>
-                        <input type="text" class="form-control" id="start_date" name="start_date" value="{{ old('start_date') }}">
+                        <input type="text" class="form-control datemask" id="start_date" name="start_date" value="{{ old('start_date') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="end_date">Data do fim das Inscrições</label>
-                        <input type="text" class="form-control" id="end_date" name="end_date" value="{{ old('end_date') }}">
+                        <input type="text" class="form-control datemask" id="end_date" name="end_date" value="{{ old('end_date') }}">
                     </div>
 
 
@@ -91,6 +91,7 @@
 
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Salvar Evento</button>
+                  <a class="btn btn-default float-right" href="{{ url('event') }}">Voltar</a>
                 </div>
             </form>
         </div>
@@ -134,5 +135,10 @@
                 increaseArea: '20%' // optional
             });
         });
+    </script>
+
+    <script>
+        //Datemask dd/mm/yyyy
+        $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
     </script>
 @endsection

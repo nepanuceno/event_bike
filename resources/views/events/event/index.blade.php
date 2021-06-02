@@ -3,6 +3,8 @@
 
 @section('content')
 
+<a class="btn btn-primary mb-2" href="{{ route('event.create') }}">Criar um evento</a>
+
 <div class="card shadow-sm p-3 mb-5 bg-white rounded">
     <div class="card-header">
         Eventos
@@ -30,7 +32,7 @@
                         <td>{{ $event->end_date }}</td>
                         <td>{{ $event->modality->name }}</td>
                         <td>
-                            <a class="btn btn-success" href="{{ route('event.show',$event->id) }}">Detalhes</a>
+                            <a class="btn btn-success" href="{{ route('event.show',$event->id) }}">Configurações & Detalhes</a>
                             @can('manager')
                                 <a class="btn btn-secondary" href="{{ route('event.edit',$event->id) }}">Editar</a>
                             @endcan

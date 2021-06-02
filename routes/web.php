@@ -53,5 +53,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('event', EventController::class);
         Route::resource('category', CategoryController::class);
         Route::resource('modality', ModalityController::class);
+
+        Route::post('event/upload/{id}',[EventController::class, 'upload'])->name('event.upload');
     });
 });
