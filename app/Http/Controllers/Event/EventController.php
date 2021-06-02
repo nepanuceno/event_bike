@@ -147,15 +147,19 @@ class EventController extends Controller
             if($event->update($inputs)) {
                 $event->categories()->sync($request->input('category'));
 
-                if(isset($old_logo)) {
+                if(isset($old_logo) && (file_exists('storage/logo_events/'.$event->logo))) {
                     unlink('storage/logo_events/'.$event->logo);
                 }
                 $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
 
-                return redirect()->back()->with('success',"Evento atualizado com sucesso!");
+                return redirect()->route('event.index')->with('success',"Evento atualizado com sucesso!");
+            } else {
+                dd(public_path('storage/logo_events'));
             }
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
+            dd(public_path('storage/logo_events'));
+
             return redirect()->back()->with('error',"Houve problema ao atualizar o evento ".$event->name.PHP_EOL.$th);
         }
     }

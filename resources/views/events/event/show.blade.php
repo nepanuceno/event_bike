@@ -17,7 +17,7 @@
             <div class="card-body">
                 <div class="bg-white clearfix">
                     @can('manager')
-                        <a class="btn btn-secondary float-left mr-1" href="{{ route('event.edit',$event->id) }}">Editar</a>
+                        <a class="btn btn-success float-left mr-1 text-white" href="{{ route('event.edit',$event->id) }}">Editar</a>
 
                         {!! Form::open(['method' => 'DELETE','route' => ['event.destroy', $event->id],'style'=>'display:inline']) !!}
                             {!! Form::submit('Desativar', ['class' => 'btn btn-danger float-left']) !!}

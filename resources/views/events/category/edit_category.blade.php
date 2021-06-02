@@ -34,8 +34,9 @@
             <!-- /.card-header -->
             <!-- form start -->
 
-            <form action="{{ url('category.update',[1]) }}" method="PATCH" name="frm_category" id="frm_category">
+            <form action="{{ url('category.update',$category->id) }}" method="PATCH" name="frm_category" id="frm_category">
                 {!! csrf_field() !!}
+                @method('PATCH')
 
                 <div class="card-body">
                     <div class="form-group">

@@ -35,9 +35,9 @@
             <!-- /.card-header -->
             <!-- form start -->
 
-            <form action="{{ url('modality.update',[1]) }}" method="PATCH" name="frm_modality" id="frm_modality">
-                {!! csrf_field() !!}
-
+            <form action="{{ url('modality.update',$modality->id) }}" method="PATCH" name="frm_modality" id="frm_modality">
+                @csrf
+                @method('PATCH')
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Nome da Modalidade</label>
