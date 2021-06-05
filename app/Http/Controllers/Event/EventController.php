@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Event;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\EventImages;
+use Illuminate\Http\Request;
 use App\Models\EventCategory;
 use App\Models\EventModality;
+use App\Models\CategoryHasEvent;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class EventController extends Controller
 {
@@ -18,7 +20,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::where('active', 'true')->get();
+        $events = Event::where('active', 1)->get();
         return view('events.event.index', compact('events'));
     }
 
@@ -56,9 +58,9 @@ class EventController extends Controller
 
         $inputs = [
             'name' => $request->input('name'),
-            'date_event' => $request->input('date_event'),
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
+            'date_event' => date('Y-m-d H:i:s', strtotime($request->input('date_event'))),
+            'start_date' => date('Y-m-d H:i:s', strtotime($request->input('start_date'))),
+            'end_date' => date('Y-m-d H:i:s', strtotime($request->input('end_date'))),
             'adress' => $request->input('adress'),
             'modality_id' => $request->input('modality_id'),
             'logo' => time().'.'.$request->logo->getClientOriginalExtension(),
@@ -71,9 +73,9 @@ class EventController extends Controller
 
             return back()->with('success','Evento Criado com sucesso');
         } catch (\Throwable $th) {
-            return back()->with('error','Erro ao cadastrar');
+            //return back()->with('error','Erro ao cadastrar');
 
-            //throw $th;
+            throw $th;
         }
     }
 
@@ -197,6 +199,26 @@ class EventController extends Controller
             $request->file->move(public_path('storage/event_images'), $image_name);
         } else {
             echo "Errou feio";
+        }
+    }
+
+    public function add_costs(Request $request)
+    {
+        $inputs=$request->all();
+        foreach($inputs as $key=>$input) {
+            if ($key != "_token" && $key!="event_id") {
+                $arr[$key] = $input;
+            }
+        }
+
+        foreach($arr as $key=>$value) {
+            $cost = DB::update('update category_has_event cost SET cost = ? WHERE event_id = ? AND category_id = ?', [$value, $inputs['event_id'], $key]);
+
+            if($cost) {
+                return back()->with('success', 'Valor adicionado com sucesso!');
+            } else {
+                return back()->with('error', 'Erro ao tentar setar um valor.');
+            }
         }
     }
 }

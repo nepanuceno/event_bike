@@ -1,13 +1,14 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Acl\RoleController;
-use App\Http\Controllers\Event\ModalityController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Event\EventController;
 use App\Http\Controllers\Acl\RoleUserController;
 use App\Http\Controllers\Acl\PermissionController;
 use App\Http\Controllers\Event\CategoryController;
+use App\Http\Controllers\Event\ModalityController;
 use App\Http\Controllers\User\UserProfileController;
 
 /*
@@ -53,6 +54,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('event', EventController::class);
         Route::resource('category', CategoryController::class);
         Route::resource('modality', ModalityController::class);
+        Route::post('event/add_costs', [EventController::class, 'add_costs']);
 
         Route::post('event/upload/{id}',[EventController::class, 'upload'])->name('event.upload');
     });

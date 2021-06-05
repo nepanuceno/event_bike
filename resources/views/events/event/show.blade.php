@@ -30,6 +30,16 @@
                         @endcan
                         <a class="btn btn-default float-right" href="{{ url()->previous() }}">Voltar</a>
                     </div>
+                    <form action="{{ url('event/add_costs') }}" method="post">
+                        @csrf
+                        <input type="hidden" id="event" name="event_id" value="{{ $event->id }}">
+                        @foreach ($event->categories as $category)
+                            <label for="{{ $category->id }}">Valor de {{ $category->name }}</label>
+                            <input type="text" id={{ $category->id }} name={{ $category->id }} value="{{ $category->pivot->cost }}">
+                        @endforeach
+
+                        <button class="btn btn-primary" type="submit">Alterar</button>
+                    </form>
                 </div>
             </div>
         </div>

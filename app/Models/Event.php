@@ -18,7 +18,7 @@ class Event extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(EventCategory::class, 'category_has_event', 'event_id', 'category_id'); //Um evento possui muitas categorias(Inicante, Sub30, Master A ...)
+        return $this->belongsToMany(EventCategory::class, 'category_has_event', 'event_id', 'category_id')->withPivot('cost'); //Um evento possui muitas categorias(Inicante, Sub30, Master A ...)
     }
 
     public function modality()
