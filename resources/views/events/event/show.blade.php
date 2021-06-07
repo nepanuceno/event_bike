@@ -9,7 +9,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <div class="card">
                 <img class="card-img-top p-2" src="/storage/logo_events/{{ $event->logo }}" alt="Logo do Evento">
                 <div class="card-body">
@@ -30,52 +30,58 @@
                         @endcan
                         <a class="btn btn-default float-right" href="{{ url()->previous() }}">Voltar</a>
                     </div>
-                    <form action="{{ url('event/add_costs') }}" method="post">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-7 col-xl-8">
+
+            <div class="card">
+                <h5 class="card-header bg-dark">Valores por Categoria</h5>
+                <div class="card-body col-md-4">
+                    <form action="{{ url('event/add_costs') }}" method="post" class="mb-3">
                         @csrf
                         <input type="hidden" id="event" name="event_id" value="{{ $event->id }}">
                         @foreach ($event->categories as $category)
                             <label for="{{ $category->id }}">Valor de {{ $category->name }}</label>
                             <input type="text" id={{ $category->id }} name={{ $category->id }} value="{{ $category->pivot->cost }}">
                         @endforeach
-
+                        <hr>
                         <button class="btn btn-primary" type="submit">Alterar</button>
                     </form>
                 </div>
             </div>
-        </div>
-        <div class="col-md-8">
 
             <div class="card border">
                 <div class="card-body">
-                <div class="card-header bg-dark">
-                    <h3 class="card-title">Upload de Imagens</h3>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('event.upload', $event->id) }}" class="dropzone" id="dropzoneFrom" style=" border: 2px dashed rgb(54, 183, 0);">
-                        @csrf
-                    </form>
+                    <div class="card-header bg-dark">
+                        <h3 class="card-title">Upload de Imagens</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('event.upload', $event->id) }}" class="dropzone" id="dropzoneFrom" style=" border: 2px dashed rgb(54, 183, 0);">
+                            @csrf
+                         </form>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-12">
-                            <div class="card card-dark">
-                                <div class="card-header">
-                                    <h4 class="card-title">Geleria de Imagens</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        @foreach($event->images as $image)
-                                        <div class="col-sm-2 border shadow-sm m-3 p-1">
-                                            <a href="/storage/event_images/{{ $image->image }}" data-toggle="lightbox" data-title="" data-gallery="gallery">
-                                                <img src="/storage/event_images/{{ $image->image }}" class="img-fluid mb-2" alt="white sample">
-                                            </a>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-12">
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h4 class="card-title">Geleria de Imagens</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach($event->images as $image)
+                            <div class="col-sm-2 border shadow-sm m-3 p-1">
+                                <a href="/storage/event_images/{{ $image->image }}" data-toggle="lightbox" data-title="" data-gallery="gallery">
+                                    <img src="/storage/event_images/{{ $image->image }}" class="img-fluid mb-2" alt="white sample">
+                                </a>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

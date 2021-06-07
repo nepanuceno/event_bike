@@ -20,7 +20,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::where('active', 1)->get();
+        $events = Event::where('active','<>', 0)->get();
+
         return view('events.event.index', compact('events'));
     }
 
@@ -211,14 +212,16 @@ class EventController extends Controller
             }
         }
 
-        foreach($arr as $key=>$value) {
-            $cost = DB::update('update category_has_event cost SET cost = ? WHERE event_id = ? AND category_id = ?', [$value, $inputs['event_id'], $key]);
+        // dd($arr);
 
-            if($cost) {
-                return back()->with('success', 'Valor adicionado com sucesso!');
-            } else {
+        foreach($arr as $key=>$value) {
+            $cost = DB::update('update category_has_event SET cost = ? WHERE event_id = ? AND category_id = ?', [$value, $inputs['event_id'], $key]);
+
+            if(!$cost) {
                 return back()->with('error', 'Erro ao tentar setar um valor.');
             }
         }
+
+        return back()->with('success', 'Valor adicionado com sucesso!');
     }
 }

@@ -23,6 +23,7 @@ class CreateEventsTable extends Migration
             $table->dateTime('end_date');
             $table->string('adress');
             $table->string('logo');
+            $table->boolean('active')->default(true);
 
             $table->foreign('modality_id')->references('id')->on('event_modalities');
 

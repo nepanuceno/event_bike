@@ -16,6 +16,7 @@ class CreateCategoryHasEventTable extends Migration
         Schema::create('category_has_event', function (Blueprint $table) {
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('category_id');
+            $table->decimal('cost', 2,2)->notnull()->default(0);
 
             $table->foreign('event_id')->references('id')->on('events');
             $table->foreign('category_id')->references('id')->on('event_categories');
