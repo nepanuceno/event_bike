@@ -83,6 +83,7 @@
     @if(!config('adminlte.enabled_laravel_mix'))
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
+        <script src="{{ asset('vendor/inputmask/inputmask.min.js') }}"></script>
         <script src="{{ asset('vendor/inputmask/min/inputmask/jquery.inputmask.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>

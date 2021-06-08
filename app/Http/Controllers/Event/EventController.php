@@ -57,8 +57,8 @@ class EventController extends Controller
             'adress'=>'required',
             'modality_id'=>'required',
             'category'=>'required',
-            'event_notice' => 'required|file|mimes:application/pdf, application/x-pdf,application/acrobat, applications/vnd.pdf, text/pdf, text/x-pdf|max:2048',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'event_notice' => 'required|file|mimes:pdf|max:1024',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
         $date_event = Carbon::createFromFormat('d/m/Y, H:i', $request->input('date_event'))->format('Y-m-d H:i');
@@ -148,7 +148,7 @@ class EventController extends Controller
             'modality_id'=>'required',
             'category'=>'required',
             'event_notice' => 'file|mimes:pdf|max:1024',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
         $date_event = Carbon::createFromFormat('d/m/Y, H:i', $request->input('date_event'))->format('Y-m-d H:i');
@@ -190,8 +190,11 @@ class EventController extends Controller
                     $request->event_notice->move(public_path('storage/event_notices'), $inputs['event_notice']);
                 }
 
-                if(isset($old_logo) && (file_exists('storage/logo_events/'.$event->logo))) {
-                    unlink('storage/logo_events/'.$event->logo);
+                if(isset($old_logo)) {
+
+                    if(file_exists('storage/logo_events/'.$event->logo)) {
+                        unlink('storage/logo_events/'.$event->logo);
+                    }
                     $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
                 }
 

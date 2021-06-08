@@ -49,7 +49,7 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                 </div>
-                                <input type="text" class="form-control money" id={{ $category->id }} name={{ $category->id }} value="{{ $category->pivot->cost }}" data-mask>
+                                <input type="text" class="form-control money" id={{ $category->id }} name={{ $category->id }} value="{{ $category->pivot->cost }}" data-mask >
                             </div>
 
                         @endforeach
@@ -59,16 +59,15 @@
                 </div>
             </div>
 
-            <div class="card border">
+            <div class="card">
+                <div class="card-header bg-dark">
+                    <h3 class="card-title">Upload de Imagens</h3>
+                </div>
+
                 <div class="card-body">
-                    <div class="card-header bg-dark">
-                        <h3 class="card-title">Upload de Imagens</h3>
-                    </div>
-                    <div class="card-body">
-                        <form action="{{ route('event.upload', $event->id) }}" class="dropzone" id="dropzoneFrom" style=" border: 2px dashed rgb(54, 183, 0);">
-                            @csrf
-                         </form>
-                    </div>
+                    <form action="{{ route('event.upload', $event->id) }}" class="dropzone" id="dropzoneFrom" style=" border: 2px dashed rgb(54, 183, 0);">
+                        @csrf
+                        </form>
                 </div>
             </div>
         </div>
