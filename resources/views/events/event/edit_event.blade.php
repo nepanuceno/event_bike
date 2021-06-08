@@ -33,6 +33,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="description">Descrição do Evento</label>
+                        <textarea  class="form-control" name="description" id="description" cols="30" rows="4">{{ $event->description }}</textarea>
+                    </div>
+
+                    <div class="form-group">
                         <label for="date">Data do Evento</label>
                         <div class="form-group">
                             <div class="input-group date datetimepicker" id="date_event" data-target-input="nearest">
@@ -95,21 +100,36 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="logo">Logo do Evento</label>
+                    <div class=" row form-group shadow p-3">
+                        <label for="logo">Edital do Evento</label>
                         <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" onchange="readURL(this);" class="custom-file-input" id="logo" name="logo">
-                                <label class="custom-file-label" for="exampleInputFile">Escolher Arquivo</label>
+                            <div class="custom-file col-md-7">
+                                <input type="file" onchange="readURL(this);" class="custom-file-input" id="event_notice" name="event_notice" value="{{ $event->event_notice }}">
+                                <label class="custom-file-label" for="event_notice">Escolher Arquivo</label>
+                            </div>
+                            <div class="col-md-5">
+                                <embed src="/storage/event_notices/{{ $event->event_notice }}" type="application/pdf" width="100%" height="100%">
                             </div>
                         </div>
                     </div>
 
-                    @if(isset($event->logo))
-                        <img class="float-right img-fluid img-thumbnail" src="/storage/logo_events/{{ $event->logo }}" id="img">
-                    @else
-                        <img class="float-right img-fluid img-thumbnail" src="#" id="img" alt="" style="display:none;">
-                    @endif
+                    <div class="row form-group shadow p-3">
+                        <label for="logo">Logo do Evento</label>
+                        <div class="input-group">
+                            <div class="custom-file col-md-7">
+                                <input type="file" onchange="readURL(this);" class="custom-file-input" id="logo" name="logo">
+                                <label class="custom-file-label" for="exampleInputFile">Escolher Arquivo</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if(isset($event->logo))
+                                    <img class="float-right img-fluid img-thumbnail" src="/storage/logo_events/{{ $event->logo }}" id="img">
+                                @else
+                                    <img class="float-right img-fluid img-thumbnail" src="#" id="img" alt="" style="display:none;">
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
                 <!-- /.card-body -->

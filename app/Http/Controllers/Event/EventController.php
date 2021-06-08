@@ -50,12 +50,14 @@ class EventController extends Controller
     {
         $this->validate($request,[
             'name'=>'required',
+            'description'=>'required',
             'date_event'=>'required',
             'start_date'=>'required',
             'end_date'=>'required',
             'adress'=>'required',
             'modality_id'=>'required',
             'category'=>'required',
+            'event_notice' => 'required|file|mimes:application/pdf, application/x-pdf,application/acrobat, applications/vnd.pdf, text/pdf, text/x-pdf|max:2048',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -65,16 +67,19 @@ class EventController extends Controller
 
         $inputs = [
             'name' => $request->input('name'),
+            'description' => $request->input('description'),
             'date_event' => $date_event,
             'start_date' => $start_date,
             'end_date' => $end_date,
             'adress' => $request->input('adress'),
             'modality_id' => $request->input('modality_id'),
+            'event_notice' => 'notice_'.time().'.'.$request->event_notice->getClientOriginalExtension(),
             'logo' => time().'.'.$request->logo->getClientOriginalExtension(),
         ];
 
         try {
             $event = Event::create($inputs);
+            $request->event_notice->move(public_path('storage/event_notices'), $inputs['event_notice']);
             $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
             $event->categories()->sync($request->input('category'));
 
@@ -135,12 +140,14 @@ class EventController extends Controller
     {
         $this->validate($request,[
             'name'=>'required',
+            'description'=>'required',
             'date_event'=>'required',
             'start_date'=>'required',
             'end_date'=>'required',
             'adress'=>'required',
             'modality_id'=>'required',
             'category'=>'required',
+            'event_notice' => 'required|file|mimes:pdf|max:1024',
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -159,6 +166,11 @@ class EventController extends Controller
 
         $event = Event::find($id);
 
+        if($request->hasFile('event_notice')) {
+            $inputs['event_notice']='notice_'.time().'.'.$request->event_notice->getClientOriginalExtension();
+            $old_event_notice = $event->event_notice;
+        }
+
         if($request->hasFile('logo')) {
             $inputs['logo']=time().'.'.$request->logo->getClientOriginalExtension();
             $old_logo = $event->logo;
@@ -167,6 +179,15 @@ class EventController extends Controller
         try {
             if($event->update($inputs)) {
                 $event->categories()->sync($request->input('category'));
+
+                if(isset($old_event_notice)) {
+
+                    if(file_exists('storage/event_notices/'.$old_event_notice)) {
+                        unlink('storage/event_notices/'.$old_event_notice);
+                    }
+
+                    $request->event_notice->move(public_path('storage/event_notices'), $inputs['event_notice']);
+                }
 
                 if(isset($old_logo) && (file_exists('storage/logo_events/'.$event->logo))) {
                     unlink('storage/logo_events/'.$event->logo);
@@ -191,23 +212,19 @@ class EventController extends Controller
     public function destroy($id)
     {
         $event = Event::find($id);
-
         $event->active = false;
-
         $event->save();
 
         return redirect()->back()->with('success',"Evento desativado com sucesso");
-
     }
 
+    //Publish photos from the image gallery of an event
     public function upload(Request $request, $id)
     {
         $name_file = $request->file->getClientOriginalName();
         $event = Event::find($id);
         $image_event = new EventImages;
-
         $image_name = md5($name_file).'.'.$request->file->getClientOriginalExtension();
-
         $image_event->event_id = $id;
         $image_event->image = $image_name;
 
@@ -228,11 +245,8 @@ class EventController extends Controller
             }
         }
 
-        // dd($arr);
-
         foreach($arr as $key=>$value) {
             $cost = DB::update('update category_has_event SET cost = ? WHERE event_id = ? AND category_id = ?', [$value, $inputs['event_id'], $key]);
-
             if(!$cost) {
                 return back()->with('error', 'Erro ao tentar setar um valor.');
             }

@@ -32,12 +32,16 @@
                         <input type="name" class="form-control" id="name" name="name" value="{{ old('name') }}">
                     </div>
 
+                    <div class="form-group">
+                        <label for="description">Descrição do Evento</label>
+                        <textarea  class="form-control" name="description" id="description" cols="30" rows="4">{{ old('description') }}</textarea>
+                    </div>
 
                     <div class="form-group">
                         <label for="date">Data do Evento</label>
                         <div class="form-group">
                             <div class="input-group date datetimepicker" id="date_event" data-target-input="nearest">
-                                <input name="date_event" value="{{ old('date_event') }}" type="text" class="form-control datetimepicker-input" data-target="#date_event"/>
+                                <input name="date_event" value="{{ old('date_event') }}" type="text" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#date_event"/>
                                 <div class="input-group-append" data-target="#date_event" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -49,7 +53,7 @@
                         <label for="start_date">Data de início das inscrições</label>
                         <div class="form-group">
                             <div class="input-group date datetimepicker" id="start_date" data-target-input="nearest">
-                                <input name="start_date" value="{{ old('start_date') }}" type="text" class="form-control datetimepicker-input" data-target="#start_date"/>
+                                <input name="start_date" value="{{ old('start_date') }}" type="text" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#start_date"/>
                                 <div class="input-group-append" data-target="#start_date" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -61,7 +65,7 @@
                         <label for="end_date">Data do fim das Inscrições</label>
                         <div class="form-group">
                             <div class="input-group date datetimepicker" id="end_date" data-target-input="nearest">
-                                <input name="end_date" value="{{ old('end_date') }}" type="text" class="form-control datetimepicker-input" data-target="#end_date"/>
+                                <input name="end_date" value="{{ old('end_date') }}" type="text" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#end_date"/>
                                 <div class="input-group-append" data-target="#end_date" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -96,11 +100,21 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="logo">Edital do Evento</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" onchange="readURL(this);" class="custom-file-input" id="event_notice" name="event_notice" value="{{ old('event_notice') }}">
+                                <label class="custom-file-label" for="event_notice">Escolher Arquivo</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="logo">Logo do Evento</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" onchange="readURL(this);" class="custom-file-input" id="logo" name="logo" value="{{ old('logo') }}">
-                                <label class="custom-file-label" for="exampleInputFile">Escolher Arquivo</label>
+                                <label class="custom-file-label" for="logo">Escolher Imagem</label>
                             </div>
                         </div>
                     </div>
