@@ -2,7 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/dropzone.min.css') }}")>
-<script src="{{ asset('css/ekko-lightbox.css') }}"></script>
+<link rel="{{ asset('css/ekko-lightbox.css') }}">
 
 @endsection
 
@@ -38,7 +38,7 @@
 
             <div class="card">
                 <h5 class="card-header bg-dark">Valores por Categoria</h5>
-                <div class="card-body col-md-4 form-group">
+                <div class="card-body col-md-6 col-lg-6 col-xl-4 form-group">
                     <form action="{{ url('event/add_costs') }}" method="post" class="mb-3">
                         @csrf
                         <input type="hidden" id="event" name="event_id" value="{{ $event->id }}">

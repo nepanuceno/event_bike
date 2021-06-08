@@ -9,8 +9,8 @@
     <div class="card-header">
         Eventos
     </div>
-    <div class="col-md-12">
-        <table id="events" class="table display" style="width:100%">
+    <div class="col-md-12 table-responsive-md">
+        <table id="events" class="table display table-striped" style="width:100%">
             <thead class="bg-dark">
                 <tr>
                     <th>Nome</th>
