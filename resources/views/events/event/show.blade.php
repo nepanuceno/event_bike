@@ -16,8 +16,9 @@
                     <h2>{{ $event->name }}</h2>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Data do Evento: </strong>{{ $event->date_event }}</li>
+                    <li class="list-group-item"><strong>Data do Evento: </strong>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i', $event->date_event)->format('d/m/Y H:i') }}</li>
                     <li class="list-group-item"><strong>Modalidade: </strong>{{ $event->modality->name }}</li>
+                    <li class="list-group-item"><strong>Descrição: </strong>{{ $event->description }}</li>
                 </ul>
                 <div class="card-body">
                     <div class="bg-white clearfix">

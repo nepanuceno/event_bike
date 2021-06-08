@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-12">
         <table id="events" class="table display" style="width:100%">
-            <thead class="">
+            <thead class="bg-dark">
                 <tr>
                     <th>Nome</th>
                     <th>Local do Evento</th>

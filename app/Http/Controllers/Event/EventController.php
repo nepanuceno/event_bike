@@ -147,7 +147,7 @@ class EventController extends Controller
             'adress'=>'required',
             'modality_id'=>'required',
             'category'=>'required',
-            'event_notice' => 'required|file|mimes:pdf|max:1024',
+            'event_notice' => 'file|mimes:pdf|max:1024',
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -157,6 +157,7 @@ class EventController extends Controller
 
         $inputs = [
             'name' => $request->input('name'),
+            'description' => $request->input('description'),
             'date_event' =>  $date_event,
             'start_date' => $start_date ,
             'end_date' =>  $end_date,
