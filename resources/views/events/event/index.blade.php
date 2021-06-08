@@ -32,7 +32,7 @@
                         <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i', $event->end_date)->format('d/m/Y H:i') }}</td>
                         <td>{{ $event->modality->name }}</td>
                         <td>
-                            <a class="btn btn-success" href="{{ route('event.show',$event->id) }}">Configurações & Detalhes</a>
+                            <a class="btn btn-success" href="{{ route('event.show',$event->id) }}">Configurações & Valores</a>
                             @can('manager')
                                 <a class="btn btn-secondary" href="{{ route('event.edit',$event->id) }}">Editar</a>
                             @endcan
