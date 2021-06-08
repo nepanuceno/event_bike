@@ -25,6 +25,7 @@
     {{-- Base Stylesheets --}}
     @if(!config('adminlte.enabled_laravel_mix'))
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
         {{-- Configured Stylesheets --}}
@@ -81,8 +82,11 @@
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('vendor/inputmask/inputmask.js') }}"></script>
+        <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
+        <script src="{{ asset('vendor/inputmask/min/inputmask/jquery.inputmask.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/2.1.30/js/locales/bootstrap-datetimepicker.pt-BR.js"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
         {{-- Configured Scripts --}}

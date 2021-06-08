@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Event;
 
+use DateTime;
+use Carbon\Carbon;
 use App\Models\Event;
 use App\Models\EventImages;
 use Illuminate\Http\Request;
@@ -57,11 +59,15 @@ class EventController extends Controller
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        $date_event = Carbon::createFromFormat('d/m/Y, H:i', $request->input('date_event'))->format('Y-m-d H:i');
+        $start_date = Carbon::createFromFormat('d/m/Y, H:i', $request->input('start_date'))->format('Y-m-d H:i');
+        $end_date = Carbon::createFromFormat('d/m/Y, H:i', $request->input('end_date'))->format('Y-m-d H:i');
+
         $inputs = [
             'name' => $request->input('name'),
-            'date_event' => date('Y-m-d H:i:s', strtotime($request->input('date_event'))),
-            'start_date' => date('Y-m-d H:i:s', strtotime($request->input('start_date'))),
-            'end_date' => date('Y-m-d H:i:s', strtotime($request->input('end_date'))),
+            'date_event' => $date_event,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
             'adress' => $request->input('adress'),
             'modality_id' => $request->input('modality_id'),
             'logo' => time().'.'.$request->logo->getClientOriginalExtension(),
@@ -105,7 +111,16 @@ class EventController extends Controller
         $modalities = EventModality::all();
         $categories = EventCategory::all();
 
+        //Modificando as datas vindas do banco para o formato pt-br
+        $date_event = Carbon::createFromFormat('Y-m-d H:i', $event->date_event)->format('d/m/Y H:i');
+        $start_date = Carbon::createFromFormat('Y-m-d H:i', $event->start_date)->format('d/m/Y H:i');
+        $end_date = Carbon::createFromFormat('Y-m-d H:i', $event->end_date)->format('d/m/Y H:i');
 
+        $event->date_event = $date_event;
+        $event->start_date = $start_date;
+        $event->end_date = $end_date;
+
+        // dd($event->date_event);
         return view('events.event.edit_event', compact('event','modalities','categories'));
     }
 
@@ -129,11 +144,15 @@ class EventController extends Controller
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        $date_event = Carbon::createFromFormat('d/m/Y, H:i', $request->input('date_event'))->format('Y-m-d H:i');
+        $start_date = Carbon::createFromFormat('d/m/Y, H:i', $request->input('start_date'))->format('Y-m-d H:i');
+        $end_date = Carbon::createFromFormat('d/m/Y, H:i', $request->input('end_date'))->format('Y-m-d H:i');
+
         $inputs = [
             'name' => $request->input('name'),
-            'date_event' => $request->input('date_event'),
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
+            'date_event' =>  $date_event,
+            'start_date' => $start_date ,
+            'end_date' =>  $end_date,
             'adress' => $request->input('adress'),
             'modality_id' => $request->input('modality_id'),
         ];
@@ -151,16 +170,13 @@ class EventController extends Controller
 
                 if(isset($old_logo) && (file_exists('storage/logo_events/'.$event->logo))) {
                     unlink('storage/logo_events/'.$event->logo);
+                    $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
                 }
-                $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
 
                 return redirect()->route('event.index')->with('success',"Evento atualizado com sucesso!");
-            } else {
-                dd(public_path('storage/logo_events'));
             }
         } catch (\Throwable $th) {
             throw $th;
-            dd(public_path('storage/logo_events'));
 
             return redirect()->back()->with('error',"Houve problema ao atualizar o evento ".$event->name.PHP_EOL.$th);
         }

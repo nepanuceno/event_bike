@@ -32,21 +32,42 @@
                         <input type="name" class="form-control" id="name" name="name" value="{{ old('name') }}">
                     </div>
 
+
                     <div class="form-group">
                         <label for="date">Data do Evento</label>
-                        <input type="text" class="form-control datemask" id="date" name="date_event" value="{{ old('date_event') }}">
+                        <div class="form-group">
+                            <div class="input-group date datetimepicker" id="date_event" data-target-input="nearest">
+                                <input name="date_event" value="{{ old('date_event') }}" type="text" class="form-control datetimepicker-input" data-target="#date_event"/>
+                                <div class="input-group-append" data-target="#date_event" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="start_date">Data de início das inscrições</label>
-                        <input type="text" class="form-control datemask" id="start_date" name="start_date" value="{{ old('start_date') }}">
+                        <div class="form-group">
+                            <div class="input-group date datetimepicker" id="start_date" data-target-input="nearest">
+                                <input name="start_date" value="{{ old('start_date') }}" type="text" class="form-control datetimepicker-input" data-target="#start_date"/>
+                                <div class="input-group-append" data-target="#start_date" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="end_date">Data do fim das Inscrições</label>
-                        <input type="text" class="form-control datemask" id="end_date" name="end_date" value="{{ old('end_date') }}">
+                        <div class="form-group">
+                            <div class="input-group date datetimepicker" id="end_date" data-target-input="nearest">
+                                <input name="end_date" value="{{ old('end_date') }}" type="text" class="form-control datetimepicker-input" data-target="#end_date"/>
+                                <div class="input-group-append" data-target="#end_date" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
 
                     <div class="form-group">
                         <label for="adress">Endereço do Evento</label>
@@ -106,6 +127,8 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('js/dateTimeConfig.js') }}"></script>
+
     <script src="{{ asset('js/sweetalert.js') }}"></script>
 
     @if ($message = Session::get('success'))
@@ -139,6 +162,6 @@
 
     <script>
         //Datemask dd/mm/yyyy
-        $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        // $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
     </script>
 @endsection

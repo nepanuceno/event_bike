@@ -37,13 +37,20 @@
 
             <div class="card">
                 <h5 class="card-header bg-dark">Valores por Categoria</h5>
-                <div class="card-body col-md-4">
+                <div class="card-body col-md-4 form-group">
                     <form action="{{ url('event/add_costs') }}" method="post" class="mb-3">
                         @csrf
                         <input type="hidden" id="event" name="event_id" value="{{ $event->id }}">
                         @foreach ($event->categories as $category)
+
                             <label for="{{ $category->id }}">Valor de {{ $category->name }}</label>
-                            <input type="text" id={{ $category->id }} name={{ $category->id }} value="{{ $category->pivot->cost }}">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                </div>
+                                <input type="text" class="form-control money" id={{ $category->id }} name={{ $category->id }} value="{{ $category->pivot->cost }}" data-mask>
+                            </div>
+
                         @endforeach
                         <hr>
                         <button class="btn btn-primary" type="submit">Alterar</button>
@@ -140,7 +147,18 @@
         alwaysShowClose: true
       });
     });
-  })
+
+    $(".money").inputmask( 'currency',{"autoUnmask": true,
+            radixPoint:",",
+            groupSeparator: ".",
+            allowMinus: false,
+            prefix: 'R$ ',
+            digits: 2,
+            digitsOptional: false,
+            rightAlign: true,
+            unmaskAsNumber: true
+    });
+  });
 </script>
 
 @endsection
