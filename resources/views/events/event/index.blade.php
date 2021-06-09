@@ -27,9 +27,9 @@
                     <tr>
                         <td>{{ $event->name }}</td>
                         <td>{{ $event->adress }}</td>
-                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i', $event->date_event)->format('d/m/Y H:i') }}</td>
-                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i', $event->start_date)->format('d/m/Y H:i') }}</td>
-                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i', $event->end_date)->format('d/m/Y H:i') }}</td>
+                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->format('d/m/Y H:i:s') }}</td>
+                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date)->format('d/m/Y H:i:s') }}</td>
+                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->end_date)->format('d/m/Y H:i:s') }}</td>
                         <td>{{ $event->modality->name }}</td>
                         <td>
                             <a class="btn btn-success" href="{{ route('event.show',$event->id) }}">Configurações & Valores</a>

@@ -61,9 +61,9 @@ class EventController extends Controller
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
-        $date_event = Carbon::createFromFormat('d/m/Y, H:i', $request->input('date_event'))->format('Y-m-d H:i');
-        $start_date = Carbon::createFromFormat('d/m/Y, H:i', $request->input('start_date'))->format('Y-m-d H:i');
-        $end_date = Carbon::createFromFormat('d/m/Y, H:i', $request->input('end_date'))->format('Y-m-d H:i');
+        $date_event = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('date_event'))->format('Y-m-d H:i:s');
+        $start_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('start_date'))->format('Y-m-d H:i:s');
+        $end_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('end_date'))->format('Y-m-d H:i:s');
 
         $inputs = [
             'name' => $request->input('name'),
@@ -117,9 +117,9 @@ class EventController extends Controller
         $categories = EventCategory::all();
 
         //Modificando as datas vindas do banco para o formato pt-br
-        $date_event = Carbon::createFromFormat('Y-m-d H:i', $event->date_event)->format('d/m/Y H:i');
-        $start_date = Carbon::createFromFormat('Y-m-d H:i', $event->start_date)->format('d/m/Y H:i');
-        $end_date = Carbon::createFromFormat('Y-m-d H:i', $event->end_date)->format('d/m/Y H:i');
+        $date_event = Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->format('d/m/Y H:i:s');
+        $start_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date)->format('d/m/Y H:i:s');
+        $end_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->end_date)->format('d/m/Y H:i:s');
 
         $event->date_event = $date_event;
         $event->start_date = $start_date;
@@ -151,9 +151,9 @@ class EventController extends Controller
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
-        $date_event = Carbon::createFromFormat('d/m/Y, H:i', $request->input('date_event'))->format('Y-m-d H:i');
-        $start_date = Carbon::createFromFormat('d/m/Y, H:i', $request->input('start_date'))->format('Y-m-d H:i');
-        $end_date = Carbon::createFromFormat('d/m/Y, H:i', $request->input('end_date'))->format('Y-m-d H:i');
+        $date_event = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('date_event'))->format('Y-m-d H:i:s');
+        $start_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('start_date'))->format('Y-m-d H:i:s');
+        $end_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('end_date'))->format('Y-m-d H:i:s');
 
         $inputs = [
             'name' => $request->input('name'),
