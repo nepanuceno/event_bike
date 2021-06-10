@@ -3,6 +3,9 @@
 
 @section('content')
 
+{!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
+
+
 <div class="col-md-8">
 
     <div class="card">
@@ -32,7 +35,7 @@
 
         <div class="card-footer">
             <div class="clearfix">
-                <button type="submit" class="btn btn-secondary float-left">Salvar Alteração</button>
+                <button type="submit" class="btn btn-primary float-left">Salvar Alteração</button>
                 <a href="{{ route('roles.index') }}" type="button" class="btn btn-secondary float-right text-white">Cancelar</a>
             </div>
         </div>
@@ -50,10 +53,6 @@
         </ul>
     </div>
 @endif
-
-
-{!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
-
 
 {!! Form::close() !!}
 
