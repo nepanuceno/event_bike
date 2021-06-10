@@ -6,12 +6,8 @@
 <div class="row">
 
     <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Gerenciamento de Usuários</h2>
-        </div>
-
         <div class="pull-right mt-5 mb-3">
-            <a class="btn btn-success" href="{{ route('user.create') }}"> Criar novo Usuário</a>
+            <a class="btn btn-success" href="{{ route('user.create') }}"><span class="fas fa-plus"></span> Criar novo Usuário</a>
         </div>
     </div>
 </div>
@@ -27,44 +23,60 @@
 
 @endif
 
+<div class="card card-primary">
+    <div class="card-header">
+      <h2 class="card-title">Gerenciamento de Usuários</h2>
 
-<table class="table table-bordered">
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+        </button>
+      </div>
+      <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table class="table table-bordered">
 
- <tr>
-   <th>No</th>
-   <th>Name</th>
-   <th>Email</th>
-   <th>Roles</th>
-   <th width="280px">Action</th>
- </tr>
+       <tr>
+         <th>No</th>
+         <th>Name</th>
+         <th>Email</th>
+         <th>Roles</th>
+         <th width="280px">Action</th>
+       </tr>
 
- @foreach ($data as $key => $user)
-  <tr>
-    <td>{{ ++$i }}</td>
-    <td>{{ $user->name }}</td>
-    <td>{{ $user->email }}</td>
-    <td>
-      @if(!empty($user->getRoleNames()))
-        @foreach($user->getRoleNames() as $v)
-           <label class="badge badge-success">{{ $v }}</label>
-        @endforeach
-      @endif
-    </td>
-    <td>
-       <a class="btn btn-info" href="{{ route('user.show',$user->id) }}">Ver</a>
-       <!-- <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a> -->
-        {!! Form::open(['method' => 'DELETE','route' => ['user.destroy', $user->id],'style'=>'display:inline']) !!}
-            {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
-    </td>
-  </tr>
+       @foreach ($data as $key => $user)
+        <tr>
+          <td>{{ ++$i }}</td>
+          <td>{{ $user->name }}</td>
+          <td>{{ $user->email }}</td>
+          <td>
+            @if(!empty($user->getRoleNames()))
+              @foreach($user->getRoleNames() as $v)
+                 <label class="badge badge-success">{{ $v }}</label>
+              @endforeach
+            @endif
+          </td>
+          <td>
+             <a class="btn btn-info" href="{{ route('user.show',$user->id) }}"><span class="fas fa-eye"></span> Detalhes</a>
+             <!-- <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a> -->
+              {!! Form::open(['method' => 'DELETE','route' => ['user.destroy', $user->id],'style'=>'display:inline']) !!}
+                  {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
+              {!! Form::close() !!}
+          </td>
+        </tr>
 
- @endforeach
+       @endforeach
 
-</table>
+      </table>
 
 
-{!! $data->render() !!}
+      {!! $data->render() !!}
+    </div>
+    <!-- /.card-body -->
+  </div>
+
+
 
 
 @endsection
