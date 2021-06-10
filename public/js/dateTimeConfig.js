@@ -3,7 +3,7 @@ $(function () {
     $('.datetimepicker').datetimepicker({
         // inline: true,
         // sideBySide: true,
-        format: 'DD/MM/YYYY, HH:mm',
+        format: 'DD/MM/YYYY, HH:mm:ss',
         userCurrent: false,
         locale: 'pt-br',
         icons: {
