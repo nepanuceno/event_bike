@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <h2>CARD</h2>
+    <div class="card-group">
         <slot></slot>
     </div>
 </template>

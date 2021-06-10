@@ -258,4 +258,11 @@ class EventController extends Controller
 
         return back()->with('success', 'Valor adicionado com sucesso!');
     }
+
+    public function published_events()
+    {
+        $events = Event::all();
+
+        return view('welcome', compact('events'));
+    }
 }

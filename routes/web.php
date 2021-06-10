@@ -59,3 +59,5 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('event/upload/{id}',[EventController::class, 'upload'])->name('event.upload');
     });
 });
+
+Route::get('/',[EventController::class, 'published_events'])->name('published_events');
