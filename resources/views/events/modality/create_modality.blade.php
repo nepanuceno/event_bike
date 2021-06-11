@@ -14,13 +14,6 @@
     </div>
 @endif
 
-@if ($message = Session::get('success'))
-    <div class="alert alert-success alert-block">
-        <button type="button" class="close" data-dismiss="alert"><span class="fas fa-close"></span></button>
-            <strong>{{ $message }}</strong>
-    </div>
-@endif
-
 <div class="row">
     <!-- left column -->
     <div class="col-md-6">
@@ -56,5 +49,12 @@
 
 
 @section('js')
+<script src="/js/sweetalert.js"></script>
+@if ($message = Session::get('success'))
+<script>MessageAlert(['message','success']);</script>
+@endif
 
+@if ($message = Session::get('error'))
+    <script>MessageAlert(['message','error']);</script>
+@endif
 @endsection

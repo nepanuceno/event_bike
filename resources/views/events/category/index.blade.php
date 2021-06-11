@@ -58,7 +58,7 @@
 @endsection
 
 @section('js')
-    <script src="js/sweetalert.js"></script>
+    <script src="/js/sweetalert.js"></script>
     @if ($message = Session::get('success'))
     <script>MessageAlert(['message','success']);</script>
     @endif
