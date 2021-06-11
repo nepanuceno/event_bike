@@ -57,5 +57,6 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('event/add_costs', [EventController::class, 'add_costs']);
 
         Route::post('event/upload/{id}',[EventController::class, 'upload'])->name('event.upload');
+        Route::get('event/filter/{id}',[EventController::class, 'event_filter'])->name('event.filter');
     });
 });

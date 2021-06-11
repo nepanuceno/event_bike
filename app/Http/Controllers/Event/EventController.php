@@ -22,9 +22,68 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::where('active','<>', 0)->get();
+        $result = $this->event_filter(1);
 
-        return view('events.event.index', compact('events'));
+        return view('events.event.index', ['events'=>$result['all'], 'event_queries'=>$result, 'status'=>1 ]);
+    }
+
+    //Performs event queries separating by status
+    public function event_queries()
+    {
+        $events = Event::where('active','<>', 0);
+
+        $all = clone $events;
+        $all = $all->get();
+
+        $released_events = clone $events;
+        $released_events = $released_events->whereDate('start_date','>',date(Carbon::now()->toDateString()))
+            ->get();
+
+        $open_subscriptions = clone $events;
+        $open_subscriptions = $open_subscriptions->whereDate('date_event','>',date(Carbon::now()->toDateString()))
+            ->whereDate('start_date','<',date(Carbon::now()->toDateString()))
+            ->whereDate('end_date','>',date(Carbon::now()->toDateString()))
+            ->get();
+
+        $closed_subscriptions = clone $events;
+        $closed_subscriptions = $closed_subscriptions->whereDate('date_event','>',date(Carbon::now()->toDateString()))
+            ->whereDate('end_date','<',date(Carbon::now()->toDateString()))
+            ->get();
+
+        $past_events = clone $events;
+        $past_events = $past_events->whereDate('date_event','<',date(Carbon::now()->toDateString()))
+            ->get();
+
+        $disabled_events = Event::where('active','=', 0)->get();
+
+        return compact('all','released_events', 'open_subscriptions', 'closed_subscriptions', 'past_events', 'disabled_events');
+    }
+
+    //Filters events based on dates
+    public function event_filter($id)
+    {
+
+        $event_queries = $this->event_queries();
+
+        switch($id)
+        {
+            case 1 : return $events = $event_queries;
+                break;
+            case 2 : $events = $event_queries['released_events'];
+                break;
+            case 3 : $events = $event_queries['open_subscriptions'];
+                break;
+            case 4 : $events = $event_queries['closed_subscriptions'];
+                break;
+            case 5 : $events = $event_queries['past_events'];
+                break;
+            case 6 : $events = $event_queries['disabled_events'];
+                break;
+        }
+
+        // dd($events);
+        $status = $id;
+        return view('events.event.index', compact('events','event_queries', 'status'));
     }
 
     /**
@@ -216,10 +275,17 @@ class EventController extends Controller
     public function destroy($id)
     {
         $event = Event::find($id);
-        $event->active = false;
+        if($event->active == 1){
+            $event->active = false;
+            $status = 'Desativado';
+        }
+        else{
+            $event->active = true;
+            $status = 'Reativado';
+        }
         $event->save();
 
-        return redirect()->back()->with('success',"Evento desativado com sucesso");
+        return redirect()->back()->with('success',"Evento ".$status." com sucesso");
     }
 
     //Publish photos from the image gallery of an event
@@ -240,6 +306,7 @@ class EventController extends Controller
         }
     }
 
+    //Add entry fees by category type
     public function add_costs(Request $request)
     {
         $inputs=$request->all();

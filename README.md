@@ -10,7 +10,9 @@
 ## Configure Project
 <p>php artisan migrate</p>
 <p>php artisan db:seed --class=PermissionTableSeeder</p>
-</p>php artisan db:seed --class=CreateAdminUserSeeder</p>
+<p>php artisan db:seed --class=CreateAdminUserSeeder</p>
+<p>php artisan adminlte:update</p>
+<p>php artisan adminlte:install --only=main_views --force</p>
 
 ## About Laravel
 
