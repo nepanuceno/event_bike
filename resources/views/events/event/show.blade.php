@@ -49,7 +49,12 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                 </div>
-                                <input type="text" class="form-control money" id={{ $category->id }} name={{ $category->id }} value="{{ $category->pivot->cost }}" data-mask >
+                                <input type="text" class="form-control money" 
+                                    id={{ $category->id }} 
+                                    name={{ $category->id }} 
+                                    {{-- value={{ \Cknow\Money\Money::USD($category->pivot->cost)->formatByIntlLocalizedDecimal(null, null, \NumberFormatter::DECIMAL) }} --}}
+                                    value={{ str_replace('.',',',$category->pivot->cost) }}
+                                    data-mask >
                             </div>
 
                         @endforeach
@@ -101,6 +106,10 @@
     <span id="message" style="display: none">{{ $message }}</span>
 @endif
 
+@if ($message = Session::get('error'))
+    <span id="message_error" style="display: none">{{ $message }}</span>
+@endif
+
 @endsection
 
 @section('js')
@@ -112,7 +121,7 @@
     @endif
 
     @if ($message = Session::get('error'))
-        <script>MessageAlert(['message','error']);</script>
+        <script>MessageAlert(['message_error','error']);</script>
     @endif
     <script>
         $(document).ready(function(){

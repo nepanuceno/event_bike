@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\EventCategory;
 use App\Models\EventModality;
 use App\Models\CategoryHasEvent;
+use Cknow\Money\Money;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -160,6 +161,7 @@ class EventController extends Controller
     {
         $event = Event::find($id);
 
+        // dd($event->categories);
         return view('events.event.show', compact('event'));
     }
 
@@ -312,14 +314,20 @@ class EventController extends Controller
         $inputs=$request->all();
         foreach($inputs as $key=>$input) {
             if ($key != "_token" && $key!="event_id") {
-                $arr[$key] = $input;
+                $aux = str_replace(['.', 'R$ '], '', $input);                
+                $aux = str_replace(',','.',$aux);
+                $arr[$key] = $aux;
             }
         }
 
         foreach($arr as $key=>$value) {
-            $cost = DB::update('update category_has_event SET cost = ? WHERE event_id = ? AND category_id = ?', [$value, $inputs['event_id'], $key]);
-            if(!$cost) {
-                return back()->with('error', 'Erro ao tentar setar um valor.');
+            try {
+                CategoryHasEvent::where('event_id',$inputs['event_id'])
+                    ->where('category_id', $key)
+                    ->update(['cost'=> $value]);
+            } catch (\Throwable $th) {
+                // throw $th;
+                return back()->with('error', 'Erro ao tentar setar um valor. '.$th);
             }
         }
 

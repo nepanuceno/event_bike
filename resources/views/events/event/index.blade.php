@@ -2,13 +2,13 @@
 
 
 @section('content')
-<div class="card card-primary" style="height: inherit; width: inherit; transition: all 0.15s ease 0s;">
+<div class="card card-secondary" style="height: inherit; width: inherit; transition: all 0.15s ease 0s;">
     <div class="card-header pl-2 pr-0">
         <a class="btn btn-app mb-2 ml-0 bg-olive mr-4" href="{{ route('event.create') }}"> <i class="fas fa-plus"></i> Criar um evento</a>
         <button type="button" class="btn btn-tool align-top float-right mr-0 ml-3" data-card-widget="maximize"><i class="fas fa-expand fa-2x"></i></button>
 
         <div class="card-tools">
-        <a class="btn btn-app  mb-1 bg-secondary btn-tool" href="{{ url('event')}}">
+        <a class="btn btn-app  mb-1 bg-primary btn-tool" href="{{ url('event')}}">
             <span class="badge bg-success">{{ count($event_queries['all']) }}</span>
             <i class="fas fa-barcode"></i> Todos
           </a>
@@ -85,7 +85,11 @@
                 <tbody>
                     @foreach($events as $event)
                         <tr>
-                            <td>{{ $event->name }}</td>
+                            <td>
+                                <a class="btn btn-outline-info" href="{{ route('event.show',$event->id) }}">
+                                    <i class="fa fa-cogs mr-1"></i>{{ $event->name }}
+                                </a>
+                            </td>
                             <td>{{ $event->adress }}</td>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->format('d/m/Y H:i:s') }}</td>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date)->format('d/m/Y H:i:s') }}</td>
@@ -93,15 +97,18 @@
                             <td>{{ $event->modality->name }}</td>
                             <td class="float-right">
                                 @if($event->active <> 0)
-                                    <a class="btn btn-success" href="{{ route('event.show',$event->id) }}"><i class="fa fa-cogs"> Configurações & Valores</i></a>
+                                <div class="btn-group">
+
+                                    {{-- <a class="btn btn-success" href="{{ route('event.show',$event->id) }}"><i class="fa fa-cogs"> Configurações & Valores</i></a> --}}
                                     @can('manager')
-                                        <a class="btn btn-secondary" href="{{ route('event.edit',$event->id) }}"><i class="fa fa-edit"> Editar</i></a>
+                                    <a class="btn btn-secondary" href="{{ route('event.edit',$event->id) }}"><i class="fa fa-edit"></i></a>
                                     @endcan
                                     @can('manager')
-                                        {!! Form::open(['method' => 'DELETE','route' => ['event.destroy', $event->id],'style'=>'display:inline']) !!}
-                                            {!! Form::button('<i class="fa fa-trash"> Desativar</i>', ['type'=>'submit', 'class' => 'btn btn-danger']) !!}
-                                        {!! Form::close() !!}
+                                    {!! Form::open(['method' => 'DELETE','route' => ['event.destroy', $event->id],'style'=>'display:inline']) !!}
+                                    {!! Form::button('<i class="fa fa-trash"></i>', ['type'=>'submit', 'class' => 'btn btn-danger']) !!}
+                                    {!! Form::close() !!}
                                     @endcan
+                                </div>
                                 @else
                                     @can('manager')
                                         {!! Form::open(['method' => 'DELETE','route' => ['event.destroy', $event->id],'style'=>'display:inline']) !!}

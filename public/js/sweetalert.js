@@ -72,10 +72,12 @@ function MessageAlert(params)
 
     if(params[1] == 'success') {
         type_message = "Sucesso"
+    } else if(params[1] == 'error') {
+        type_message = "Opss!"
     }
 
     Swal.fire(
-        'Sucesso!',
+        type_message,
         message,
         params[1]
     )

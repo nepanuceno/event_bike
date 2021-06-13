@@ -11,12 +11,13 @@ class CategoryHasEvent extends Model
     use HasFactory;
 
     protected $table = 'category_has_event';
-
+    public $timestamps = false;
 
     public function __construct()
     {
         $this->setFillable();
     }
+
     public function setFillable()
     {
         $fields = Schema::getColumnListing('category_has_event');
