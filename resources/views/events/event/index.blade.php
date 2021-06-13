@@ -42,34 +42,37 @@
         <h3 class="">
             @switch($status)
             @case(1)
-               Todos os Eventos
-                @break
-
+            Todos os Eventos
+            @break
+            
             @case(2)
-                Eventos Lançados Recentemente
-                @break
-
+            Eventos Lançados Recentemente
+            @break
+            
             @case(3)
-                Eventos com Inscrições Abertas
-                @break
-
+            Eventos com Inscrições Abertas
+            @break
+            
             @case(4)
-                Eventos com Inscrições Encerradas
-                @break
-
+            Eventos com Inscrições Encerradas
+            @break
+            
             @case(5)
-                Eventos que já aconteceram
-                @break
-
+            Eventos que já aconteceram
+            @break
+            
             @case(6)
-                Eventos Desativados
-                @break
-
+            Eventos Desativados
+            @break
+            
             @default
-                Eventos
-        @endswitch
+            Eventos
+            @endswitch
         </h3>
+
+        @if(count($events) > 0)
         <div class="col-md-12 table-responsive-md">
+
             <table id="events" class="table display table-striped" style="width:100%">
                 <thead class="bg-dark">
                     <tr>
@@ -121,6 +124,12 @@
                     @endforeach
                 </tbody>
             </table>
+            @else
+            <div class="alert alert-info" role="alert">
+                Não há resultados para esta consulta!
+            </div>
+            @endif
+
         </div>
     </div>
     <!-- /.card-body -->

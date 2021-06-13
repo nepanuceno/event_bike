@@ -25,6 +25,10 @@ class EventController extends Controller
     {
         $result = $this->event_filter(1);
 
+        if(count($result) == 0) {
+            return view('events.event.index', ['events'=>$result['all'], 'event_queries'=>$result, 'status'=>1 ])
+            ->with('empty', "Não ha resultados para esta consulta");
+        }
         return view('events.event.index', ['events'=>$result['all'], 'event_queries'=>$result, 'status'=>1 ]);
     }
 
@@ -82,8 +86,11 @@ class EventController extends Controller
                 break;
         }
 
-        // dd($events);
         $status = $id;
+        if(count($events) == 0) {
+            return view('events.event.index', compact('events','event_queries', 'status'))->with('empty', "Não ha resultados para esta consulta");
+        }
+
         return view('events.event.index', compact('events','event_queries', 'status'));
     }
 
