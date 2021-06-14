@@ -341,8 +341,8 @@ class EventController extends Controller
 
         foreach($arr as $key=>$value) {
             try {
-                // $this->categoryHasEvent->where('event_id',$inputs['event_id'])
-                CategoryHasEvent::where('event_id',$inputs['event_id'])
+                // CategoryHasEvent::where('event_id',$inputs['event_id'])
+                $this->categoryHasEvent->where('event_id',$inputs['event_id'])
                     ->where('category_id', $key)
                     ->update(['cost'=> $value]);
             } catch (\Throwable $th) {
