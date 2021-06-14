@@ -4,18 +4,32 @@ namespace App\Http\Controllers\Event;
 
 use DateTime;
 use Carbon\Carbon;
-use App\Models\Event;
 use App\Models\EventImages;
 use Illuminate\Http\Request;
 use App\Models\EventCategory;
 use App\Models\EventModality;
 use App\Models\CategoryHasEvent;
-use Cknow\Money\Money;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\CategoryHasEventRepositoryInterface;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Repositories\Contracts\EventRepositoryInterface;
+use App\Repositories\Contracts\ModalityRepositoryInterface;
 
 class EventController extends Controller
 {
+    public $events;
+    public $modality;
+    public $category;
+    public $categoryHasEvent;
+
+    public function __construct(
+        EventRepositoryInterface $events, ModalityRepositoryInterface $modality, CategoryRepositoryInterface $category, CategoryHasEventRepositoryInterface $categoryHasEvent)
+    {
+        $this->event = $events;
+        $this->modality = $modality;
+        $this->category = $category;
+        $this->categoryHasEvent = $categoryHasEvent;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +49,7 @@ class EventController extends Controller
     //Performs event queries separating by status
     public function event_queries()
     {
-        $events = Event::where('active','<>', 0);
+        $events = $this->event->where('active','<>', 0);
 
         $all = clone $events;
         $all = $all->get();
@@ -59,7 +73,7 @@ class EventController extends Controller
         $past_events = $past_events->whereDate('date_event','<',date(Carbon::now()->toDateString()))
             ->get();
 
-        $disabled_events = Event::where('active','=', 0)->get();
+        $disabled_events = $this->event->where('active', 0)->get();
 
         return compact('all','released_events', 'open_subscriptions', 'closed_subscriptions', 'past_events', 'disabled_events');
     }
@@ -145,14 +159,14 @@ class EventController extends Controller
         ];
 
         try {
-            $event = Event::create($inputs);
+            $event = $this->event->create($inputs);
             $request->event_notice->move(public_path('storage/event_notices'), $inputs['event_notice']);
             $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
             $event->categories()->sync($request->input('category'));
 
             return back()->with('success','Evento Criado com sucesso');
         } catch (\Throwable $th) {
-            //return back()->with('error','Erro ao cadastrar');
+            return back()->with('error','Erro ao cadastrar');
 
             throw $th;
         }
@@ -166,9 +180,8 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $event = Event::find($id);
+        $event = $this->event->find($id);
 
-        // dd($event->categories);
         return view('events.event.show', compact('event'));
     }
 
@@ -180,9 +193,9 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        $event = Event::find($id);
-        $modalities = EventModality::all();
-        $categories = EventCategory::all();
+        $event = $this->event->find($id);
+        $modalities = $this->modality->all();
+        $categories = $this->category->all();
 
         //Modificando as datas vindas do banco para o formato pt-br
         $date_event = Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->format('d/m/Y H:i:s');
@@ -193,7 +206,6 @@ class EventController extends Controller
         $event->start_date = $start_date;
         $event->end_date = $end_date;
 
-        // dd($event->date_event);
         return view('events.event.edit_event', compact('event','modalities','categories'));
     }
 
@@ -233,7 +245,7 @@ class EventController extends Controller
             'modality_id' => $request->input('modality_id'),
         ];
 
-        $event = Event::find($id);
+        $event = $this->event->find($id);
 
         if($request->hasFile('event_notice')) {
             $inputs['event_notice']='notice_'.time().'.'.$request->event_notice->getClientOriginalExtension();
@@ -283,7 +295,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        $event = Event::find($id);
+        $event = $this->event->find($id);
         if($event->active == 1){
             $event->active = false;
             $status = 'Desativado';
@@ -301,7 +313,7 @@ class EventController extends Controller
     public function upload(Request $request, $id)
     {
         $name_file = $request->file->getClientOriginalName();
-        $event = Event::find($id);
+        $event = $this->event->find($id);
         $image_event = new EventImages;
         $image_name = md5($name_file).'.'.$request->file->getClientOriginalExtension();
         $image_event->event_id = $id;
@@ -321,7 +333,7 @@ class EventController extends Controller
         $inputs=$request->all();
         foreach($inputs as $key=>$input) {
             if ($key != "_token" && $key!="event_id") {
-                $aux = str_replace(['.', 'R$ '], '', $input);                
+                $aux = str_replace(['.', 'R$ '], '', $input);
                 $aux = str_replace(',','.',$aux);
                 $arr[$key] = $aux;
             }
@@ -329,7 +341,7 @@ class EventController extends Controller
 
         foreach($arr as $key=>$value) {
             try {
-                CategoryHasEvent::where('event_id',$inputs['event_id'])
+                $this->categoryHasEvent->where('event_id',$inputs['event_id'])
                     ->where('category_id', $key)
                     ->update(['cost'=> $value]);
             } catch (\Throwable $th) {
