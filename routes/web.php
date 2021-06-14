@@ -58,5 +58,8 @@ Route::group(['middleware' => ['auth']], function() {
 
         Route::post('event/upload/{id}',[EventController::class, 'upload'])->name('event.upload');
         Route::get('event/filter/{id}',[EventController::class, 'event_filter'])->name('event.filter');
+        Route::get('events/csv_head_file', [EventController::class, 'csv_head_file'])->name('csv_head_file');
     });
 });
+
+

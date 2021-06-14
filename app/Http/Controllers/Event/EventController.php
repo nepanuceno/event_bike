@@ -340,4 +340,13 @@ class EventController extends Controller
 
         return back()->with('success', 'Valor adicionado com sucesso!');
     }
+
+
+    public function csv_head_file()
+    {
+        ini_set('auto_detect_line_endings',TRUE);
+        $handle = fopen('file.csv','r');
+        $csv_head = fgetcsv($handle);
+        return view('events.event.import_csv', compact('csv_head'));
+    }
 }
