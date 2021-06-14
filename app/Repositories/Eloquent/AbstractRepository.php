@@ -21,9 +21,9 @@ abstract class AbstractRepository
         return $this->model->all();
     }
 
-    public function find()
+    public function find($id)
     {
-        return $this->model->find();
+        return $this->model->find($id);
     }
 
     public function create($array_inputs)
