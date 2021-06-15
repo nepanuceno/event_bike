@@ -44,7 +44,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Perfis para atribuir ao Usuário</label>
-                                            <select class="select2 select_input_roles" multiple="multiple" name="roles" id="roles" data-placeholder="Selecione as funções" style="width: 100%;">
+                                            <select class="select2 select_input_roles" multiple name="roles[]" id="roles" data-placeholder="Selecione as funções" style="width: 100%;">
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
                                             @endforeach
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                             <hr>
-                            <button class="btn btn-secondary" type="submit">Atribuir Função</button>
+                            <button class="btn btn-secondary" type="submit">Assossiar Perfil</button>
 
                         </form>
                     </div>

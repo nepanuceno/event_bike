@@ -78,15 +78,7 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
             ]);
 
-
-            $permissions = Permission::pluck('id','name')->all();
-            // dd($permissions);
-            $role = Role::where('name','Manager')->get();
-            // dd(['manager'=>$permissions['manager']]);
-            $role->syncPermissions(['manager'=>$permissions['manager']]);
-            $user->assignRole([$role->id]);
-
-
+            $user->assignRole('Manager');
             DB::commit();
 
             return $user;
