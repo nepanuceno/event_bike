@@ -142,9 +142,14 @@ class EventController extends Controller
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
-        $date_event = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('date_event'))->format('Y-m-d H:i:s');
-        $start_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('start_date'))->format('Y-m-d H:i:s');
-        $end_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('end_date'))->format('Y-m-d H:i:s');
+        // $date_event = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('date_event'))->format('Y-m-d H:i:s');
+        // $start_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('start_date'))->format('Y-m-d H:i:s');
+        // $end_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('end_date'))->format('Y-m-d H:i:s');
+
+        $date_event = $this->dateFormatToDb($request->input('date_event'));
+        $start_date = $this->dateFormatToDb($request->input('start_date'));
+        $end_date = $this->dateFormatToDb($request->input('end_date'));
+
 
         $inputs = [
             'name' => $request->input('name'),
@@ -198,13 +203,9 @@ class EventController extends Controller
         $categories = $this->category->all();
 
         //Modificando as datas vindas do banco para o formato pt-br
-        $date_event = Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->format('d/m/Y H:i:s');
-        $start_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date)->format('d/m/Y H:i:s');
-        $end_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->end_date)->format('d/m/Y H:i:s');
-
-        $event->date_event = $date_event;
-        $event->start_date = $start_date;
-        $event->end_date = $end_date;
+        $event->date_event = $this->dateFormatToPt_BR( $event->date_event);
+        $event->start_date = $this->dateFormatToPt_BR($event->start_date);
+        $event->end_date = $this->dateFormatToPt_BR($event->end_date);
 
         return view('events.event.edit_event', compact('event','modalities','categories'));
     }
@@ -231,16 +232,12 @@ class EventController extends Controller
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
-        $date_event = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('date_event'))->format('Y-m-d H:i:s');
-        $start_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('start_date'))->format('Y-m-d H:i:s');
-        $end_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('end_date'))->format('Y-m-d H:i:s');
-
         $inputs = [
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'date_event' =>  $date_event,
-            'start_date' => $start_date ,
-            'end_date' =>  $end_date,
+            'date_event' => $this->dateFormatToDb($request->input('date_event')),
+            'start_date' => $this->dateFormatToDb($request->input('start_date')),
+            'end_date' => $this->dateFormatToDb($request->input('end_date')),
             'adress' => $request->input('adress'),
             'modality_id' => $request->input('modality_id'),
         ];
@@ -341,7 +338,6 @@ class EventController extends Controller
 
         foreach($arr as $key=>$value) {
             try {
-                // CategoryHasEvent::where('event_id',$inputs['event_id'])
                 $this->categoryHasEvent->where('event_id',$inputs['event_id'])
                     ->where('category_id', $key)
                     ->update(['cost'=> $value]);
@@ -361,5 +357,16 @@ class EventController extends Controller
         $handle = fopen('file.csv','r');
         $csv_head = fgetcsv($handle);
         return view('events.event.import_csv', compact('csv_head'));
+    }
+
+    private function dateFormatToDb($date_input)
+    {
+       return Carbon::createFromFormat('d/m/Y, H:i:s', $date_input)->format('Y-m-d H:i:s');
+    }
+
+    private function dateFormatToPt_BR($date_input)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date_input)->format('d/m/Y H:i:s');
+
     }
 }

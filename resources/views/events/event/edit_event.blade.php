@@ -107,8 +107,8 @@
                                 <input type="file" onchange="readURL(this);" class="custom-file-input" id="event_notice" name="event_notice" value="{{ $event->event_notice }}">
                                 <label class="custom-file-label" for="event_notice">Escolher Arquivo</label>
                             </div>
-                            <div class="col-md-5">
-                                <embed src="/storage/event_notices/{{ $event->event_notice }}" type="application/pdf" width="100%" height="100%">
+                            <div class="col-md-5 mt-2">
+                                <embed class="float-right img-fluid img-thumbnail" src="/storage/event_notices/{{ $event->event_notice }}" type="application/pdf" width="100%" height="100%">
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                                 <input type="file" onchange="readURL(this);" class="custom-file-input" id="logo" name="logo">
                                 <label class="custom-file-label" for="exampleInputFile">Escolher Arquivo</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5 mt-2">
                                 @if(isset($event->logo))
                                     <img class="float-right img-fluid img-thumbnail" src="/storage/logo_events/{{ $event->logo }}" id="img">
                                 @else

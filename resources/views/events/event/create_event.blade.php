@@ -100,11 +100,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="logo">Edital do Evento</label>
+                        <label for="event_notice">Edital do Evento</label>
                         <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" onchange="readURL(this);" class="custom-file-input" id="event_notice" name="event_notice" value="{{ old('event_notice') }}">
+                            <div class="custom-file col-md-7">
+                                <input type="file" onchange="readURL(this,'#pdf');" class="custom-file-input" id="event_notice" name="event_notice" value="{{ old('event_notice') }}">
                                 <label class="custom-file-label" for="event_notice">Escolher Arquivo</label>
+                            </div>
+                            <div class="col-md-5 mt-2">
+                                <embed class="float-right img-fluid img-thumbnail" id="pdf" src="" type="application/pdf" width="100%" height="100%" style="display:none;">
                             </div>
                         </div>
                     </div>
@@ -112,14 +115,16 @@
                     <div class="form-group">
                         <label for="logo">Logo do Evento</label>
                         <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" onchange="readURL(this);" class="custom-file-input" id="logo" name="logo" value="{{ old('logo') }}">
+                            <div class="custom-file col-md-7">
+                                <input type="file" onchange="readURL(this, '#img');" class="custom-file-input" id="logo" name="logo" value="{{ old('logo') }}">
                                 <label class="custom-file-label" for="logo">Escolher Imagem</label>
+                            </div>
+                            <div class="col-md-5">
+                                <img class="float-right img-fluid img-thumbnail" src="#" id="img" alt="" style="display:none;">
                             </div>
                         </div>
                     </div>
 
-                    <img class="float-right img-fluid img-thumbnail" src="#" id="img" alt="" style="display:none;">
 
                 </div>
                 <!-- /.card-body -->
@@ -163,7 +168,7 @@
             });
         });
     </script>
-
+{{--
     <script>
         $(document).ready(function(){
             $('input').iCheck({
@@ -172,7 +177,7 @@
                 increaseArea: '20%' // optional
             });
         });
-    </script>
+    </script> --}}
 
     <script>
         //Datemask dd/mm/yyyy
