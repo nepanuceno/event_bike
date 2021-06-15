@@ -246,21 +246,25 @@ return [
             'text' => 'Usuarios',
             'url'  => 'user',
             'icon' => 'fas fa-fw fa-users',
+            'can'  => ['user-list'],
         ],
         [
             'text' => 'Eventos',
             'url'  => 'event',
             'icon' => 'fas fa-fw fa-flag-checkered',
+            'can'  => ['manager'],
         ],
         [
             'text' => 'Categorias',
             'url'  => 'category',
             'icon' => 'fas fa-fw fa-bicycle',
+            'can'  => ['manager'],
         ],
         [
             'text' => 'Modalidades',
             'url'  => 'modality',
             'icon' => 'fas fa-fw fa-mountain',
+            'can'  => ['manager'],
         ],
         // [
         //     'text' => 'change_password',
@@ -275,6 +279,7 @@ return [
                     'text' => 'Perfis',
                     'url'  => "/roles",
                     'icon'  => "fa fa-theater-masks",
+                    'can'  => ['role-list'],
                 ],
                 // [
                 //     'text'    => 'level_one',
@@ -304,14 +309,26 @@ return [
                     'text' => 'Permissões',
                     'url'  => 'permissions',
                     'icon'  => "fa fa-user-lock",
+                    'can'  => ['permission-list'],
                 ],
                 [
                     'text' => 'Perfis por Usuário',
                     'url'  => 'role_user',
                     'icon'  => "fa fa-user-lock",
+                    'can'  => ['role-list'],
                 ],
             ],
+            'icon_color' => 'danger',
+            'can'  => ['role-list', 'permission-list'],
+
         ],
+        // [
+        //     'text'        => 'pages',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'far fa-fw fa-file',
+        //     'label'       => 4,
+        //     'label_color' => 'success',
+        // ],
         // ['header' => 'labels'],
         // [
         //     'text'       => 'important',
