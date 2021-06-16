@@ -54,7 +54,7 @@ class User extends Authenticatable
         if(isset($this->profile->photo))
             return "/storage/photos/".$this->profile->photo;
         else {
-            return "/storage/photos/sem-foto.jpg";
+            return "/system_images/photo-less.jpg";
         }
     }
 
