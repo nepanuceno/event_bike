@@ -77,14 +77,13 @@
                             <a href="{{ route('user_address.edit', $address->id)}}" class="btn bg-info btn-sm" >
                               <i class="fas fa-edit"></i>
                             </a>
-                            <a class="btn bg-info btn-sm" onclick="document.getElementById('delete_address').submit()">
-                              <i class="fas fa-times"></i>
-                            </a>
 
-                            <form id="delete_address" action="{{ url('user_address', $address->id) }}" method="POST">
+                            <form style="display:inline" id="delete_address" action="{{ url('user_address', $address->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
+                                <button class="btn bg-info btn-sm" type="submit"> <i class="fas fa-times"></i></button>
                             </form>
+                            
                           </div>
                         </div>
                         <div class="card-body">
