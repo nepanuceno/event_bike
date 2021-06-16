@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Acl\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Event\EventController;
@@ -23,9 +24,11 @@ use App\Http\Controllers\User\UserProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('clients.welcome');
+// });
+
+Route::get('/',[ClientController::class, 'index'])->name('welcome');
 
 Auth::routes();
 
