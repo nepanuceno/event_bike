@@ -9,7 +9,9 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="client/assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        {{-- <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script> --}}
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
@@ -18,6 +20,7 @@
     </head>
     <body id="page-top">
         <!-- Navigation-->
+
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="#page-top"><img src="client/assets/img/event-bike-logo.png" alt="..." /></a>
@@ -35,7 +38,7 @@
                         @if (Route::has('login'))
                         {{-- <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block"> --}}
                             @auth
-                                <li class="nav-item"><a href="{{ url('/home') }}" class="nav-link">Principal</a></li>
+                                <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">Principal</a></li>
                             @else
                                 <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Entrar</a></li>
 
@@ -46,9 +49,37 @@
                         {{-- </div> --}}
                     @endif
 
-                    </ul>
+                </ul>
+
                 </div>
+                @auth
+                    <div class="dropdown-user">
+                        <span>{{ Auth::user()->name }}</span>
+                        <div class="dropdown-content-user">
+
+                            <img class="user-profile" style="margin-bottom: 2px" src="{{ Auth::user()->adminlte_image() }}" alt="Avatar">
+                            <hr>
+
+                            <div style="display: block; margin-top: 2px;">
+
+                                <a class="btn btn-primary btn-sm text-uppercase" href="{{ route('profile') }}">
+                                    <i class="fas fa-id-card"> Perfil</i>
+                                </a>
+
+                                <a class="btn btn-primary btn-sm text-uppercase" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt">Sair</i>
+                                </a>
+                            </div>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                @endauth
             </div>
+
         </nav>
         <!-- Masthead-->
         <header class="masthead">
