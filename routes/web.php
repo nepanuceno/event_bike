@@ -8,6 +8,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Event\EventController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\Acl\RoleUserController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Acl\PermissionController;
 use App\Http\Controllers\Event\CategoryController;
 use App\Http\Controllers\Event\ModalityController;
@@ -34,6 +35,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+Route::get('register_manager', [UserController::class, 'register_manager'])->name('manager.create');
+Route::post('register_manager', [RegisterController::class, 'register'])->name('manager.register');
 
 Route::get('user/profile',[UserProfileController::class,'index'])->name('profile');  //->middleware(['password.confirm'])->name('profile');
 Route::get('user/profile_create',[UserProfileController::class,'create'])->name('profile_create');  //->middleware(['password.confirm'])->name('profile');

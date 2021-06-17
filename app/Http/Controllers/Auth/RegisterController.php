@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Exception;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
-use Exception;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -66,7 +69,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(array $data, $user_type)
     {
         try {
             //code...
@@ -78,7 +81,10 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
             ]);
 
-            $user->assignRole('Manager');
+            if($user_type) {
+                $user->assignRole('Manager');
+            }
+
             DB::commit();
 
             return $user;
@@ -89,5 +95,34 @@ class RegisterController extends Controller
                 'error' => $e->getMessage()
             ]);
         }
+    }
+
+     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    public function register(Request $request)
+    {
+        if ($request->getPathInfo() =='/register') {//Is simply user
+            $user_type = false;
+        } else {
+            $user_type = true;
+        }
+
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all(), $user_type)));
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+                    ? new JsonResponse([], 201)
+                    : redirect($this->redirectPath());
     }
 }
