@@ -4,8 +4,8 @@
 
 <div class="container">
     <div class="text-center">
-        <h2 class="section-heading text-uppercase">Portfolio</h2>
-        <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        <h2 class="section-heading text-uppercase">Eventos</h2>
+        <h3 class="section-subheading text-muted">Escolha os seus eventos e faça já a sua inscrição.</h3>
     </div>
     <div class="row">
         @foreach ($events as $event)

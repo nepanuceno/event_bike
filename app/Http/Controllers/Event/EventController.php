@@ -361,17 +361,18 @@ class EventController extends Controller
 
     private function dateFormatToDb($date_input)
     {
-        // dd($date_input);
-        // dd(Carbon::createFromFormat('d/m/Y H:i:s', $date_input)->toDateTimeString());
-        $dateTime = Carbon::createFromFormat('d/m/Y H:i:s', $date_input)->toDateTimeString();
+        $dateTime = Carbon::createFromFormat('d/m/Y, H:i:s', $date_input)->toDateTimeString();
         return $dateTime;
-
-       return Carbon::createFromFormat('d/m/Y, H:i:s', $date_input)->toDateTimeString();
     }
 
     private function dateFormatToPt_BR($date_input)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date_input)->format('d/m/Y H:i:s');
+
+    }
+
+    public function dateFormat($date_input)
+    {
 
     }
 }
