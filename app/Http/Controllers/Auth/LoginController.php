@@ -35,13 +35,21 @@ class LoginController extends Controller
     public function redirectTo() : string
     {
         $auth = Auth::check();
-        //Se nao houver perfil do usuario, redireciona o usuário para o formulário de preenchimento
-        if($auth) {
-            $user = User::find(Auth::id());
-            if($user->profile == null) {
-                return '/user/profile_create';
+
+        $user = User::find(Auth::id());
+
+        if(!$user->hasRole('Manager')) {
+
+            //Se nao houver perfil do usuario, redireciona o usuï¿½rio para o formulï¿½rio de preenchimento
+            if($auth) {
+                if($user->profile == null) {
+                    return '/user/profile_create';
+                } else {
+                    return '/';
+                }
             }
         }
+
         return $this->redirectTo;
     }
 
