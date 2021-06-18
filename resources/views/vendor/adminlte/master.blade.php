@@ -86,6 +86,7 @@
         <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
         <script src="{{ asset('vendor/moment/moment-with-locales.min.js') }}"></script>
         <script src="{{ asset('vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+        <script src="{{ asset('vendor/inputmask/jquery.inputmask.min.js') }}"></script>
 
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 

@@ -229,6 +229,14 @@ return [
             'search' => false,
             'topnav' => false,
         ],
+
+        [
+            'text' => 'Portal',
+            'url'  => '/',
+            'icon' => 'fas fa-fw fa-home',
+            'topnav' => true,
+        ],
+        
         // [
         //     'text' => 'blog',
         //     'url'  => 'admin/blog',

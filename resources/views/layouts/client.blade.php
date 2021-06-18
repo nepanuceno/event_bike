@@ -17,6 +17,10 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="client/css/styles.css" rel="stylesheet" />
+        <link href="client/css/select.css" rel="stylesheet" />
+
+
+
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -30,34 +34,20 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#events">Eventos</a></li>
-                        {{-- <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li> --}}
-                        @if (Route::has('login'))
-                        {{-- <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block"> --}}
-                            @auth
-                                <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">Principal</a></li>
-                            @else
-                                <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Entrar</a></li>
-
-                                @if (Route::has('register'))
-                                    <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Registre-se</a></li>
-                                @endif
-                            @endauth
-                        {{-- </div> --}}
-                    @endif
-
+                        {{-- <li class="nav-item"><a class="nav-link" href="#events">Eventos</a></li> --}}
+                        {{-- <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li> --}}
+                        <li class="nav-item"><a class="nav-link" href="#about">Informações</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Equipe</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contato</a></li>
                 </ul>
 
                 </div>
                 @auth
                     <div class="dropdown-user">
-                        <span>{{ Auth::user()->name }}</span>
+                        <span id="user_name">{{ Auth::user()->name }}</span>
                         <div class="dropdown-content-user">
 
-                            <img class="user-profile" style="margin-bottom: 2px" src="{{ Auth::user()->adminlte_image() }}" alt="Avatar">
+                            <img class="rounded-circle img-fluid" style="margin-bottom: 2px" src="{{ Auth::user()->adminlte_image() }}" alt="Avatar">
                             <hr>
 
                             <div style="display: block; margin-top: 2px;" class="button-content-user">
@@ -86,7 +76,16 @@
             <div class="container">
                 <div class="masthead-subheading">Bem vindo ao EventBike!</div>
                 <div class="masthead-heading text-uppercase">Sua Plataforma de Eventos de Bike</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Cadastre-se</a>
+                @auth
+
+                @else
+                    @if (Route::has('register'))
+                        <a class="btn btn-primary btn-xl text-uppercase" href="/register">Cadastre-se</a>
+                    @endif
+                    @if (Route::has('login'))
+                        <a class="btn btn-primary btn-xl text-uppercase" href="/login">Login</a>
+                    @endif
+                @endauth
             </div>
         </header>
 
@@ -104,5 +103,20 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+
+        <script>
+            $(document).ready(function(){
+                $('#user_name').click(function(){
+                    $('.dropdown-content-user').css('display', 'block');
+                })
+
+                $('.dropdown-content-user').mouseleave(function() {
+                    //if DIVB not hovering
+                        $('.dropdown-content-user').hide();
+                    //end if
+                });
+            });
+        </script>
     </body>
 </html>
