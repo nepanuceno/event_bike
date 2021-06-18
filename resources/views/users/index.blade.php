@@ -3,14 +3,14 @@
 
 @section('content')
 
-<div class="row">
+{{-- <div class="row">
 
     <div class="col-lg-12 margin-tb">
         <div class="pull-right mt-5 mb-3">
             <a class="btn btn-success" href="{{ route('user.create') }}"><span class="fas fa-plus"></span> Criar novo Usuário</a>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 @if ($message = Session::get('success'))

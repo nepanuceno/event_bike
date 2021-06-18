@@ -43,7 +43,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->route('register');
     }
 
 
@@ -115,11 +115,12 @@ class UserController extends Controller
         $user = User::find($id);
 
         if($user) {
-            $photo = public_path('storage/photos/'.$user->profile->photo);
-            if(file_exists($photo)) {
-
+            if ($user->profile) {
+                $photo = public_path('storage/photos/'.$user->profile->photo);
                 try {
-                    unlink($photo);
+                    if (file_exists($photo)){
+                        unlink($photo);
+                    }
                 } catch (Throwable $e) {
                     report($e);
                     return back()->with('error',$e);
