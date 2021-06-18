@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if(!$user->hasRole('Manager') || !$user->hasRole('Administrator')) {{-- Not modifier Roles / não modifique --}}
+            @if(!$user->hasRole('Manager') && !$user->hasRole('Administrator')) {{-- Not modifier Roles / não modifique --}}
 
                 @if($user->profile)
                     <div class="card">
@@ -31,7 +31,12 @@
             @else
                 @if($user->hasRole('Administrator'))
                         <h1> Área Administrativa</h1>
+                @else
+                    @if($user->hasRole('Manager'))
+                        <h1> Área do Genrente</h1>
+                    @endif
                 @endif
+
             @endif
         </div>
     </div>
