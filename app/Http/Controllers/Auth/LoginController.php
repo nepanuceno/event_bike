@@ -38,9 +38,8 @@ class LoginController extends Controller
 
         $user = User::find(Auth::id());
 
-        if(!$user->hasRole('Manager')) {
-
-            //Se nao houver perfil do usuario, redireciona o usu�rio para o formul�rio de preenchimento
+        if(!$user->hasRole('Manager') && !$user->hasRole('Administrator')) { //not modifier Roles / não modifique
+            //Se nao houver perfil do usuario, redireciona o usuário para o formulário de preenchimento
             if($auth) {
                 if($user->profile == null) {
                     return '/user/profile_create';
