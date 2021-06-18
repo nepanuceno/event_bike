@@ -7,14 +7,16 @@
     <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
         <div class="container">
             <span class="custom-dropdown">
-                <select>
-                    <option>Lançamentos & Inscrições Abertas</option>
-                    <option>Lançamentos</option>
-                    <option>Inscrições Abertas</option>
-                    <option>Inscrições Encerradas</option>
-                </select>
+                <form action="{{ route('filter') }}" method="get" id="from_filters_modality">
+                    <select name="filter" id="filter">
+                        <option value="1" {{ isset($id) && $id==1 ? 'selected':'' }}>Lançamentos & Inscrições Abertas</option>
+                        <option value="2" {{ isset($id) && $id==2 ? 'selected':'' }}>Lançamentos</option>
+                        <option value="3" {{ isset($id) && $id==3 ? 'selected':'' }}>Inscrições Abertas</option>
+                        <option value="4" {{ isset($id) && $id==4 ? 'selected':'' }}>Inscrições Encerradas</option>
+                    </select>
+                    <button type="submit">Filtrar</button>
+                </form>
             </span>
-
         </div>
     </nav>
 
@@ -83,4 +85,18 @@
     @endforeach
 
 </div>
+@endsection
+
+@section('js')
+    <script>
+
+    $(document).ready(function(){
+
+        $('#filters').on('change',function(){
+            alert(this);
+        });
+        // $('#from_filters_modality').submit();
+    });
+    </script>
+
 @endsection

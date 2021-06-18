@@ -38,4 +38,34 @@ class ClientController extends Controller
 
         return view('clients.welcome', compact('events'));
     }
+
+    public function filter_events(Request $request)
+    {
+        $id = $request->filter;
+
+        switch($id)
+        {
+            case 1 : $events = $this->event->where('active','<>', 0)
+                    ->whereDate('date_event','>',date(Carbon::now()->toDateString()))
+                    ->whereDate('end_date','>',date(Carbon::now()->toDateString()))
+                    ->get();
+                break;
+
+            case 2 : $events = $this->event->where('start_date','>',date(Carbon::now()->toDateString()))->get();
+                break;
+
+            case 3 : $events = $this->event->where('date_event','>',date(Carbon::now()->toDateString()))
+                    ->where('start_date','<',date(Carbon::now()->toDateString()))
+                    ->where('end_date','>',date(Carbon::now()->toDateString()))
+                    ->get();
+                break;
+
+            case 4 : $events = $this->event->where('date_event','<',date(Carbon::now()->toDateString()))
+                    ->get();
+                break;
+        }
+
+
+        return view('clients.welcome', compact('events','id'));
+    }
 }
