@@ -29,7 +29,7 @@
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <ul class="navbar-nav text-uppercase py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="#events">Eventos</a></li>
                         {{-- <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
@@ -60,7 +60,7 @@
                             <img class="user-profile" style="margin-bottom: 2px" src="{{ Auth::user()->adminlte_image() }}" alt="Avatar">
                             <hr>
 
-                            <div style="display: block; margin-top: 2px;">
+                            <div style="display: block; margin-top: 2px;" class="button-content-user">
 
                                 <a class="btn btn-primary btn-sm text-uppercase" href="{{ route('profile') }}">
                                     <i class="fas fa-id-card"> Perfil</i>
