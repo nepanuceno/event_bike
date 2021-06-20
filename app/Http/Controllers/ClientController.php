@@ -36,7 +36,30 @@ class ClientController extends Controller
         ->whereDate('end_date','>',date(Carbon::now()->toDateString()))
         ->get();
 
+        $events = $this->status_event($events);
+
         return view('clients.welcome', compact('events'));
+    }
+
+    public function status_event($events){
+        foreach($events as $event) {   
+            
+            $now = Carbon::createFromFormat('Y-m-d', date(Carbon::now()->toDateString()));
+            $date_event = Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event);
+            $start_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date);
+            $end_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->end_date);
+    
+            if($start_date->gt($now))
+            {
+                $event['status'] = 1;
+            } else if($now->gte($start_date) && ($now->lte($end_date))) {
+                $event['status'] = 2;
+            } else if($now->gt($end_date) && $now->lte($date_event)) {
+                $event['status'] = 3;
+            }
+        }
+
+        return $events;
     }
 
     public function filter_events(Request $request)
@@ -51,20 +74,25 @@ class ClientController extends Controller
                     ->get();
                 break;
 
-            case 2 : $events = $this->event->where('start_date','>',date(Carbon::now()->toDateString()))->get();
+            case 2 : $events = $this->event->where('active','<>', 0)
+                    ->where('start_date','>',date(Carbon::now()->toDateString()))->get();
                 break;
 
-            case 3 : $events = $this->event->where('date_event','>',date(Carbon::now()->toDateString()))
+            case 3 : $events = $this->event->where('active','<>', 0)
+                    ->where('date_event','>',date(Carbon::now()->toDateString()))
                     ->where('start_date','<',date(Carbon::now()->toDateString()))
                     ->where('end_date','>',date(Carbon::now()->toDateString()))
                     ->get();
                 break;
 
-            case 4 : $events = $this->event->where('date_event','<',date(Carbon::now()->toDateString()))
+            case 4 : $events = $this->event->where('active','<>', 0)
+                    ->where('date_event','>',date(Carbon::now()->toDateString()))
+                    ->where('end_date','<',date(Carbon::now()->toDateString()))
                     ->get();
                 break;
         }
 
+        $events = $this->status_event($events);
 
         return view('clients.welcome', compact('events','id'));
     }

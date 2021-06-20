@@ -30,7 +30,7 @@ use App\Http\Controllers\User\UserProfileController;
 // });
 
 Route::get('/',[ClientController::class, 'index'])->name('welcome');
-Route::get('/filter',[ClientController::class, 'filter_events'])->name('filter');
+Route::post('/',[ClientController::class, 'filter_events'])->name('#events');
 
 Auth::routes();
 

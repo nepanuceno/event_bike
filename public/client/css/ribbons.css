@@ -1,0 +1,87 @@
+.bg-gray {
+    background-color: #adb5bd;
+    color: #1f2d3d;
+}
+.bg-gray, .bg-gray > a {
+    color: #fff !important;
+}
+.bg-gray {
+    background-color: #6c757d !important;
+}
+.p-3 {
+    padding: 1rem !important;
+}
+.position-relative {
+    position: relative !important;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+
+.ribbon-wrapper.ribbon-lg {
+    height: 120px;
+    width: 120px;
+}
+.ribbon-wrapper {
+    height: 70px;
+    overflow: hidden;
+    position: absolute;
+    right: -2px;
+    top: -2px;
+    width: 70px;
+    z-index: 10;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.ribbon-wrapper.ribbon-lg .ribbon {
+    right: 0;
+    top: 26px;
+    width: 160px;
+}
+
+.ribbon-wrapper.ribbon-xl {
+    height: 180px;
+    width: 180px;
+}
+
+.ribbon-wrapper.ribbon-xl .ribbon {
+    right: 4px;
+    top: 47px;
+    width: 240px;
+}
+.ribbon-wrapper .ribbon {
+    box-shadow: 0 0 3px rgba(0,0,0,.3);
+    font-size: .8rem;
+    line-height: 100%;
+    padding: .375rem 0;
+    position: relative;
+    right: -2px;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.4);
+    text-transform: uppercase;
+    top: 10px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 90px;
+}
+.bg-success, .bg-success > a {
+    color: #fff !important;
+}
+.bg-success {
+    background-color: #28a745 !important;
+}
+.text-lg {
+    font-size: 1.25rem !important;
+}
+.bg-success {
+    background-color: #28a745 !important;
+}
+.bg-warning, .bg-warning > a {
+    color: #1f2d3d !important;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}

@@ -7,40 +7,58 @@
     <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
         <div class="container">
             <span class="custom-dropdown">
-                <form action="{{ route('filter') }}" method="get" id="from_filters_modality">
+                <form action="{{ route('#events') }}" method="post" id="form_filters_modality">
+                    @csrf
                     <select name="filter" id="filter">
                         <option value="1" {{ isset($id) && $id==1 ? 'selected':'' }}>Lançamentos & Inscrições Abertas</option>
                         <option value="2" {{ isset($id) && $id==2 ? 'selected':'' }}>Lançamentos</option>
                         <option value="3" {{ isset($id) && $id==3 ? 'selected':'' }}>Inscrições Abertas</option>
                         <option value="4" {{ isset($id) && $id==4 ? 'selected':'' }}>Inscrições Encerradas</option>
                     </select>
-                    <button type="submit">Filtrar</button>
+                    {{-- <button type="submit">Filtrar</button> --}}
                 </form>
             </span>
         </div>
     </nav>
-
-    <div class="text-center">
+<hr>
+    <div class="text-center" id="events">
         <h2 class="section-heading text-uppercase">Eventos</h2>
         <h3 class="section-subheading text-muted">Escolha os seus eventos e faça já as suas inscrições.</h3>
     </div>
 
     <div class="row">
         @foreach ($events as $key=>$event)
+        
             <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 1-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#event{{$key}}">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid" src="/storage/logo_events/{{ $event->logo }}" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">{{ $event->name }}</div>
-                        <div class="portfolio-caption-subheading text-muted">{{ $event->description }}</div>
+
+                @if($event->status == 1)
+                <div class="position-relative bg-gray">
+                    <div class="ribbon-wrapper ribbon-xl">
+                      <div class="ribbon bg-warning text-lg">
+                        NOVIDADE
+                      </div>
                     </div>
+                @endif
+                     <!-- Portfolio item 1-->
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#event{{$key}}">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid" src="/storage/logo_events/{{ $event->logo }}" alt="..." />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">{{ $event->name }}</div>
+                            <div>
+                                {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->format('d/m/Y H:i a') }} - {{ $event->adress}}
+                            </div>
+                            <div class="portfolio-caption-subheading text-muted">{{ $event->description }}</div>
+                        </div>
+                    </div>
+                @if($event->status == 1)
                 </div>
+                @endif
+               
             </div>
         @endforeach
     </div>
@@ -70,10 +88,16 @@
 
                                             </li>
                                         </ul>
+                                        @if($event->status == 2)
                                         <a class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                             <i class="fas fa-times me-1"></i>
                                             Inscreva-se
                                         </a>
+                                        @elseif ($event->status == 3)
+                                            <h3>Incrições Encerradas</h3>
+                                        @elseif ($event->status == 1)
+                                            <h3>Início das Incrições em {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date)->format('d/m/Y H:i a') }}</h3>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -92,10 +116,18 @@
 
     $(document).ready(function(){
 
-        $('#filters').on('change',function(){
-            alert(this);
+        $('#filter').change(function(){
+            //var filter =  $(this).find(":selected").val();
+            
+            var form =document.querySelector('#form_filters_modality');
+
+            form.submit();
+
+            $('#form_filters_modality').submit(function(){
+                console.log(this)
+            });
+
         });
-        // $('#from_filters_modality').submit();
     });
     </script>
 

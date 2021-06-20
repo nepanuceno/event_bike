@@ -47,10 +47,8 @@ class EventController extends Controller
     }
 
     //Performs event queries separating by status
-    public function event_queries()
+    public function event_queries($events)
     {
-        $events = $this->event->where('active','<>', 0);
-
         $all = clone $events;
         $all = $all->get();
 
@@ -81,8 +79,9 @@ class EventController extends Controller
     //Filters events based on dates
     public function event_filter($id)
     {
+        $events = $this->event->where('active','<>', 0);
 
-        $event_queries = $this->event_queries();
+        $event_queries = $this->event_queries($events);
 
         switch($id)
         {

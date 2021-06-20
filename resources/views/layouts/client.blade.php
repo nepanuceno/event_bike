@@ -18,6 +18,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="client/css/styles.css" rel="stylesheet" />
         <link href="client/css/select.css" rel="stylesheet" />
+        <link href="client/css/ribbons.css" rel="stylesheet" />
 
 
 
@@ -35,7 +36,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase py-4 py-lg-0">
                         {{-- <li class="nav-item"><a class="nav-link" href="#events">Eventos</a></li> --}}
-                        {{-- <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li> --}}
+                        <li class="nav-item"><a class="nav-link" href="#events">Eventos</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">Informações</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Equipe</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contato</a></li>
