@@ -2,7 +2,7 @@
 
 @section('container')
 
-<div class="container">
+<div class="container" id="events">
 
     <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
         <div class="container">
@@ -21,12 +21,12 @@
         </div>
     </nav>
 <hr>
-    <div class="text-center" id="events">
+    <div class="text-center">
         <h2 class="section-heading text-uppercase">Eventos</h2>
         <h3 class="section-subheading text-muted">Escolha os seus eventos e faça já as suas inscrições.</h3>
     </div>
 
-    <div class="row">
+    <div class="row current">
         @foreach ($events as $key=>$event)
         
             <div class="col-lg-4 col-sm-6 mb-4">
@@ -118,7 +118,7 @@
 
         $('#filter').change(function(){
             //var filter =  $(this).find(":selected").val();
-            
+                   
             var form =document.querySelector('#form_filters_modality');
 
             form.submit();
@@ -127,7 +127,29 @@
                 console.log(this)
             });
 
+            document.getElementById('events').scrollIntoView();  
         });
+
+        // $('#filter').change(function() {
+        //     $.ajax({
+        //         url : "/",
+        //         type : 'post',
+        //         data : {
+        //             _token : $('input[name="_token"]').attr('value'),
+        //             filter : $(this).find(":selected").val(),
+        //         },
+        //         beforeSend : function(){
+        //             $("#result").html("Aguarde...");
+        //         }
+        //     })
+        //     .done(function(msg){
+        //         console.log(msg);
+        //         $("#result").html(msg);
+        //     })
+        //     .fail(function(jqXHR, textStatus, msg){
+        //         alert(msg);
+        //     });
+        // });
     });
     </script>
 

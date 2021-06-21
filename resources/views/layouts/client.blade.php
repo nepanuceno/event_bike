@@ -103,7 +103,7 @@
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        {{-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> --}}
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 
         <script>

@@ -3,7 +3,7 @@
     color: #1f2d3d;
 }
 .bg-gray, .bg-gray > a {
-    color: #fff !important;
+    color: rgb(218, 35, 35) !important;
 }
 .bg-gray {
     background-color: #6c757d !important;

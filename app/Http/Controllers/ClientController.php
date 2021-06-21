@@ -30,14 +30,12 @@ class ClientController extends Controller
 
     public function index()
     {
-        // $events = Event::all();
         $events = $this->event->where('active','<>', 0)
         ->whereDate('date_event','>',date(Carbon::now()->toDateString()))
         ->whereDate('end_date','>',date(Carbon::now()->toDateString()))
         ->get();
 
         $events = $this->status_event($events);
-
         return view('clients.welcome', compact('events'));
     }
 
@@ -48,15 +46,18 @@ class ClientController extends Controller
             $date_event = Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event);
             $start_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date);
             $end_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->end_date);
-    
-            if($start_date->gt($now))
-            {
-                $event['status'] = 1;
+
+
+            if($start_date->gt($now)){
+                $event['status'] = 1; //New
             } else if($now->gte($start_date) && ($now->lte($end_date))) {
-                $event['status'] = 2;
-            } else if($now->gt($end_date) && $now->lte($date_event)) {
-                $event['status'] = 3;
-            }
+                $event['status'] = 2; //Open Subscription
+            } else if($now->gte($end_date)) {
+                $event['status'] = 3; //End Subscription
+            } 
+            // else if($now->gt($end_date) && $now->lte($date_event)) {
+            //     $event['status'] = 4;
+            // }
         }
 
         return $events;
@@ -93,7 +94,6 @@ class ClientController extends Controller
         }
 
         $events = $this->status_event($events);
-
         return view('clients.welcome', compact('events','id'));
     }
 }
