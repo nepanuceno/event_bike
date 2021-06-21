@@ -28,7 +28,7 @@
 
     <div class="row current">
         @foreach ($events as $key=>$event)
-        
+
             <div class="col-lg-4 col-sm-6 mb-4">
 
                 @if($event->status == 1)
@@ -58,7 +58,7 @@
                 @if($event->status == 1)
                 </div>
                 @endif
-               
+
             </div>
         @endforeach
     </div>
@@ -90,9 +90,13 @@
                                         </ul>
                                         @if($event->status == 2)
                                         <a class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                            <i class="fas fa-times me-1"></i>
+                                            <i class="fas fa-thumbs-up me-1"></i>
+                                            @auth
                                             Inscreva-se
+                                            @else
+                                            Login
                                         </a>
+                                            @endauth
                                         @elseif ($event->status == 3)
                                             <h3>Incrições Encerradas</h3>
                                         @elseif ($event->status == 1)
@@ -118,7 +122,7 @@
 
         $('#filter').change(function(){
             //var filter =  $(this).find(":selected").val();
-                   
+
             var form =document.querySelector('#form_filters_modality');
 
             form.submit();
@@ -127,7 +131,7 @@
                 console.log(this)
             });
 
-            document.getElementById('events').scrollIntoView();  
+            document.getElementById('events').scrollIntoView();
         });
 
         // $('#filter').change(function() {
