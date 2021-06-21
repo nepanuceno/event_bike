@@ -10,7 +10,7 @@ class EventVideos extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['url_event'];
+    protected $fillable = ['event_id','url_video'];
 
 
     public function event()

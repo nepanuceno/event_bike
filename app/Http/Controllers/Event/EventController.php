@@ -10,6 +10,7 @@ use App\Models\EventCategory;
 use App\Models\EventModality;
 use App\Models\CategoryHasEvent;
 use App\Http\Controllers\Controller;
+use App\Models\EventVideos;
 use App\Repositories\Contracts\CategoryHasEventRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\EventRepositoryInterface;
@@ -370,8 +371,30 @@ class EventController extends Controller
 
     }
 
-    public function dateFormat($date_input)
+    public function create_video(Request $request)
     {
+        // dd($request->all());
 
+        try {
+            EventVideos::create([
+                'event_id' => $request->event_id,
+                'url_video' => $request->url_video,
+            ]);
+
+            return redirect()->back()->with('success',"Vídeo cadastrado!");
+        } catch (\Throwable $th) {
+            // throw $th;
+            return redirect()->back()->with('error',"Vídeo não cadastrado! ".$th);
+
+        }
+    }
+
+    public function remove_video($id)
+    {
+        $video = EventVideos::find($id);
+
+        $video->delete();
+
+        return redirect()->back()->with('success','Vídeo removido!');
     }
 }

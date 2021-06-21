@@ -65,6 +65,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('category', CategoryController::class);
         Route::resource('modality', ModalityController::class);
         Route::post('event/add_costs', [EventController::class, 'add_costs']);
+        Route::post('event/add_video', [EventController::class, 'create_video'])->name('event.create.video');
+        Route::get('event/remove_video/{id}', [EventController::class, 'remove_video'])->name('event.remove.video');
 
         Route::post('event/upload/{id}',[EventController::class, 'upload'])->name('event.upload');
         Route::get('event/filter/{id}',[EventController::class, 'event_filter'])->name('event.filter');

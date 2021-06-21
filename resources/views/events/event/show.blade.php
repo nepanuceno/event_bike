@@ -35,71 +35,116 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-7 col-xl-8">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xl-4">
+                    <div class="card">
+                        <h5 class="card-header bg-dark">Valores por Categoria</h5>
+                        <div class="card-body form-group"  style="overflow:scroll; height:39em;">
+                            <form action="{{ url('event/add_costs') }}" method="post" class="mb-3">
+                                @csrf
+                                <input type="hidden" id="event" name="event_id" value="{{ $event->id }}">
+                                @foreach ($event->categories as $category)
 
-            <div class="card">
-                <h5 class="card-header bg-dark">Valores por Categoria</h5>
-                <div class="card-body col-md-6 col-lg-6 col-xl-4 form-group">
-                    <form action="{{ url('event/add_costs') }}" method="post" class="mb-3">
-                        @csrf
-                        <input type="hidden" id="event" name="event_id" value="{{ $event->id }}">
-                        @foreach ($event->categories as $category)
-
-                            <label for="{{ $category->id }}">Valor de {{ $category->name }}</label>
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-                                </div>
-                                <input type="text" class="form-control money" 
-                                    id={{ $category->id }} 
-                                    name={{ $category->id }} 
+                                <label for="{{ $category->id }}">Valor de {{ $category->name }}</label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control money"
+                                    id={{ $category->id }}
+                                    name={{ $category->id }}
                                     {{-- value={{ \Cknow\Money\Money::USD($category->pivot->cost)->formatByIntlLocalizedDecimal(null, null, \NumberFormatter::DECIMAL) }} --}}
                                     value={{ str_replace('.',',',$category->pivot->cost) }}
                                     data-mask >
-                            </div>
+                                </div>
 
-                        @endforeach
-                        <hr>
-                        <button class="btn btn-primary" type="submit">Alterar</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header bg-dark">
-                    <h3 class="card-title">Upload de Imagens</h3>
-                </div>
-
-                <div class="card-body">
-                    <form action="{{ route('event.upload', $event->id) }}" class="dropzone" id="dropzoneFrom" style=" border: 2px dashed rgb(54, 183, 0);">
-                        @csrf
-                        </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-12">
-                <div class="card card-dark">
-                    <div class="card-header">
-                        <h4 class="card-title">Geleria de Imagens</h4>
+                                @endforeach
+                                <hr>
+                                <button class="btn btn-primary" type="submit">Alterar</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            @foreach($event->images as $image)
-                            <div class="col-sm-2 border shadow-sm m-3 p-1">
-                                <a href="/storage/event_images/{{ $image->image }}" data-toggle="lightbox" data-title="" data-gallery="gallery">
-                                    <img src="/storage/event_images/{{ $image->image }}" class="img-fluid mb-2" alt="white sample">
-                                </a>
-                            </div>
-                            @endforeach
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card">
+                        <h5 class="card-header bg-dark">Vídeos dop Evento</h5>
+                        <div class="card-body form-group">
+                            <form action="{{ url('event/add_video') }}" method="post" class="mb-3">
+                                @csrf
+                                <input type="hidden" id="event" name="event_id" value="{{ $event->id }}">
+                                <label for="url_video">Código do Vídeo - <a href="https://support.google.com/youtube/answer/171780?hl=pt-BR">Ajuda</a></label>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" id="url_video" name="url_video">
+                                </div>
+
+                                <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+                                <hr>
+
+                                <fieldset>
+                                    <label for="videos">Vídeos</label>
+                                    <div class="row" style="overflow:scroll; height:24em;">
+                                        @foreach ($event->videos as $video)
+                                            <div class="col-md-6">
+                                                <div class="embed-responsive embed-responsive-16by9">
+                                                    {{!! $video->url_video !!}}
+                                                    <a class="btn btn-sm btn-danger text-white remove-video" data-uri="{{ route('event.remove.video',$video->id) }}" style="position: relative; z-index: 1000">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-dark">
+                                <h3 class="card-title">Upload de Imagens</h3>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{ route('event.upload', $event->id) }}" class="dropzone" id="dropzoneFrom" style=" border: 2px dashed rgb(54, 183, 0);">
+                                    @csrf
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card card-dark">
+                            <div class="card-header">
+                                <h4 class="card-title">Geleria de Imagens</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    @foreach($event->images as $image)
+                                    <div class="col-sm-2 border shadow-sm m-3 p-1 mb-5">
+                                        <a href="/storage/event_images/{{ $image->image }}" data-toggle="lightbox" data-title="" data-gallery="gallery">
+                                            <img src="/storage/event_images/{{ $image->image }}" class="img-fluid mb-2" alt="white sample">
+                                        </a>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
+
+
+
+
+
+
 
 
 @if ($message = Session::get('success'))
@@ -126,7 +171,7 @@
     <script>
         $(document).ready(function(){
             Dropzone.options.dropzoneFrom = {
-                dictDefaultMessage: "Put your custom message here",
+                dictDefaultMessage: "Arraste suas imagens para cá",
                 autoProcessQueue: false, //para ele não enviar o arquivo automáticamente
                 acceptedFiles:".png, .jpg, .jpeg", //Aqui seram os tipos de arquivos que seram aceitos, ai é simples só colocar a extensão
                 maxFiles:10, // Limite de arquivo que pode ser enviado ao mesmo tempo
@@ -168,6 +213,45 @@
             unmaskAsNumber: true
     });
   });
+</script>
+
+<script>
+
+    let button = document.querySelector('.remove-video');
+    if(button) {
+        var uri=null;
+        button.addEventListener('click', function(){
+            uri = button.getAttribute('data-uri')
+
+            Swal.fire({
+            title: 'Apagar o Vídeo?',
+            text: "Esta operação não poderá ser desfeita",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, apagar!'
+            }).then((result) => {
+                if (result.value) {
+                    console.log(uri)
+                    fetch(uri)
+                    .then(response => {
+                        if (!response.ok) {
+                        throw new Error(response.statusText)
+                        }
+                        return response.json()
+                    })
+                    .catch(error => {
+                        Swal.showValidationMessage(
+                        `Request failed: ${error}`
+                        )
+                    })
+
+                }
+            });
+        });
+    }
+
 </script>
 
 @endsection
