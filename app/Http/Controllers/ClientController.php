@@ -36,12 +36,13 @@ class ClientController extends Controller
         ->get();
 
         $events = $this->status_event($events);
-        return view('clients.welcome', compact('events'));
+        $id=0;
+        return view('clients.welcome', compact('events','id'));
     }
 
     public function status_event($events){
-        foreach($events as $event) {   
-            
+        foreach($events as $event) {
+
             $now = Carbon::createFromFormat('Y-m-d', date(Carbon::now()->toDateString()));
             $date_event = Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event);
             $start_date = Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date);
@@ -54,7 +55,7 @@ class ClientController extends Controller
                 $event['status'] = 2; //Open Subscription
             } else if($now->gte($end_date)) {
                 $event['status'] = 3; //End Subscription
-            } 
+            }
             // else if($now->gt($end_date) && $now->lte($date_event)) {
             //     $event['status'] = 4;
             // }

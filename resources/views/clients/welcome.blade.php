@@ -9,6 +9,7 @@
             <span class="custom-dropdown">
                 <form action="{{ route('#events') }}" method="post" id="form_filters_modality">
                     @csrf
+                    <input type="hidden" name="id_filter" id="id_filter" value="{{ $id }}">
                     <select name="filter" id="filter">
                         <option value="1" {{ isset($id) && $id==1 ? 'selected':'' }}>Lançamentos & Inscrições Abertas</option>
                         <option value="2" {{ isset($id) && $id==2 ? 'selected':'' }}>Lançamentos</option>
@@ -117,44 +118,50 @@
 
 @section('js')
     <script>
+        function scrollToEvents()
+        {
+            var $valFilter = document.querySelector('#id_filter').value;
+            console.log($valFilter)
+            if($valFilter != 0) {
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById('events').scrollIntoView();
+                    console.log('event');
 
-    $(document).ready(function(){
+                }, false);
+            }
+        }
 
-        $('#filter').change(function(){
-            //var filter =  $(this).find(":selected").val();
+        document.querySelector('#filter').addEventListener('change', function(){
+            document.querySelector('#form_filters_modality').submit()
+            console.log('eventFilter');
 
-            var form =document.querySelector('#form_filters_modality');
-
-            form.submit();
-
-            $('#form_filters_modality').submit(function(){
-                console.log(this)
-            });
-
-            document.getElementById('events').scrollIntoView();
         });
+        scrollToEvents();
 
-        // $('#filter').change(function() {
-        //     $.ajax({
-        //         url : "/",
-        //         type : 'post',
-        //         data : {
-        //             _token : $('input[name="_token"]').attr('value'),
-        //             filter : $(this).find(":selected").val(),
-        //         },
-        //         beforeSend : function(){
-        //             $("#result").html("Aguarde...");
-        //         }
-        //     })
-        //     .done(function(msg){
-        //         console.log(msg);
-        //         $("#result").html(msg);
-        //     })
-        //     .fail(function(jqXHR, textStatus, msg){
-        //         alert(msg);
-        //     });
+        // $(document).ready(function(){
+            // $('#filter').change(function() {
+            //     $.ajax({
+            //         url : "/",
+            //         type : 'post',
+            //         data : {
+            //             _token : $('input[name="_token"]').attr('value'),
+            //             filter : $(this).find(":selected").val(),
+            //         },
+            //         beforeSend : function(){
+            //             $("#result").html("Aguarde...");
+            //         }
+            //     })
+            //     .done(function(msg){
+            //         console.log(msg);
+            //         $("#result").html(msg);
+            //     })
+            //     .fail(function(jqXHR, textStatus, msg){
+            //         alert(msg);
+            //     });
+            // });
         // });
-    });
+
+
     </script>
 
 @endsection
