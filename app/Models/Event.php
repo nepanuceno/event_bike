@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\EventImages;
+use App\Models\EventVideos;
 use App\Models\EventCategory;
 use App\Models\EventModality;
 use Illuminate\Database\Eloquent\Model;
@@ -29,5 +30,10 @@ class Event extends Model
     public function images()
     {
         return $this->hasMany(EventImages::class);
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(EventVideos::class);
     }
 }
