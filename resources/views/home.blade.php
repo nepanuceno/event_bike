@@ -33,7 +33,7 @@
                         <h1> Área Administrativa</h1>
                 @else
                     @if($user->hasRole('Manager'))
-                        <h1> Área do Genrente</h1>
+                        <h1> Área do Gerente</h1>
                     @endif
                 @endif
 

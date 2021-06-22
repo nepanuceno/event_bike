@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Tenant;
 use App\Models\Profile;
 use App\Models\UserAddress;
+use App\Models\Traits\Tenantable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, Tenantable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +24,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'tenant_id',
         'password',
     ];
 
@@ -68,4 +71,8 @@ class User extends Authenticatable
         return $this->hasMany(UserAddress::class);
     }
 
+    public function tenants()
+    {
+        return $this->belongsToMany(Tenant::class);
+    }
 }

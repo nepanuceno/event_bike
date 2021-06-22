@@ -82,7 +82,11 @@ class RegisterController extends Controller
             ]);
 
             if($user_type) {
-                $user->assignRole('Manager');
+                if(!$user->assignRole('Manager')) {
+                    return redirect()->back()->withInput()->withErrors([
+                        'error' => "Opss! Parece que o Perfil de Manager ainda não foi criado.\nComunique o Adminisatrador do Sistema."
+                    ]);
+                }
             }
 
             DB::commit();
