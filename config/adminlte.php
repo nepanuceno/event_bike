@@ -257,6 +257,12 @@ return [
             'can'  => ['user-list'],
         ],
         [
+            'text' => 'Usuarios',
+            'url'  => 'user',
+            'icon' => 'fas fa-fw fa-users',
+            'can'  => ['manager'],
+        ],
+        [
             'text' => 'Eventos',
             'url'  => 'event',
             'icon' => 'fas fa-fw fa-flag-checkered',

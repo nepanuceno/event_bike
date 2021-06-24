@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Closure;
+use App\Models\User;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +11,18 @@ use Illuminate\Support\Facades\Auth;
 
 class TenantController extends Controller
 {
+    private $user;
+
+    function __construct()
+    {
+        // $this->middleware('permission:permission-list|permission-create|permission-edit|permission-delete', ['only' => ['index','store']]);
+        // $this->middleware('permission:permission-create', ['only' => ['create','store']]);
+        // $this->middleware('permission:manager', ['only' => ['index','edit','update']]);
+        // $this->middleware('permission:manager', ['only' => ['destroy']]);
+        $this->middleware('permission:manager');
+        $this->user = User::find(Auth::id());
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -96,5 +110,18 @@ class TenantController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function choices()
+    {
+        $user = Auth::user();
+        $tenants = $user->tenant;
+        return view('tenants.choices-tenants', compact('tenants'));
+    }
+
+    public function setTenantId($id)
+    {
+        session(['tenant_id' => $id]);
+        return redirect('home');
     }
 }
