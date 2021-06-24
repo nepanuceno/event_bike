@@ -53,8 +53,16 @@ class TenantController extends Controller
     {
         DB::beginTransaction();
         try {
-            $tenant = Tenant::create($request->all());
+
+            $inputs = [
+                'name'=> $request->name,
+                'creator_user_id' => Auth::id(),
+                'key_pagarme'=> isset($request->key_pagarme) ? $request->key_pagarme : null,
+            ];
+
+            $tenant = Tenant::create($inputs);
             // dd($request);
+
             $tenant->users()->sync(Auth::id());
             DB::commit();
             

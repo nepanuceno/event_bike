@@ -11,10 +11,15 @@ class Tenant extends Model
     use HasFactory;
 
 
-    protected $fillable = ['name','key_pagarme'];
+    protected $fillable = ['name','key_pagarme', 'creator_user_id'];
 
     public function users()
     {
         return $this->belongsToMany(User::class, 'tenant_has_user', 'tenant_id', 'user_id');
+    }
+
+    public function creator_user()
+    {
+        $this->belongsTo(User::class);
     }
 }

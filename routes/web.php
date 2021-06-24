@@ -39,30 +39,28 @@ Route::post('register_manager', [RegisterController::class, 'register'])->name('
 
 Auth::routes();
 
-
 Route::get('choices',[TenantController::class, 'choices'])
     ->name('tenants.choices')
     ->middleware('auth');
 
 Route::get('setTenantId/{id}', [TenantController::class, 'setTenantId'])->name('setTenantId');
 
+Route::get('user/profile',[UserProfileController::class,'index'])->name('profile');  //->middleware(['password.confirm'])->name('profile');
+Route::get('user/profile_create',[UserProfileController::class,'create'])->name('profile_create');  //->middleware(['password.confirm'])->name('profile');
+Route::get('user/profile_edit',[UserProfileController::class,'edit'])->name('profile_edit');  //->middleware(['password.confirm'])->name('profile');
+Route::post('user/profile',[UserProfileController::class,'store'])->name('profile_store');  //->middleware(['password.confirm'])->name('profile');
+Route::post('user/profile_update/{id}',[UserProfileController::class,'update'])->name('profile_update');  //->middleware(['password.confirm'])->name('profile');
+
+Route::resource('tenant', TenantController::class);
+
 Route::group(['middleware' => ['auth', 'tenants']], function() {
 
-    
-
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('user/profile',[UserProfileController::class,'index'])->name('profile');  //->middleware(['password.confirm'])->name('profile');
-    Route::get('user/profile_create',[UserProfileController::class,'create'])->name('profile_create');  //->middleware(['password.confirm'])->name('profile');
-    Route::get('user/profile_edit',[UserProfileController::class,'edit'])->name('profile_edit');  //->middleware(['password.confirm'])->name('profile');
-    Route::post('user/profile',[UserProfileController::class,'store'])->name('profile_store');  //->middleware(['password.confirm'])->name('profile');
-    Route::post('user/profile_update/{id}',[UserProfileController::class,'update'])->name('profile_update');  //->middleware(['password.confirm'])->name('profile');
 
-    Route::resource('tenant', TenantController::class);
-
+    Route::resource('user', UserController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('role_user', RoleUserController::class);
-    Route::resource('user', UserController::class);
 
     Route::get('roles_user/{id}', [RoleUserController::class, 'roles_user']);
     Route::get('delete_roles_user/{user}/{role}', [RoleUserController::class, 'delete_roles_user']);
@@ -70,8 +68,7 @@ Route::group(['middleware' => ['auth', 'tenants']], function() {
 
     Route::resource('user_address', UserAddressController::class);
 
-
-    Route::group(['middleware'=>['permission']], function(){
+    Route::group(['middleware'=>['permission:manager']], function(){
         Route::resource('event', EventController::class);
         Route::resource('category', CategoryController::class);
         Route::resource('modality', ModalityController::class);

@@ -2,11 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Tenant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Events\Dispatcher;
 use App\Repositories\Eloquent\EventRepository;
 use App\Repositories\Eloquent\CategoryRepository;
 use App\Repositories\Eloquent\ModalityRepository;
+use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 use App\Repositories\Contracts\EventRepositoryInterface;
 use App\Repositories\Eloquent\CategoryHasEventRepository;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
@@ -33,8 +36,41 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Dispatcher $events)
     {
+        $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
+            // Add some items to the menu...
 
+            // dd(session()->get('tenant_id'));
+
+            if(session()->has('tenant_id') && session()->get('tenant_id')){
+
+                $user = Auth::user();
+                $items = array();
+                if(count($user->tenant) > 1) {
+
+                    foreach($user->tenant as $tenant) {
+                       $item = [
+                            'text' => $tenant->name,
+                            'url' => route('setTenantId', $tenant->id),
+                            'topnav' => true,
+                       ];
+                       $items[] = $item; 
+                    }
+
+                    $tenanto_current = Tenant::find(session()->get('tenant_id'));
+
+                    $menu = [
+                        'text'    => $tenanto_current->name,
+                        'icon'    => 'fas fa-fw fa-profile',
+                        'topnav' => true,
+                        'submenu' => $items,
+                    ];
+
+                    $event->menu->add($menu);
+
+                }
+            }
+        });
     }
 }

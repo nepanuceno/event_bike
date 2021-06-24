@@ -28,5 +28,9 @@ class SetTenantInSession
         if(count($event->user->tenant) == 1) {
             session(['tenant_id'=> $event->user->tenant[0]->id]);
         }
+        
+        if($event->user->can('administrator')){
+            session(['tenant_id'=>'administrator']);
+        }
     }
 }

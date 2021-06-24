@@ -16,8 +16,11 @@ class CreateTenantsTable extends Migration
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('creator_user_id');
             $table->string('key_pagarme')->nullable();
             $table->timestamps();
+
+            $table->foreign('creator_user_id')->references('id')->on('users');
         });
     }
 

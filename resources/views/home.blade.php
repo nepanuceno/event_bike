@@ -31,7 +31,6 @@
             @else
                 @if($user->hasRole('Administrator'))
                         <h1> Área Administrativa</h1>
-                        {{ session()->get('tenant_id') }}
                 @else
                     @if($user->hasRole('Manager'))
                         <h1> Área do Gerente</h1>

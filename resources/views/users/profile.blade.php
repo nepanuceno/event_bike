@@ -1,23 +1,45 @@
 @extends('adminlte::page')
 @section('content')
 
+@can('manager')
+    @if(isset($tenants) && count($tenants) > 0)
+       
+            
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-primary collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Meus Grupos</h3>
+                    
+                    <div class="card-tools">
+                        <a href="{{ route('tenant.create') }}" class="btn btn-tool"><i class="fas fa-plus"></i> Novo Grupo</a>
+                        <a href="{{ route('tenant.create') }}" class="btn btn-tool"><i class="fas fa-object-group"></i> Entrar em um Grupo</a>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-caret-down fa-2x"></i>
+                        </button>
 
-@if(isset($tenants))
-    <fieldset>
-
-        <label for="">
-            <h3>Meus Grupos</h3>
-        </label>
-        
-        @foreach ($tenants as $tenant)
-        <p><a href="{{ route('tenant.show', $tenant->id) }}">{{ $tenant->name }}</p>
-        @endforeach
-    </fieldset>
-@else
-<div class="alert alert-warning" role="alert"><h3>Usuário sem Grupo (Empresa, Organização, Associação etc.)</h3></div>
-
-<div class="mb-5">Você deseja <a href="{{ route('tenant.create') }}"> Cadastar </a> um grupo ou <a href="#"> Particiapar </a> de um grupo ja existente?</div>
-@endif
+                    </div>
+                    <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body" style="display: none;">
+                    @foreach ($tenants as $tenant)
+                    <p>
+                        <a href="{{ route('tenant.show', $tenant->id) }}">{{ $tenant->name }}</a>
+                        <a  class="btn btn-info btn-sm" href="{{ route('tenant.edit', $tenant->id) }}"><i class="fas fa-edit"></i></a>
+                    </p>
+                    @endforeach
+                </div>
+                <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    @else
+        <div class="alert alert-warning" role="alert"><h3>Usuário sem Grupo (Empresa, Organização, Associação etc.)</h3></div>
+        <div class="mb-5">Você deseja <a href="{{ route('tenant.create') }}"> Cadastar </a> um grupo ou <a href="#"> Particiapar </a> de um grupo ja existente?</div>
+    @endif
+@endcan
 
 @if(isset($profile))
 <!-- Profile Image -->

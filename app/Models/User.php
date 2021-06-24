@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Tenant::class);
     }
+
+    public function tenants_created()
+    {
+        return $this->hasMany(Tenant::class, 'creator_user_id');
+    }
 }
