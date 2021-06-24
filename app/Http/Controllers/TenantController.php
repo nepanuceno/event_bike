@@ -94,7 +94,9 @@ class TenantController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tenant = Tenant::find($id);
+
+        return view('tenants.edit', compact('tenant'));
     }
 
     /**
@@ -106,7 +108,16 @@ class TenantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tenant = Tenant::find($id);
+
+        try {
+            //code...
+            $tenant->update($request->all());
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
+        return redirect('user/profile');
     }
 
     /**
