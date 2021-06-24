@@ -29,13 +29,13 @@ class EventServiceProvider extends ServiceProvider
             SetTenantInSession::class
         ],
 
-        'Illuminate\Auth\Events\Authenticated' => [
-            'App\Listeners\LogAuthenticated',
-        ],
+        // 'Illuminate\Auth\Events\Authenticated' => [
+        //     'App\Listeners\LogAuthenticated',
+        // ],
 
-        Login::class => [
-            LogSuccessfulLogin::class,
-        ],
+        // Login::class => [
+        //     LogSuccessfulLogin::class,
+        // ],
     ];
 
     /**

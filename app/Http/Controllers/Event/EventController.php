@@ -168,6 +168,7 @@ class EventController extends Controller
             $request->event_notice->move(public_path('storage/event_notices'), $inputs['event_notice']);
             $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
             $event->categories()->sync($request->input('category'));
+            $event->categories()->sync(session()->get('tenant_id'));
 
             return back()->with('success','Evento Criado com sucesso');
         } catch (\Throwable $th) {

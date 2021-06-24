@@ -9,11 +9,11 @@ trait Tenantable
     protected static function bootTenantable()
     {
         static::addGlobalScope(new TenantScope);
-        if(session()->has('tenant_id') && !is_null(session()->get('tenant_id'))) {
-            static::creating(function($model) {
-                $model->tenant_id = session()->get('tenant_id');
-            });
-        }
+        // if(session()->has('tenant_id') && !is_null(session()->get('tenant_id'))) {
+        //     static::creating(function($model) {
+        //         $model->categories()->sync(session()->get('tenant_id'));
+        //     });
+        // }
     }
 
     public function tenant()
