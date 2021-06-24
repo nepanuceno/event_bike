@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tenant extends Model
 {
@@ -14,6 +15,6 @@ class Tenant extends Model
 
     public function users()
     {
-        return $this->belongsToMany(Users::class);
+        return $this->belongsToMany(User::class, 'tenant_has_user', 'tenant_id', 'user_id');
     }
 }

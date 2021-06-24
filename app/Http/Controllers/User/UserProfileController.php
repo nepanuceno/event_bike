@@ -22,10 +22,12 @@ class UserProfileController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
+
+        $tenants = $user->tenant;
         $profile = $user->profile;
         $addresses = $user->addresses;
-
-        return view('users.profile', compact('user', 'profile', 'addresses'));
+        
+        return view('users.profile', compact('user', 'tenants', 'profile', 'addresses'));
     }
 
     /**

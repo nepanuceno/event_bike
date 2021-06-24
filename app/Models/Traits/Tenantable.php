@@ -18,6 +18,6 @@ trait Tenantable
 
     public function tenant()
     {
-        return $this->belongsTo(Tenant::class);
+        return $this->belongsToMany(Tenant::class, 'tenant_has_user', 'user_id', 'tenant_id');
     }
 }

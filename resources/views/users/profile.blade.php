@@ -1,6 +1,24 @@
 @extends('adminlte::page')
 @section('content')
 
+
+@if(isset($tenants))
+    <fieldset>
+
+        <label for="">
+            <h3>Meus Grupos</h3>
+        </label>
+        
+        @foreach ($tenants as $tenant)
+        <p><a href="{{ route('tenant.show', $tenant->id) }}">{{ $tenant->name }}</p>
+        @endforeach
+    </fieldset>
+@else
+<div class="alert alert-warning" role="alert"><h3>Usuário sem Grupo (Empresa, Organização, Associação etc.)</h3></div>
+
+<div class="mb-5">Você deseja <a href="{{ route('tenant.create') }}"> Cadastar </a> um grupo ou <a href="#"> Particiapar </a> de um grupo ja existente?</div>
+@endif
+
 @if(isset($profile))
 <!-- Profile Image -->
 <div class="row">
