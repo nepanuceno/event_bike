@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Tenant;
 use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
@@ -23,11 +24,15 @@ class UserProfileController extends Controller
     {
         $user = User::find(Auth::id());
 
+        $all_tenants = Tenant::all();
         $tenants = $user->tenant;
         $profile = $user->profile;
         $addresses = $user->addresses;
+
+        $all_tenants = $all_tenants->diff($tenants);
+        $all_tenants = $all_tenants->all();
         
-        return view('users.profile', compact('user', 'tenants', 'profile', 'addresses'));
+        return view('users.profile', compact('user', 'tenants', 'profile', 'addresses', 'all_tenants'));
     }
 
     /**

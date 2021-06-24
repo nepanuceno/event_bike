@@ -52,6 +52,7 @@ Route::post('user/profile',[UserProfileController::class,'store'])->name('profil
 Route::post('user/profile_update/{id}',[UserProfileController::class,'update'])->name('profile_update');  //->middleware(['password.confirm'])->name('profile');
 
 Route::resource('tenant', TenantController::class);
+Route::get('tenant/joingroup', [TenantController::class, 'joingroup'])->name('joingroup');
 
 Route::group(['middleware' => ['auth', 'tenants']], function() {
 

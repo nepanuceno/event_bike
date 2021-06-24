@@ -5,19 +5,47 @@
     @if(isset($tenants) && count($tenants) > 0)
        
             
+    <!-- Modal -->
+    <div class="modal fade" id="joinTenant" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="joinTenantCenterTitle">Participar de um grupo existente</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                @if(count($all_tenants) > 0)
+                    <select name="all_tenants" id="">
+                    @foreach ($all_tenants as  $tenant)
+                        <option value="{{ $tenant->id }}">{{ $tenant->name }}</option>
+                    @endforeach
+                    </select>
+                @else
+                    Você já está participando de todos os grupos possíveis.
+                @endif
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            @if(count($all_tenants) > 0)
+            <button type="button" class="btn btn-primary">Participar</button>
+            @endif
+            </div>
+        </div>
+        </div>
+    </div>
     
     <div class="row">
         <div class="col-md-6">
             <div class="card card-primary collapsed-card">
                 <div class="card-header">
                     <h3 class="card-title">Meus Grupos</h3>
-                    
                     <div class="card-tools">
                         <a href="{{ route('tenant.create') }}" class="btn btn-tool"><i class="fas fa-plus"></i> Novo Grupo</a>
-                        <a href="{{ route('tenant.create') }}" class="btn btn-tool"><i class="fas fa-object-group"></i> Entrar em um Grupo</a>
+                        <a href="#" class="btn btn-tool" data-toggle="modal" data-target="#joinTenant"><i class="fas fa-object-group" ></i> Entrar em um Grupo</a>
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-caret-down fa-2x"></i>
                         </button>
-
                     </div>
                     <!-- /.card-tools -->
                 </div>

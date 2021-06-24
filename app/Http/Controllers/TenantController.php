@@ -143,4 +143,9 @@ class TenantController extends Controller
         session(['tenant_id' => $id]);
         return redirect('home');
     }
+
+    public function joingroup()
+    {
+        return redirect('user/profile');
+    }
 }
