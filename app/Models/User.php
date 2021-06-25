@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tenant::class, 'creator_user_id');
     }
+
+    public function notifies()
+    {
+        return $this->hasMany(TenantNotifyJoinUser::class, 'requesting_user_id');
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
@@ -10,11 +11,11 @@ use App\Http\Controllers\Event\EventController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\Acl\RoleUserController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Acl\PermissionController;
 use App\Http\Controllers\Event\CategoryController;
 use App\Http\Controllers\Event\ModalityController;
 use App\Http\Controllers\User\UserProfileController;
-use GuzzleHttp\Psr7\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,9 @@ Route::get('choices',[TenantController::class, 'choices'])
     ->name('tenants.choices')
     ->middleware('auth');
 
+    Route::get('notifications/get', [NotificationsController::class, 'getNotificationsData'])
+    ->name('notifications.get');
+
 Route::get('setTenantId/{id}', [TenantController::class, 'setTenantId'])->name('setTenantId');
 
 Route::get('user/profile',[UserProfileController::class,'index'])->name('profile');  //->middleware(['password.confirm'])->name('profile');
@@ -52,7 +56,7 @@ Route::post('user/profile',[UserProfileController::class,'store'])->name('profil
 Route::post('user/profile_update/{id}',[UserProfileController::class,'update'])->name('profile_update');  //->middleware(['password.confirm'])->name('profile');
 
 Route::resource('tenant', TenantController::class);
-Route::get('tenant/joingroup', [TenantController::class, 'joingroup'])->name('joingroup');
+Route::post('tenant/joingroup', [TenantController::class, 'joingroup'])->name('joingroup');
 
 Route::group(['middleware' => ['auth', 'tenants']], function() {
 

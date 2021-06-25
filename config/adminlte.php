@@ -231,6 +231,24 @@ return [
         ],
 
         [
+            'type'         => 'navbar-notification',
+            'id'           => 'my-notification',      // An ID attribute (required).
+            'icon'         => 'fas fa-bell',          // A font awesome icon (required).
+            //'icon_color'   => 'warning',              // The initial icon color (optional).
+            'label'        => 0,                      // The initial label for the badge (optional).
+            'text'          => 'Solicitações',
+            'label_color'  => 'info',               // The initial badge color (optional).
+            'url'          => 'notifications/show',   // The url to access all notifications/elements (required).
+            'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
+            'dropdown_mode'   => true,                // Enables the dropdown mode (optional).
+            'dropdown_flabel' => 'All notifications', // The label for the dropdown footer link (optional).
+            'update_cfg'   => [
+                'url' => 'notifications/get',         // The url to periodically fetch new data (optional).
+                'period' => 30,                       // The update period for get new data (in seconds, optional).
+            ],
+        ],
+
+        [
             'text' => 'Portal',
             'url'  => '/',
             'icon' => 'fas fa-fw fa-home',
@@ -250,6 +268,9 @@ return [
         //     'label_color' => 'success',
         // ],
         // ['header' => 'account_settings'],
+        [
+            'header' => 'Parametros de Evento',
+        ],
         [
             'text' => 'Usuarios',
             'url'  => 'user',
@@ -280,6 +301,10 @@ return [
         //     'url'  => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
+        [
+            'header' => 'Configurações do Sistema',
+            'can' => ['administrator'],
+        ],
         [
             'text'    => 'Perfis e Permissões',
             'icon'    => 'fas fa-fw fa-key',

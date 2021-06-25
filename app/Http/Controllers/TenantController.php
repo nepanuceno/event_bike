@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Closure;
 use App\Models\User;
 use App\Models\Tenant;
+use App\Models\TenantNotifyJoinUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -144,8 +145,21 @@ class TenantController extends Controller
         return redirect('home');
     }
 
-    public function joingroup()
+    public function joingroup(Request $request)
     {
-        return redirect('user/profile');
+        $tenant = Tenant::find($request->all_tenants);
+        $recipient_users = $tenant->users;
+        
+        foreach($recipient_users as $recipient_user) {
+            
+            TenantNotifyJoinUser::create([
+                'requesting_user_id' => Auth::id(),
+                'tenant_id' => $tenant->id,
+                'recipient_users' => $recipient_user->id
+            ]);
+
+        }
+
+        return redirect('user/profile')->with('success', 'Solicitação enviada ao grupo! Aguarde até que algum membro do grupo aprove a sua solicitação.');
     }
 }

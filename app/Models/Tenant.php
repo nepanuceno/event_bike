@@ -22,4 +22,9 @@ class Tenant extends Model
     {
         $this->belongsTo(User::class);
     }
+
+    public function notifies()
+    {
+        return $this->belongsTo(TenantNotifyJoinUser::class);
+    }
 }

@@ -8,31 +8,34 @@
     <!-- Modal -->
     <div class="modal fade" id="joinTenant" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="joinTenantCenterTitle">Participar de um grupo existente</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="joinTenantCenterTitle">Participar de um grupo existente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <form action="{{ route('joingroup') }}" method="post">
+                    <div class="modal-body">
+                        @if(count($all_tenants) > 0)
+                            @csrf
+                            <select name="all_tenants" id="all_tenants">
+                                @foreach ($all_tenants as  $tenant)
+                                <option value="{{ $tenant->id }}">{{ $tenant->name }}</option>
+                                @endforeach
+                            </select>
+                            @else
+                            Você já está participando de todos os grupos possíveis.
+                        @endif
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        @if(count($all_tenants) > 0)
+                            <button type="submit" class="btn btn-primary">Participar</button>
+                        @endif
+                    </div>
+                </form>
             </div>
-            <div class="modal-body">
-                @if(count($all_tenants) > 0)
-                    <select name="all_tenants" id="">
-                    @foreach ($all_tenants as  $tenant)
-                        <option value="{{ $tenant->id }}">{{ $tenant->name }}</option>
-                    @endforeach
-                    </select>
-                @else
-                    Você já está participando de todos os grupos possíveis.
-                @endif
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            @if(count($all_tenants) > 0)
-            <button type="button" class="btn btn-primary">Participar</button>
-            @endif
-            </div>
-        </div>
         </div>
     </div>
     
