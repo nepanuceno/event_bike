@@ -16,7 +16,7 @@
         Você deseja 
         <a href="{{ route('tenant.create') }}"> Cadastar </a> 
         um grupo ou 
-        <a href="#" data-toggle="modal" data-target="#joinTenant">Solicitar Participação </a>
+        <a href="{{ route('profile') }}" data-toggle="modal" data-target="#joinTenant">Solicitar Participação </a>
         em um grupo ja existente?
         </li>
     </ul>

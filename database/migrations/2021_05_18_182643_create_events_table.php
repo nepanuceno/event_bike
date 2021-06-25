@@ -15,6 +15,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tenant_id');
             $table->unsignedBigInteger('modality_id');
 
             $table->string('name');
@@ -28,6 +29,7 @@ class CreateEventsTable extends Migration
             $table->boolean('active')->default(true);
 
             $table->foreign('modality_id')->references('id')->on('event_modalities');
+            $table->foreign('tenant_id')->references('id')->on('tenants');
 
             $table->timestamps();
         });

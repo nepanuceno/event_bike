@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Models\User;
@@ -9,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Tenant extends Model
 {
     use HasFactory;
-
 
     protected $fillable = ['name','key_pagarme', 'creator_user_id'];
 

@@ -14,7 +14,7 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'date_event', 'start_date', 'end_date', 'adress', 'modality_id', 'category','logo', 'event_notice'
+        'tenant_id', 'name', 'description', 'date_event', 'start_date', 'end_date', 'adress', 'modality_id', 'category','logo', 'event_notice'
     ];
 
     public function categories()
