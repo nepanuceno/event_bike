@@ -36,4 +36,9 @@ class Event extends Model
     {
         return $this->hasMany(EventVideos::class);
     }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class, 'tenant_has_events');
+    }
 }

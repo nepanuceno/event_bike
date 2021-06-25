@@ -27,4 +27,9 @@ class Tenant extends Model
     {
         return $this->belongsTo(TenantNotifyJoinUser::class);
     }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class,'tenant_has_events');
+    }
 }

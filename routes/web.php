@@ -64,7 +64,6 @@ Route::group(['middleware' => ['auth', 'tenants']], function() {
     
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-
     Route::resource('user', UserController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
