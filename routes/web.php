@@ -3,6 +3,7 @@
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\Acl\RoleController;
@@ -56,11 +57,13 @@ Route::post('user/profile',[UserProfileController::class,'store'])->name('profil
 Route::post('user/profile_update/{id}',[UserProfileController::class,'update'])->name('profile_update');  //->middleware(['password.confirm'])->name('profile');
 
 Route::resource('tenant', TenantController::class);
-Route::post('tenant/joingroup', [TenantController::class, 'joingroup'])->name('joingroup');
+Route::post('tenant/create_notify_joingroup', [TenantController::class, 'create_notify_joingroup'])->name('create.notify.joingroup');
+Route::get('tenant/joinGroup/{tenant_id}/{user_id}/{notify_id}', [TenantController::class, 'joinGroup'])->name('joinGroup');
 
 Route::group(['middleware' => ['auth', 'tenants']], function() {
+    
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::resource('user', UserController::class);
     Route::resource('roles', RoleController::class);

@@ -9,6 +9,7 @@ use App\Models\TenantNotifyJoinUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\TryCatch;
 
 class TenantController extends Controller
 {
@@ -145,7 +146,7 @@ class TenantController extends Controller
         return redirect('home');
     }
 
-    public function joingroup(Request $request)
+    public function create_notify_joingroup(Request $request)
     {
         $tenant = Tenant::find($request->all_tenants);
         $recipient_users = $tenant->users;
@@ -161,5 +162,32 @@ class TenantController extends Controller
         }
 
         return redirect('user/profile')->with('success', 'Solicitação enviada ao grupo! Aguarde até que algum membro do grupo aprove a sua solicitação.');
+    }
+
+    public function joinGroup($tenant_id, $user_id, $notify_id) {
+
+        try {
+            DB::beginTransaction();
+
+            $tenant = Tenant::find($tenant_id);
+            $user = User::find($user_id);
+            $notify = TenantNotifyJoinUser::find($notify_id);
+
+            if(count($user->tenants()->where('tenant_id', $tenant)->get()) <= 0) {
+                $tenant->users()->attach($user);
+            } else {
+                DB::rollBack();
+                return back()->with('error', "O usuário já percence a este grupo!");
+            }
+            
+            $notify->delete(); //Apaga notificaçao atendida
+            DB::commit();
+        } catch (\Throwable $th) {
+            throw $th;
+            DB::rollBack();
+            return back()->with('error', "Erro ao inserir usuário!");
+
+        }
+        return back()->with('success', "Usuário aceito!");
     }
 }

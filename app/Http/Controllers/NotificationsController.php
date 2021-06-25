@@ -7,18 +7,17 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationsController extends Controller
 {
-
-
     public function getNotificationsTenantJoin()
     {
-
         $dropdownHtml = '';
         $user = Auth::user();
         $notifications = $user->received_notifies;
         $photo = isset($user->photo) ? 'storage/photos/'.$user->photo : '/system_images/photo-less.jpg';
 
         foreach($notifications as $key=>$notify) {
-            $dropdownHtml .= "<a href='#' class='dropdown-item'>";
+            $route = '/tenant/joinGroup/'. $notify->requested_tenant->id .'/'. $notify->sending_user->id.'/'.$notify->id;
+
+            $dropdownHtml .= "<a href='".$route."' id=\"notifications\" class='dropdown-item'>";
             $dropdownHtml .= "<div class=\"media\">
                                 <img src=\"". $photo ."\" alt=\"Photo\" class=\"img-size-50 mr-3 img-circle\">
                                 <div class=\"media-body\">
@@ -30,9 +29,11 @@ class NotificationsController extends Controller
             $dropdownHtml .= "</div>";
             $dropdownHtml .= "</div>";
             $dropdownHtml .= "</a>";
+
             if ($key < count($notifications) - 1) {
                 $dropdownHtml .= "<div class='dropdown-divider'></div>";
             }
+
         }
 
         return [

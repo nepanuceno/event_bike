@@ -241,7 +241,7 @@ return [
             'url'          => 'notifications/show',   // The url to access all notifications/elements (required).
             'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
             'dropdown_mode'   => true,                // Enables the dropdown mode (optional).
-            'dropdown_flabel' => 'Mais notificações', // The label for the dropdown footer link (optional).
+            'dropdown_flabel' => 'Solicitações Pendentes', // The label for the dropdown footer link (optional).
             'update_cfg'   => [
                 'url' => 'notifications/tenatjoin',         // The url to periodically fetch new data (optional).
                 'period' => 30,                       // The update period for get new data (in seconds, optional).
@@ -472,7 +472,8 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' =>'/vendor/sweetalert2/sweetalert2.all.min.js',
+                    'location' =>'//cdn.jsdelivr.net/npm/sweetalert2@11',
+                    // 'location' =>'/vendor/sweetalert2/sweetalert2.all.min.js',
                 ],
             ],
         ],

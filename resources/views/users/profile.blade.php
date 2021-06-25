@@ -2,7 +2,6 @@
 @section('content')
 
 @can('manager')
-    @if(isset($tenants) && count($tenants) > 0)
        
             
     <!-- Modal -->
@@ -15,7 +14,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
-                <form action="{{ route('joingroup') }}" method="post">
+                <form action="{{ route('create.notify.joingroup') }}" method="post">
                     <div class="modal-body">
                         @if(count($all_tenants) > 0)
                             @csrf
@@ -38,6 +37,9 @@
             </div>
         </div>
     </div>
+
+    @if(isset($tenants) && count($tenants) > 0)
+
     
     <div class="row">
         <div class="col-md-6">
@@ -67,8 +69,18 @@
             </div>
         </div>
     @else
-        <div class="alert alert-warning" role="alert"><h3>Usuário sem Grupo (Empresa, Organização, Associação etc.)</h3></div>
-        <div class="mb-5">Você deseja <a href="{{ route('tenant.create') }}"> Cadastar </a> um grupo ou <a href="#"> Particiapar </a> de um grupo ja existente?</div>
+        @cannot('administrator')
+            <div class="alert alert-warning" role="alert">
+                <h3>Usuário sem Grupo (Empresa, Organização, Associação etc.)</h3>
+            </div>
+            <div class="mb-5">
+                Você deseja 
+                <a href="{{ route('tenant.create') }}"> Cadastar </a> 
+                um grupo ou 
+                <a href="#" data-toggle="modal" data-target="#joinTenant">Participar </a>
+                de um grupo ja existente?
+            </div>
+        @endcannot
     @endif
 @endcan
 
