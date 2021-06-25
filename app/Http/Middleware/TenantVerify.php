@@ -21,14 +21,14 @@ class TenantVerify
         $user = User::find(Auth::id());
 
         if(session()->has('tenant_id') && !is_null(session()->get('tenant_id'))) {
+            // if($user->can('manager')) {
+            //     return redirect('user/profile');
+            // }
             return $next($request);
             // if($user->can('manager') || $user->can('administrator')  ) {
             // } else {
             //     return redirect('/');
             // }
-        }
-        if($user->can('manager')) {
-            return redirect('user/profile');
         }
 
         return redirect('choices');

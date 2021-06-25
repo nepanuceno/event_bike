@@ -41,7 +41,7 @@
     @if(isset($tenants) && count($tenants) > 0)
 
     
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-md-6">
             <div class="card card-primary collapsed-card">
                 <div class="card-header">
@@ -56,12 +56,12 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body" style="display: none;">
+                    <ul class="list-group list-group-flush">
                     @foreach ($tenants as $tenant)
-                    <p>
-                        <a href="{{ route('tenant.show', $tenant->id) }}">{{ $tenant->name }}</a>
-                        <a  class="btn btn-info btn-sm" href="{{ route('tenant.edit', $tenant->id) }}"><i class="fas fa-edit"></i></a>
-                    </p>
-                    @endforeach
+                        <a href="{{ route('tenant.show', $tenant->id) }}" class="list-group-item list-group-item-action">{{ $tenant->name }}</a>
+                        <a  class="btn btn-info btn-sm float-left" href="{{ route('tenant.edit', $tenant->id) }}"><i class="fas fa-edit"></i></a>
+                        @endforeach
+                    </ul>
                 </div>
                 <!-- /.card-body -->
                 </div>

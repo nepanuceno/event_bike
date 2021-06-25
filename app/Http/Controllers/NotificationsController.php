@@ -36,10 +36,18 @@ class NotificationsController extends Controller
 
         }
 
+        if(count($notifications) == 0) {  
+            return [
+                'label'       => 0,
+                'label_color' => 'success',
+                'dropdown_flabel' => 'Sem nofificações'
+            ];    
+        }
+
         return [
             'label'       => count($notifications),
             'label_color' => 'danger',
-            'icon_color'  => 'dark',
+            'icon_color'  => 'warning',
             'dropdown'    => $dropdownHtml,
         ];
     }
