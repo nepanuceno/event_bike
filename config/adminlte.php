@@ -241,9 +241,9 @@ return [
             'url'          => 'notifications/show',   // The url to access all notifications/elements (required).
             'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
             'dropdown_mode'   => true,                // Enables the dropdown mode (optional).
-            'dropdown_flabel' => 'All notifications', // The label for the dropdown footer link (optional).
+            'dropdown_flabel' => 'Mais notificações', // The label for the dropdown footer link (optional).
             'update_cfg'   => [
-                'url' => 'notifications/get',         // The url to periodically fetch new data (optional).
+                'url' => 'notifications/tenatjoin',         // The url to periodically fetch new data (optional).
                 'period' => 30,                       // The update period for get new data (in seconds, optional).
             ],
         ],

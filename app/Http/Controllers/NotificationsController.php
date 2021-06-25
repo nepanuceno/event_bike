@@ -3,9 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationsController extends Controller
 {
+
+
+    public function getNotificationsTenantJoin()
+    {
+
+        $dropdownHtml = '';
+        $user = Auth::user();
+        $notifications = $user->received_notifies;
+        $photo = isset($user->photo) ? 'storage/photos/'.$user->photo : '/system_images/photo-less.jpg';
+
+        foreach($notifications as $key=>$notify) {
+            $dropdownHtml .= "<a href='#' class='dropdown-item'>";
+            $dropdownHtml .= "<div class=\"media\">
+                                <img src=\"". $photo ."\" alt=\"Photo\" class=\"img-size-50 mr-3 img-circle\">
+                                <div class=\"media-body\">
+                                <h3 class=\"dropdown-item-title\">
+                                    {$notify->sending_user->name}
+                                </h3>";
+                                $dropdownHtml .= "<p class=\"text-sm\">Solicitação de acesso!";
+                                $dropdownHtml .= "<p class=\"text-sm\"><".$notify->requested_tenant->name."</p>";
+            $dropdownHtml .= "</div>";
+            $dropdownHtml .= "</div>";
+            $dropdownHtml .= "</a>";
+            if ($key < count($notifications) - 1) {
+                $dropdownHtml .= "<div class='dropdown-divider'></div>";
+            }
+        }
+
+        return [
+            'label'       => count($notifications),
+            'label_color' => 'danger',
+            'icon_color'  => 'dark',
+            'dropdown'    => $dropdownHtml,
+        ];
+    }
     /**
      * Get the new notification data for the navbar notification.
      *

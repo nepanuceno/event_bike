@@ -85,4 +85,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(TenantNotifyJoinUser::class, 'requesting_user_id');
     }
+
+    public function received_notifies()
+    {
+        return $this->hasMany(TenantNotifyJoinUser::class, 'recipient_users');
+    }
 }

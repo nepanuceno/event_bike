@@ -44,8 +44,8 @@ Route::get('choices',[TenantController::class, 'choices'])
     ->name('tenants.choices')
     ->middleware('auth');
 
-    Route::get('notifications/get', [NotificationsController::class, 'getNotificationsData'])
-    ->name('notifications.get');
+Route::get('notifications/get', [NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
+Route::get('notifications/tenatjoin', [NotificationsController::class, 'getNotificationsTenantJoin'])->name('notificationstenantjoin.get');
 
 Route::get('setTenantId/{id}', [TenantController::class, 'setTenantId'])->name('setTenantId');
 
