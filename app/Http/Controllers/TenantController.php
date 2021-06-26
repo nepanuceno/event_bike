@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Closure;
 use App\Models\User;
 use App\Models\Tenant;
-use App\Models\TenantNotifyJoinUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\DB;
+use App\Models\TenantNotifyJoinUser;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class TenantController extends Controller
 {
@@ -143,7 +144,7 @@ class TenantController extends Controller
     public function setTenantId($id)
     {
         session(['tenant_id' => $id]);
-        return redirect('home');
+        return back()->with('success', '');
     }
 
     public function create_notify_joingroup(Request $request)

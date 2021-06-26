@@ -41,4 +41,9 @@ class Event extends Model
     {
         return $this->belongsTo(Tenant::class, 'tenant_has_events');
     }
+
+    public function users_subscribes()
+    {
+        return $this->belongsToMany(User::class)->withPivot('status', 'created_at');
+    }
 }

@@ -90,4 +90,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(TenantNotifyJoinUser::class, 'recipient_users');
     }
+
+    public function events_subscribe()
+    {
+        return $this->belongsToMany(Event::class);
+    }
 }
