@@ -37,6 +37,8 @@ use App\Http\Controllers\User\UserProfileController;
 Route::get('/',[ClientController::class, 'index'])->name('welcome');
 Route::post('/',[ClientController::class, 'filter_events'])->name('#events');
 
+Route::resource('competitor/subscribe', EventSubscribeController::class);
+
 Route::get('register_manager', [UserController::class, 'register_manager'])->name('manager.create');
 Route::post('register_manager', [RegisterController::class, 'register'])->name('manager.register');
 
@@ -61,7 +63,6 @@ Route::resource('tenant', TenantController::class);
 Route::post('tenant/create_notify_joingroup', [TenantController::class, 'create_notify_joingroup'])->name('create.notify.joingroup');
 Route::get('tenant/joinGroup/{tenant_id}/{user_id}/{notify_id}', [TenantController::class, 'joinGroup'])->name('joinGroup');
 
-Route::resource('user/subscribe', EventSubscribeController::class);
 Route::resource('user', UserController::class);
 Route::resource('user_address', UserAddressController::class);
 Route::get('search_user', [UserController::class, 'search']);
@@ -75,7 +76,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('role_user', RoleUserController::class);
     Route::get('roles_user/{id}', [RoleUserController::class, 'roles_user']);
     Route::get('delete_roles_user/{user}/{role}', [RoleUserController::class, 'delete_roles_user']);
-
 
     Route::group(['middleware'=>['permission:manager', 'tenants']], function(){
         Route::resource('event', EventController::class);

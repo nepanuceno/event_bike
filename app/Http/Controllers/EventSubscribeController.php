@@ -18,7 +18,7 @@ class EventSubscribeController extends Controller
      */
     public function index()
     {
-        //
+        return view('clients.event_subscribe');
     }
 
     /**
