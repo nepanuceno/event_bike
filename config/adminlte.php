@@ -271,6 +271,7 @@ return [
         // ['header' => 'account_settings'],
         [
             'header' => 'Parametros de Evento',
+            'can'  => ['manager'],
         ],
         [
             'text' => 'Usuarios',

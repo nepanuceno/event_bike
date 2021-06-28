@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Models\User;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,9 +23,9 @@ class TenantVerify
 
         if(session()->has('tenant_id') && !is_null(session()->get('tenant_id'))) {
             if($user->can('manager')) {
-                return redirect('user/profile');
-            } else { //se for adm ou usuário comum competidor
-                return $next($request); 
+                return $next($request);
+                // return redirect('user/profile');
+            // } else { //se for adm ou usuário comum competidor
             }
         }
 
