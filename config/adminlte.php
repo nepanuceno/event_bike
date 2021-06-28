@@ -246,6 +246,7 @@ return [
                 'url' => 'notifications/tenatjoin',         // The url to periodically fetch new data (optional).
                 'period' => 30,                       // The update period for get new data (in seconds, optional).
             ],
+            'can'  => ['manager'],
         ],
 
         [
@@ -254,7 +255,7 @@ return [
             'icon' => 'fas fa-fw fa-home',
             'topnav' => true,
         ],
-        
+
         // [
         //     'text' => 'blog',
         //     'url'  => 'admin/blog',
@@ -277,7 +278,7 @@ return [
             'icon' => 'fas fa-fw fa-users',
             'can'  => ['user-list'],
         ],
-        
+
         [
             'text' => 'Eventos',
             'url'  => 'event',
