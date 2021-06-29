@@ -41,7 +41,7 @@ class LoginController extends Controller
         if(!$user->hasRole('Manager') && !$user->hasRole('Administrator')) { //not modifier Roles / não modifique
             //Se nao houver perfil do usuario, redireciona o usuário para o formulário de preenchimento
             if($auth) {
-                if(!$user->profile || !$user->tenants || !$user->adresses) {
+                if(!$user->profile || !$user->tenants || !$user->addresses) {
                     return '/user/profile';
                 } else {
                     return '/';

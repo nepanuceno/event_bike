@@ -89,15 +89,30 @@
 
                                             </li>
                                         </ul>
+
                                         @if($event->status == 2)
-                                        <a class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                            <i class="fas fa-thumbs-up me-1"></i>
-                                            @auth
-                                            Inscreva-se
-                                            @else
-                                            Login
-                                        </a>
-                                            @endauth
+
+                                            <form action="{{ route('subscribe.store') }}" method="post">
+                                                @csrf
+
+                                                <input type="hidden" name="event" value="{{ $event->id }}">
+                                                @foreach ($event->categories as $category)
+                                                    <input class="form-check-input" type="radio" id="{{ $category->id }}" name="select_category" value="{{ $category->id }}">
+                                                    <label for="html">{{ $category->name}} - @money($category->pivot->cost) </span></label><br>
+                                                @endforeach
+
+                                                <button class="btn btn-primary btn-xl text-uppercase"  type="submit">
+                                                    <i class="fas fa-thumbs-up me-1"></i>
+                                                    @auth
+                                                    Inscreva-se
+                                                    @else
+                                                    Login
+                                                    @endauth
+                                                </button>
+
+                                            </form>
+
+
                                         @elseif ($event->status == 3)
                                             <h3>Incrições Encerradas</h3>
                                         @elseif ($event->status == 1)
@@ -114,6 +129,10 @@
     @endforeach
 
 </div>
+
+@if ($message = Session::get('success'))
+    <span id="message">{{ $message }}</span>
+@endif
 @endsection
 
 @section('js')

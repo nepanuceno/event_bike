@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
 use App\Repositories\Eloquent\EventRepository;
@@ -55,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
                             'url' => route('setTenantId', $tenant->id),
                             'topnav' => true,
                        ];
-                       $items[] = $item; 
+                       $items[] = $item;
                     }
 
                     $tenanto_current = Tenant::find(session()->get('tenant_id'));
@@ -71,6 +72,10 @@ class AppServiceProvider extends ServiceProvider
 
                 }
             }
+        });
+
+        Blade::directive('money', function ($amount) {
+            return "<?php echo 'R$' . number_format($amount, 2); ?>";
         });
     }
 }

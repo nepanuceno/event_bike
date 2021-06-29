@@ -37,7 +37,7 @@ use App\Http\Controllers\User\UserProfileController;
 Route::get('/',[ClientController::class, 'index'])->name('welcome');
 Route::post('/',[ClientController::class, 'filter_events'])->name('#events');
 
-Route::resource('competitor/subscribe', EventSubscribeController::class);
+Route::resource('subscribe', EventSubscribeController::class);
 
 Route::get('register_manager', [UserController::class, 'register_manager'])->name('manager.create');
 Route::post('register_manager', [RegisterController::class, 'register'])->name('manager.register');
@@ -68,9 +68,9 @@ Route::resource('user_address', UserAddressController::class);
 Route::get('search_user', [UserController::class, 'search']);
 
 Route::group(['middleware' => ['auth']], function() {
-    
+
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    
+
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('role_user', RoleUserController::class);

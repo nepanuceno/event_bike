@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use App\Models\EventUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventSubscribeController extends Controller
 {
@@ -39,7 +42,24 @@ class EventSubscribeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $subscribe = new EventUser();
+
+        $subscribe = $subscribe->where('user_id', Auth::id())
+                    ->where('event_id',$request->event)
+                    ->where('category_id', $request->select_category)->get();
+
+        if(!$subscribe)
+        {
+            $subscribe->create([
+                'user_id' => Auth::id(),
+                'event_id'=>$request->event,
+                'category_id' => $request->select_category,
+            ]);
+
+            return redirect()->route('welcome')->with('success', 'Parabéns!');
+        } else {
+            return redirect()->route('welcome')->with('error', 'Você já está inscrito neste Evento!');
+        }
     }
 
     /**
