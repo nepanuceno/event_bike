@@ -42,13 +42,19 @@ class EventSubscribeController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'event'=> 'required',
+            'select_category' => 'required',
+        ]);
+
+        // dd($request);
+
         $subscribe = new EventUser();
 
-        $subscribe = $subscribe->where('user_id', Auth::id())
-                    ->where('event_id',$request->event)
-                    ->where('category_id', $request->select_category)->get();
+        $subscribe_status = $subscribe->where('user_id', Auth::id())
+            ->where('event_id',$request->event)->get();
 
-        if(!$subscribe)
+        if(count($subscribe_status) == 0)
         {
             $subscribe->create([
                 'user_id' => Auth::id(),
@@ -104,6 +110,15 @@ class EventSubscribeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Auth::user();
+        $event = Event::find($id);
+
+        $enrolled = EventUser::where('user_id', $user->id)
+            ->where('event_id', $event->id)
+            ->first();
+
+        $enrolled->delete();
+
+        return redirect()->route('welcome')->with('success', 'Sua inscrição foi cancela!');
     }
 }

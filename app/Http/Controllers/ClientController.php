@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\Contracts\EventRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\ModalityRepositoryInterface;
@@ -56,9 +57,16 @@ class ClientController extends Controller
             } else if($now->gte($end_date)) {
                 $event['status'] = 3; //End Subscription
             }
-            // else if($now->gt($end_date) && $now->lte($date_event)) {
-            //     $event['status'] = 4;
-            // }
+
+            if(Auth::check()) {
+                // dd(Auth::user()->events_subscribe);
+                foreach(Auth::user()->events_subscribe as $event_subscribed) {
+                    if($event->id == $event_subscribed->id)
+                    {
+                        $event['subscribe'] = true;
+                    }
+                }
+            }
         }
 
         return $events;
