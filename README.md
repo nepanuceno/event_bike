@@ -8,6 +8,7 @@
 </p>
 
 ## Configure Project
+<p>Configure a base de dados no arquivo .env</p>
 <p>php artisan migrate</p>
 
 <p>php artisan db:seed --class=PermissionTableSeeder</p>
@@ -17,6 +18,9 @@
 
 <p>php artisan adminlte:update</p>
 <p>php artisan adminlte:install --only=main_views --force</p>
+
+### Atualizar o AdminLTE
+<p>https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Updating</p>
 
 ## About Laravel
 
