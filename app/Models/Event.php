@@ -14,7 +14,7 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'date_event', 'start_date', 'end_date', 'adress', 'modality_id', 'category','logo', 'event_notice'
+        'tenant_id', 'name', 'description', 'date_event', 'start_date', 'end_date', 'adress', 'modality_id', 'category','logo', 'event_notice'
     ];
 
     public function categories()
@@ -35,5 +35,15 @@ class Event extends Model
     public function videos()
     {
         return $this->hasMany(EventVideos::class);
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class, 'tenant_has_events');
+    }
+
+    public function users_subscribes()
+    {
+        return $this->belongsToMany(User::class)->withPivot('status', 'created_at');
     }
 }

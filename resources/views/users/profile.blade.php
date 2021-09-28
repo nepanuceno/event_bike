@@ -1,6 +1,89 @@
 @extends('adminlte::page')
 @section('content')
 
+@can('manager')
+       
+            
+    <!-- Modal -->
+    <div class="modal fade" id="joinTenant" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="joinTenantCenterTitle">Participar de um grupo existente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <form action="{{ route('create.notify.joingroup') }}" method="post">
+                    <div class="modal-body">
+                        @if(count($all_tenants) > 0)
+                            @csrf
+                            <select name="all_tenants" id="all_tenants">
+                                @foreach ($all_tenants as  $tenant)
+                                <option value="{{ $tenant->id }}">{{ $tenant->name }}</option>
+                                @endforeach
+                            </select>
+                            @else
+                            Você já está participando de todos os grupos possíveis.
+                        @endif
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        @if(count($all_tenants) > 0)
+                            <button type="submit" class="btn btn-primary">Participar</button>
+                        @endif
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @if(isset($tenants) && count($tenants) > 0)
+
+    
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="card card-primary collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Meus Grupos</h3>
+                    <div class="card-tools">
+                        <a href="{{ route('tenant.create') }}" class="btn btn-tool"><i class="fas fa-plus"></i> Novo Grupo</a>
+                        <a href="#" class="btn btn-tool" data-toggle="modal" data-target="#joinTenant"><i class="fas fa-object-group" ></i> Entrar em um Grupo</a>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-caret-down fa-2x"></i>
+                        </button>
+                    </div>
+                    <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body" style="display: none;">
+                    <ul class="list-group list-group-flush">
+                    @foreach ($tenants as $tenant)
+                        <a href="{{ route('tenant.show', $tenant->id) }}" class="list-group-item list-group-item-action">{{ $tenant->name }}</a>
+                        <a  class="btn btn-info btn-sm float-left" href="{{ route('tenant.edit', $tenant->id) }}"><i class="fas fa-edit"></i></a>
+                        @endforeach
+                    </ul>
+                </div>
+                <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    @else
+        @cannot('administrator')
+            <div class="alert alert-warning" role="alert">
+                <h3>Usuário sem Grupo (Empresa, Organização, Associação etc.)</h3>
+            </div>
+            <div class="mb-5">
+                Você deseja 
+                <a href="{{ route('tenant.create') }}"> Cadastar </a> 
+                um grupo ou 
+                <a href="#" data-toggle="modal" data-target="#joinTenant">Participar </a>
+                de um grupo ja existente?
+            </div>
+        @endcannot
+    @endif
+@endcan
+
 @if(isset($profile))
 <!-- Profile Image -->
 <div class="row">

@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Auth\Events\Login;
+
+use App\Listeners\SetTenantInSession;
+use App\Listeners\LogSuccessfulLogin;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -20,13 +25,17 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        'Illuminate\Auth\Events\Authenticated' => [
-            'App\Listeners\LogAuthenticated',
+        Login::class => [
+            SetTenantInSession::class
         ],
 
-        'Illuminate\Auth\Events\Login' => [
-            'App\Listeners\LogSuccessfulLogin',
-        ],
+        // 'Illuminate\Auth\Events\Authenticated' => [
+        //     'App\Listeners\LogAuthenticated',
+        // ],
+
+        // Login::class => [
+        //     LogSuccessfulLogin::class,
+        // ],
     ];
 
     /**

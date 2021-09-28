@@ -34,9 +34,18 @@
 
                 @if($event->status == 1)
                 <div class="position-relative bg-gray">
-                    <div class="ribbon-wrapper ribbon-xl">
+                    <div class="ribbon-wrapper ribbon-lg">
                       <div class="ribbon bg-warning text-lg">
                         NOVIDADE
+                      </div>
+                    </div>
+                @endif
+
+                @if(isset($event->subscribe))
+                <div class="position-relative bg-gray">
+                    <div class="ribbon-wrapper ribbon-xl">
+                      <div class="ribbon bg-danger text-xl">
+                        INSCRITO
                       </div>
                     </div>
                 @endif
@@ -57,6 +66,9 @@
                         </div>
                     </div>
                 @if($event->status == 1)
+                </div>
+                @endif
+                @if(!$event->subscribe)
                 </div>
                 @endif
 
@@ -89,15 +101,43 @@
 
                                             </li>
                                         </ul>
+
                                         @if($event->status == 2)
-                                        <a class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                            <i class="fas fa-thumbs-up me-1"></i>
-                                            @auth
-                                            Inscreva-se
+                                            @if($event->subscribe)
+                                                <form action="{{ route('subscribe.destroy',$event->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button class="btn btn-primary btn-xl text-uppercase"  type="submit">
+                                                        <i class="fas fa-sad-tear fa-2x me-1"></i>
+                                                        @auth
+                                                        Cancelar Inscrição
+                                                        @else
+                                                        Login
+                                                        @endauth
+                                                    </button>
+                                                </form>
                                             @else
-                                            Login
-                                        </a>
-                                            @endauth
+                                                <form action="{{ route('subscribe.store') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="event" value="{{ $event->id }}">
+                                                    @foreach ($event->categories as $category)
+                                                        <input class="form-check-input" type="radio" id="{{ $category->id }}" name="select_category" value="{{ $category->id }}">
+                                                        <label for="{{ $category->id }}">{{ $category->name}} - @money($category->pivot->cost) </span></label><br>
+                                                    @endforeach
+
+
+                                                    <button class="btn btn-primary btn-xl text-uppercase"  type="submit">
+                                                        <i class="fas fa-thumbs-up me-1"></i>
+                                                        @auth
+                                                        Inscreva-se
+                                                        @else
+                                                        Login
+                                                        @endauth
+                                                    </button>
+                                                </form>
+                                            @endif
+
                                         @elseif ($event->status == 3)
                                             <h3>Incrições Encerradas</h3>
                                         @elseif ($event->status == 1)
@@ -114,6 +154,14 @@
     @endforeach
 
 </div>
+
+@if ($message = Session::get('success'))
+    <span id="message" style="display: none">{{ $message }}</span>
+@endif
+
+@if ($message = Session::get('error'))
+    <span id="message" style="display: none">{{ $message }}</span>
+@endif
 @endsection
 
 @section('js')
@@ -137,6 +185,8 @@
 
         });
         scrollToEvents();
+
+
 
         // $(document).ready(function(){
             // $('#filter').change(function() {
@@ -163,5 +213,16 @@
 
 
     </script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="/js/sweetalert.js"></script>
+    @if ($message = Session::get('success'))
+        <script>MessageAlert(['message','success']);</script>
+    @endif
+
+    @if ($message = Session::get('error'))
+        <script>MessageAlert(['message','error']);</script>
+    @endif
 
 @endsection

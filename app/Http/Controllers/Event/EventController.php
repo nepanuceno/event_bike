@@ -5,16 +5,18 @@ namespace App\Http\Controllers\Event;
 use DateTime;
 use Carbon\Carbon;
 use App\Models\EventImages;
+use App\Models\EventVideos;
 use Illuminate\Http\Request;
 use App\Models\EventCategory;
 use App\Models\EventModality;
 use App\Models\CategoryHasEvent;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\EventVideos;
-use App\Repositories\Contracts\CategoryHasEventRepositoryInterface;
-use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Models\Tenant;
 use App\Repositories\Contracts\EventRepositoryInterface;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\ModalityRepositoryInterface;
+use App\Repositories\Contracts\CategoryHasEventRepositoryInterface;
 
 class EventController extends Controller
 {
@@ -80,7 +82,8 @@ class EventController extends Controller
     //Filters events based on dates
     public function event_filter($id)
     {
-        $events = $this->event->where('active','<>', 0);
+        $events = $this->event->where('active','<>', 0)
+            ->where('tenant_id', session()->get('tenant_id'));
 
         $event_queries = $this->event_queries($events);
 
@@ -142,16 +145,12 @@ class EventController extends Controller
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
-        // $date_event = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('date_event'))->format('Y-m-d H:i:s');
-        // $start_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('start_date'))->format('Y-m-d H:i:s');
-        // $end_date = Carbon::createFromFormat('d/m/Y, H:i:s', $request->input('end_date'))->format('Y-m-d H:i:s');
-
         $date_event = $this->dateFormatToDb($request->input('date_event'));
         $start_date = $this->dateFormatToDb($request->input('start_date'));
         $end_date = $this->dateFormatToDb($request->input('end_date'));
 
-
         $inputs = [
+            'tenant_id' => session()->get('tenant_id'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'date_event' => $date_event,
@@ -163,14 +162,17 @@ class EventController extends Controller
             'logo' => time().'.'.$request->logo->getClientOriginalExtension(),
         ];
 
+        DB::beginTransaction();
         try {
             $event = $this->event->create($inputs);
             $request->event_notice->move(public_path('storage/event_notices'), $inputs['event_notice']);
             $request->logo->move(public_path('storage/logo_events'), $inputs['logo']);
             $event->categories()->sync($request->input('category'));
 
+            DB::commit();
             return back()->with('success','Evento Criado com sucesso');
         } catch (\Throwable $th) {
+            DB::rollback();
             return back()->with('error','Erro ao cadastrar');
 
             throw $th;

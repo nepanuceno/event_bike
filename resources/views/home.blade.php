@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 text-center">
             @if(!$user->hasRole('Manager') && !$user->hasRole('Administrator')) {{-- Not modifier Roles / não modifique --}}
 
                 @if($user->profile)
@@ -33,7 +33,7 @@
                         <h1> Área Administrativa</h1>
                 @else
                     @if($user->hasRole('Manager'))
-                        <h1> Área do Genrente</h1>
+                        <h1> Área do Gerente</h1>
                     @endif
                 @endif
 

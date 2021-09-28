@@ -50,7 +50,7 @@ return [
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'EventBike',
+    'logo_img_alt' => 'Bike Event',
 
     /*
     |--------------------------------------------------------------------------
@@ -231,12 +231,31 @@ return [
         ],
 
         [
+            'type'         => 'navbar-notification',
+            'id'           => 'my-notification',      // An ID attribute (required).
+            'icon'         => 'fas fa-bell',          // A font awesome icon (required).
+            'icon_color'   => 'success',              // The initial icon color (optional).
+            'label'        => 0,                      // The initial label for the badge (optional).
+            'text'          => 'Solicitações',
+            'label_color'  => 'info',               // The initial badge color (optional).
+            'url'          => 'notifications/show',   // The url to access all notifications/elements (required).
+            'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
+            'dropdown_mode'   => true,                // Enables the dropdown mode (optional).
+            'dropdown_flabel' => 'Solicitações Pendentes', // The label for the dropdown footer link (optional).
+            'update_cfg'   => [
+                'url' => 'notifications/tenatjoin',         // The url to periodically fetch new data (optional).
+                'period' => 30,                       // The update period for get new data (in seconds, optional).
+            ],
+            'can'  => ['manager'],
+        ],
+
+        [
             'text' => 'Portal',
             'url'  => '/',
             'icon' => 'fas fa-fw fa-home',
             'topnav' => true,
         ],
-        
+
         // [
         //     'text' => 'blog',
         //     'url'  => 'admin/blog',
@@ -251,11 +270,16 @@ return [
         // ],
         // ['header' => 'account_settings'],
         [
+            'header' => 'Parametros de Evento',
+            'can'  => ['manager'],
+        ],
+        [
             'text' => 'Usuarios',
             'url'  => 'user',
             'icon' => 'fas fa-fw fa-users',
             'can'  => ['user-list'],
         ],
+
         [
             'text' => 'Eventos',
             'url'  => 'event',
@@ -279,6 +303,10 @@ return [
         //     'url'  => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
+        [
+            'header' => 'Configurações do Sistema',
+            'can' => ['administrator'],
+        ],
         [
             'text'    => 'Perfis e Permissões',
             'icon'    => 'fas fa-fw fa-key',
@@ -446,7 +474,8 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' =>'/vendor/sweetalert2/sweetalert2.all.min.js',
+                    'location' =>'//cdn.jsdelivr.net/npm/sweetalert2@11',
+                    // 'location' =>'/vendor/sweetalert2/sweetalert2.all.min.js',
                 ],
             ],
         ],

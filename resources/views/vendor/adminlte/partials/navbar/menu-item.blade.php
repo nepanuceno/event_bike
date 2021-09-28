@@ -7,7 +7,11 @@
 
 @elseif ($navbarItemHelper->isNotification($item))
 
+<<<<<<< HEAD
     {{-- Notification link --}}
+=======
+    {{-- Notification link (using blade component) --}}
+>>>>>>> implement-multi-tenancy
     <x-adminlte-navbar-notification
         :id="$item['id']"
         :href="$item['href']"
@@ -25,6 +29,7 @@
     {{-- Fullscreen toggle widget --}}
     @include('adminlte::partials.navbar.menu-item-fullscreen-widget')
 
+<<<<<<< HEAD
 @elseif ($navbarItemHelper->isDarkmode($item))
 
     {{-- Darkmode toggle widget --}}
@@ -35,6 +40,8 @@
         :color-disabled="$item['color_disabled'] ?? null"
     />
 
+=======
+>>>>>>> implement-multi-tenancy
 @elseif ($navbarItemHelper->isSubmenu($item))
 
     {{-- Dropdown menu --}}

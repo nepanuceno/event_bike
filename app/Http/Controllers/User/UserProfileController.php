@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User;
+use App\Models\Tenant;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,10 +24,25 @@ class UserProfileController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
+
+        //Remove as Tenants ja solicitadas para entrada
+        $notifies = $user->notifies;
+        $requested_tenants = new Collection(); 
+        foreach($notifies as $notify) {
+            $requested_tenants = $requested_tenants->merge($notify->tenants);
+        }
+        //
+        
+        $all_tenants = Tenant::all();
+        $tenants = $user->tenant;
         $profile = $user->profile;
         $addresses = $user->addresses;
 
-        return view('users.profile', compact('user', 'profile', 'addresses'));
+        $all_tenants = $all_tenants->diff($tenants);
+        $all_tenants = $all_tenants->diff($requested_tenants);
+        $all_tenants = $all_tenants->all();
+        
+        return view('users.profile', compact('user', 'tenants', 'profile', 'addresses', 'all_tenants'));
     }
 
     /**
