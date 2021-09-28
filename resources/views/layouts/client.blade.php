@@ -45,7 +45,7 @@
                 </div>
                 @auth
                     <div class="dropdown-user">
-                        <span id="user_name">{{ Auth::user()->name }}</span>
+                        <span style="cursor: pointer;" id="user_name">{{ Auth::user()->name }}</span>
                         <div class="dropdown-content-user">
 
                             <img class="rounded-circle img-fluid" style="margin-bottom: 2px" src="{{ Auth::user()->adminlte_image() }}" alt="Avatar">
