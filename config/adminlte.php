@@ -350,7 +350,7 @@ return [
                 [
                     'text' => 'Perfis por Usuário',
                     'url'  => 'role_user',
-                    'icon'  => "fa fa-user-lock",
+                    'icon'  => "fa fa-street-view",
                     'can'  => ['role-list'],
                 ],
             ],
