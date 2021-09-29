@@ -55,10 +55,10 @@ class UserAddressController extends Controller
             'state' => $request->state,
             'country' => $request->country
         ];
-    
+
         $user_address = UserAddress::create($inputs);
 
-        return back()->with('success', 'Endereço cadastrado com sucesso!');
+        return  redirect()->route('profile')->with('success', 'Endereço cadastrado com sucesso!');
     }
 
     /**
@@ -81,7 +81,7 @@ class UserAddressController extends Controller
     public function edit($id)
     {
         $address = UserAddress::find($id);
-        
+
         return view('users.create_address', compact('address'));
     }
 

@@ -116,7 +116,7 @@
                                     <label for="photo">Foto</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file"  onchange="readURL(this);"  class="custom-file-input" name="photo" id="photo">
+                                            <input type="file"  onchange="readURL(this,'#img');"  class="custom-file-input" name="photo" id="photo">
                                             <label class="custom-file-label" for="photo" data-browse="Carregar Foto"></label>
                                         </div>
                                     </div>

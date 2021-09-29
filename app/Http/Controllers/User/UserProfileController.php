@@ -27,12 +27,12 @@ class UserProfileController extends Controller
 
         //Remove as Tenants ja solicitadas para entrada
         $notifies = $user->notifies;
-        $requested_tenants = new Collection(); 
+        $requested_tenants = new Collection();
         foreach($notifies as $notify) {
             $requested_tenants = $requested_tenants->merge($notify->tenants);
         }
         //
-        
+
         $all_tenants = Tenant::all();
         $tenants = $user->tenant;
         $profile = $user->profile;
@@ -41,7 +41,7 @@ class UserProfileController extends Controller
         $all_tenants = $all_tenants->diff($tenants);
         $all_tenants = $all_tenants->diff($requested_tenants);
         $all_tenants = $all_tenants->all();
-        
+
         return view('users.profile', compact('user', 'tenants', 'profile', 'addresses', 'all_tenants'));
     }
 
@@ -93,9 +93,9 @@ class UserProfileController extends Controller
 
         if(Profile::create($input)) {
             $request->photo->move(public_path('storage/photos'), $input['photo']);
-            return back()->with('success','Cadastro Realizado com sucesso');
+            return redirect()->route('profile')->with('success','Cadastro Realizado com sucesso');
         } else {
-            return back()->with('error','Erro ao cadastrar');
+            return redirect()->route('profile')->with('error','Erro ao cadastrar');
         }
     }
 
