@@ -7,7 +7,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="joinTenantCenterTitle">Participar de um grupo existente</h5>
+                <h5 class="modal-title" id="joinTenantCenterTitle">{{ __('profile.join_exist_group') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -22,13 +22,13 @@
                                 @endforeach
                             </select>
                             @else
-                            Você já está participando de todos os grupos possíveis.
+                            {{ __('profile.alert_participating') }}
                         @endif
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('profile.close') }}</button>
                         @if(count($all_tenants) > 0)
-                            <button type="submit" class="btn btn-primary">Participar</button>
+                            <button type="submit" class="btn btn-primary">{{ __('profile.participate') }}</button>
                         @endif
                     </div>
                 </form>
@@ -42,10 +42,10 @@
         <div class="col-md-6">
             <div class="card card-primary collapsed-card">
                 <div class="card-header">
-                    <h3 class="card-title">Meus Grupos</h3>
+                    <h3 class="card-title">{{ __('profile.my_groups') }}</h3>
                     <div class="card-tools">
-                        <a href="{{ route('tenant.create') }}" class="btn btn-tool"><i class="fas fa-plus"></i> Novo Grupo</a>
-                        <a href="#" class="btn btn-tool" data-toggle="modal" data-target="#joinTenant"><i class="fas fa-object-group" ></i> Entrar em um Grupo</a>
+                        <a href="{{ route('tenant.create') }}" class="btn btn-tool"><i class="fas fa-plus"></i>  {{ __('profile.new_group') }}</a>
+                        <a href="#" class="btn btn-tool" data-toggle="modal" data-target="#joinTenant"><i class="fas fa-object-group" ></i> {{ __('profile.join_a_group') }}</a>
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-caret-down fa-2x"></i>
                         </button>
                     </div>
@@ -68,14 +68,14 @@
     @else
         @cannot('administrator')
             <div class="alert alert-warning" role="alert">
-                <h3>Usuário sem Grupo (Empresa, Organização, Associação etc.)</h3>
+                <h3>{{ __('profile.user_without') }}</h3>
             </div>
             <div class="mb-5">
-                Você deseja
-                <a href="{{ route('tenant.create') }}"> Cadastar </a>
-                um grupo ou
-                <a href="#" data-toggle="modal" data-target="#joinTenant">Participar </a>
-                de um grupo ja existente?
+                {{ __('profile.you_wish') }}
+                <a href="{{ route('tenant.create') }}"> {{ __('profile.register') }} </a>
+                {{ __('profile.a_group') }}
+                <a href="#" data-toggle="modal" data-target="#joinTenant">{{ __('profile.participate') }} </a>
+                {{ __('profile.existing_group')}}
             </div>
         @endcannot
     @endif
@@ -133,7 +133,7 @@
                     </li>
                 </ul>
 
-                <a href="{{ url('/user/profile_edit') }}" class="btn btn-primary btn-block"><b>Alterar Informações</b></a>
+                <a href="{{ url('/user/profile_edit') }}" class="btn btn-primary btn-block"><b>{{ __('profile.change_information') }}</b></a>
             </div>
             <!-- /.card-body -->
         </div>
@@ -141,19 +141,19 @@
     </div>
 </div>
     @else
-    <div class="alert alert-warning" role="alert"><h3>Usuário sem Informações complementares</h3></div>
-    <a class="btn btn-link" href="profile_create">Cadastrar Informações Complementares</a>
+    <div class="alert alert-warning" role="alert"><h3>{{ __('profile.user_without_additional_information') }}</h3></div>
+    <a class="btn btn-link" href="profile_create">{{ __('profile.register_complementary_information')  }}</a>
 @endif
 
 @if(count($addresses) > 0)
 <div class="col-md-5">
     <fieldset>
-        <label for="">Endereços</label>
+        <label for="">{{ __('profile.addresses')}}</label>
         <nav class="navbar navbar-expand navbar-light">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
               <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('user_address.create') }}" class="btn btn-primary"><i class="fas fa-plus mr-1"></i>Adicionar Endereço</a>
+                <a href="{{ route('user_address.create') }}" class="btn btn-primary"><i class="fas fa-plus mr-1"></i>{{ __('profile.register_address') }}</a>
               </li>
             </ul>
         </nav>
@@ -162,7 +162,7 @@
                     <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                       <h3 class="card-title">
                         <i class="fas fa-address-card mr-1"></i>
-                        Endereço {{ $key+1 }}
+                        {{ __('profile.address') }} {{ $key+1 }}
                       </h3>
 
                       <div class="card-tools">
@@ -190,8 +190,8 @@
     </fieldset>
 </div>
 @else
-    <div class="alert alert-warning mt-5" role="alert"><h3>Usuário sem Endereço</h3></div>
-    <a class="btn btn-link" href="{{ route('user_address.create') }}">Cadastrar endereço</a>
+    <div class="alert alert-warning mt-5" role="alert"><h3>{{ __('profile.user_without_address') }}</h3></div>
+    <a class="btn btn-link" href="{{ route('user_address.create') }}">{{ __('profile.register_address') }}</a>
 @endif
 
 @if ($message = Session::get('success'))

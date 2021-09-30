@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Tenant;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -39,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Dispatcher $events)
     {
+        //App::setLocale(App::currentLocale()); //Determina a localidade de acesso do sistema e adequa a liguagem ao usuŕio
+        // App::setLocale('en');
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
             // Add some items to the menu...
 

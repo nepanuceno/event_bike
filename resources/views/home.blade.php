@@ -8,7 +8,7 @@
 
                 @if($user->profile)
                     <div class="card">
-                        <div class="card-header">{{ __('Dashboard') }}</div>
+                        <div class="card-header">{{ __('home.dashboard') }}</div>
 
                         <div class="card-body">
                             @if (session('status'))
@@ -17,23 +17,23 @@
                                 </div>
                             @endif
 
-                            {{ __('You are logged in!') }}
+                            {{ __('home.logged_in') }}
                         </div>
                     </div>
                 @else
                 <div class="callout callout-info">
-                    <h5>Aviso Importante!</h5>
+                    <h5>{{ __('home.important_warning') }}</h5>
 
-                    <p>Para continuar a utilizar o programa você deverá preencher as suas informações complementares e endereços.</p>
-                    <a href="/user/profile">Meu Perfil</a>
+                    <p>{{ __('home.home_message_user') }}</p>
+                    <a href="/user/profile">{{ __('home.my_profile') }}</a>
                 </div>
                 @endif
             @else
                 @if($user->hasRole('Administrator'))
-                        <h1> Área Administrativa</h1>
+                        <h1> {{ __('home.administrative_area') }}</h1>
                 @else
                     @if($user->hasRole('Manager'))
-                        <h1> Área do Gerente</h1>
+                        <h1> {{ __('home.manager_of_area') }}</h1>
                     @endif
                 @endif
 

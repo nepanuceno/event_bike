@@ -1,0 +1,33 @@
+<?php
+
+return [
+    'logged_in' => 'Você está logado',
+    'welcome' => 'Bem vindo ao EventBike!',
+    'slogan' => 'Sua Plataforma de Eventos de Bike',
+    'events' => 'Eventos',
+    'information' => 'Informações',
+    'team' => 'Equipe',
+    'contact' => 'Contato',
+    'choose_your_events' => 'Escolha os seus eventos e faça já as suas inscrições',
+    'profile' => 'Perfil',
+    'exit' => 'Sair',
+    'register' => 'Cadastre-se',
+    'launches_open_enrollments' => 'Lançamentos & Inscrições Abertas',
+    'launches' => 'Lançamentos',
+    'open_for_subscriptions' => 'Inscrições Abertas',
+    'subscriptions_closed ' => 'Inscrições Encerradas',
+    'start_subscribe' => 'Início das inscrições em',
+    'important_warning' => 'Aviso Importante!',
+    'home_message_user' => 'Para continuar a utilizar o programa você deverá preencher as suas informações complementares e endereços.',
+    'administrative_area' => 'Área Administrativa',
+    'manager_of_area' => 'Área do Gerente',
+    'my_profile' => 'Meu Perfil',
+    'sign_up' => 'Increva-se',
+    'login' => 'Entrar',
+    'start' => 'Início',
+    'end' => 'Final',
+    'registered' => 'INSCRITO',
+    'news' => 'NOVIDADE',
+    'unsubscribe' => 'Cancelar Inscrição',
+    'dashboard' => 'Painel'
+ ];

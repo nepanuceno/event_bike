@@ -236,12 +236,12 @@ return [
             'icon'         => 'fas fa-bell',          // A font awesome icon (required).
             'icon_color'   => 'success',              // The initial icon color (optional).
             'label'        => 0,                      // The initial label for the badge (optional).
-            'text'          => 'Solicitações',
+            'text'         => 'requests',
             'label_color'  => 'info',               // The initial badge color (optional).
             'url'          => 'notifications/show',   // The url to access all notifications/elements (required).
             'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
             'dropdown_mode'   => true,                // Enables the dropdown mode (optional).
-            'dropdown_flabel' => 'Solicitações Pendentes', // The label for the dropdown footer link (optional).
+            'dropdown_flabel' => 'pending_requests', // The label for the dropdown footer link (optional).
             'update_cfg'   => [
                 'url' => 'notifications/tenatjoin',         // The url to periodically fetch new data (optional).
                 'period' => 30,                       // The update period for get new data (in seconds, optional).
@@ -250,7 +250,7 @@ return [
         ],
 
         [
-            'text' => 'Portal',
+            'text' => 'home',
             'url'  => '/',
             'icon' => 'fas fa-fw fa-home',
             'topnav' => true,
@@ -270,30 +270,30 @@ return [
         // ],
         // ['header' => 'account_settings'],
         [
-            'header' => 'Parametros de Evento',
+            'header' => 'event_params',
             'can'  => ['manager'],
         ],
         [
-            'text' => 'Usuarios',
+            'text' => 'users',
             'url'  => 'user',
             'icon' => 'fas fa-fw fa-users',
             'can'  => ['user-list'],
         ],
 
         [
-            'text' => 'Eventos',
+            'text' => 'events',
             'url'  => 'event',
             'icon' => 'fas fa-fw fa-flag-checkered',
             'can'  => ['manager'],
         ],
         [
-            'text' => 'Categorias',
+            'text' => 'categories',
             'url'  => 'category',
             'icon' => 'fas fa-fw fa-bicycle',
             'can'  => ['manager'],
         ],
         [
-            'text' => 'Modalidades',
+            'text' => 'modalities',
             'url'  => 'modality',
             'icon' => 'fas fa-fw fa-mountain',
             'can'  => ['manager'],
@@ -304,15 +304,15 @@ return [
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
         [
-            'header' => 'Configurações do Sistema',
+            'header' => 'system_settings',
             'can' => ['administrator'],
         ],
         [
-            'text'    => 'Perfis e Permissões',
+            'text'    => 'roles_and_permissions',
             'icon'    => 'fas fa-fw fa-key',
             'submenu' => [
                 [
-                    'text' => 'Perfis',
+                    'text' => 'roles',
                     'url'  => "/roles",
                     'icon'  => "fa fa-theater-masks",
                     'can'  => ['role-list'],
@@ -342,13 +342,13 @@ return [
                 //     ],
                 // ],
                 [
-                    'text' => 'Permissões',
+                    'text' => 'permissions',
                     'url'  => 'permissions',
                     'icon'  => "fa fa-user-lock",
                     'can'  => ['permission-list'],
                 ],
                 [
-                    'text' => 'Perfis por Usuário',
+                    'text' => 'profiles_by_user',
                     'url'  => 'role_user',
                     'icon'  => "fa fa-street-view",
                     'can'  => ['role-list'],

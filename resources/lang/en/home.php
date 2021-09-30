@@ -1,0 +1,33 @@
+<?php
+
+return [
+    'logged_in' => 'You are logged in',
+    'welcome' => 'Welcome to the EventBike!',
+    'slogan' => 'Your Bike Events Platform',
+    'events' => 'Events',
+    'information' => 'Information',
+    'team' => 'Team',
+    'contact' => 'Contact',
+    'choose_your_events' => 'Choose your events and register now',
+    'profile' => 'Profile',
+    'exit' => 'Exit',
+    'register' => 'Register',
+    'launches_open_enrollments' => 'Launches & Open Enrollments',
+    'launches' => 'Launches',
+    'open_for_subscriptions' => 'Open Subscriptions',
+    'subscriptions_closed ' => 'Subscriptions Closed',
+    'start_subscribe' => 'Subscriptions start at',
+    'important_warning' => 'Important Notice!',
+    'home_message_user' => 'To continue using the program you must fill in your additional information and addresses.',
+    'administrative_area' => 'Administrative Area',
+    'manager_of_area' => 'Manager Area',
+    'my_profile' => 'My Profile',
+    'sign_up' => 'Sign up',
+    'login' => 'Login',
+    'start' => 'Start',
+    'end' => 'End',
+    'registered' => 'REGISTERED',
+    'news' => 'NEWS',
+    'unsubscribe' => 'Unsubscribe',
+    'dashboard' => 'Dashboard'
+ ];

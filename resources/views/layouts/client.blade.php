@@ -36,10 +36,10 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase py-4 py-lg-0">
                         {{-- <li class="nav-item"><a class="nav-link" href="#events">Eventos</a></li> --}}
-                        <li class="nav-item"><a class="nav-link" href="#events">Eventos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">Informações</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">Equipe</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contato</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#events">{{ __('home.events') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">{{ __('home.information') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">{{ __('home.team') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">{{ __('home.contact') }}</a></li>
                 </ul>
 
                 </div>
@@ -54,12 +54,12 @@
                             <div style="display: block; margin-top: 2px;" class="button-content-user">
 
                                 <a class="btn btn-primary btn-sm text-uppercase" href="{{ route('profile') }}">
-                                    <i class="fas fa-id-card"> Perfil</i>
+                                    <i class="fas fa-id-card"> {{ __('home.profile') }}</i>
                                 </a>
 
                                 <a class="btn btn-primary btn-sm text-uppercase" href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt">Sair</i>
+                                    <i class="fas fa-sign-out-alt">{{ __('home.exit') }}</i>
                                 </a>
                             </div>
 
@@ -75,16 +75,16 @@
         <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-                <div class="masthead-subheading">Bem vindo ao EventBike!</div>
-                <div class="masthead-heading text-uppercase">Sua Plataforma de Eventos de Bike</div>
+                <div class="masthead-subheading">{{  __('home.welcome') }}</div>
+                <div class="masthead-heading text-uppercase">{{ __('home.slogan') }}</div>
                 @auth
 
                 @else
                     @if (Route::has('register'))
-                        <a class="btn btn-primary btn-xl text-uppercase" href="/register">Cadastre-se</a>
+                        <a class="btn btn-primary btn-xl text-uppercase" href="/register">{{ __('home.register') }}</a>
                     @endif
                     @if (Route::has('login'))
-                        <a class="btn btn-primary btn-xl text-uppercase" href="/login">Login</a>
+                        <a class="btn btn-primary btn-xl text-uppercase" href="/login">{{ __('home.login') }}</a>
                     @endif
                 @endauth
             </div>

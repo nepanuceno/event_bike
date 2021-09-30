@@ -11,10 +11,10 @@
                     @csrf
                     <input type="hidden" name="id_filter" id="id_filter" value="{{ $id }}">
                     <select name="filter" id="filter">
-                        <option value="1" {{ isset($id) && $id==1 ? 'selected':'' }}>Lançamentos & Inscrições Abertas</option>
-                        <option value="2" {{ isset($id) && $id==2 ? 'selected':'' }}>Lançamentos</option>
-                        <option value="3" {{ isset($id) && $id==3 ? 'selected':'' }}>Inscrições Abertas</option>
-                        <option value="4" {{ isset($id) && $id==4 ? 'selected':'' }}>Inscrições Encerradas</option>
+                        <option value="1" {{ isset($id) && $id==1 ? 'selected':'' }}>{{ __('home.launches_open_enrollments') }}</option>
+                        <option value="2" {{ isset($id) && $id==2 ? 'selected':'' }}>{{ __('home.launches') }}</option>
+                        <option value="3" {{ isset($id) && $id==3 ? 'selected':'' }}>{{ __('home.open_for_subscriptions') }}</option>
+                        <option value="4" {{ isset($id) && $id==4 ? 'selected':'' }}>{{ __('home.subscriptions_closed ') }}</option>
                     </select>
                     {{-- <button type="submit">Filtrar</button> --}}
                 </form>
@@ -23,8 +23,8 @@
     </nav>
 <hr>
     <div class="text-center">
-        <h2 class="section-heading text-uppercase">Eventos</h2>
-        <h3 class="section-subheading text-muted">Escolha os seus eventos e faça já as suas inscrições.</h3>
+        <h2 class="section-heading text-uppercase">{{ __('home.events') }}</h2>
+        <h3 class="section-subheading text-muted">{{ __('home.choose_your_events') }}</h3>
     </div>
 
     <div class="row current">
@@ -36,7 +36,7 @@
                 <div class="position-relative bg-gray">
                     <div class="ribbon-wrapper ribbon-lg">
                       <div class="ribbon bg-warning text-lg">
-                        NOVIDADE
+                        {{ __('home.news') }}
                       </div>
                     </div>
                 @endif
@@ -45,7 +45,7 @@
                 <div class="position-relative bg-gray">
                     <div class="ribbon-wrapper ribbon-xl">
                       <div class="ribbon bg-danger text-xl">
-                        INSCRITO
+                        {{ __('registered') }}
                       </div>
                     </div>
                 @endif
@@ -92,11 +92,11 @@
                                         <p>{{ $event->description }}</p>
                                         <ul class="list-inline">
                                             <li>
-                                                <strong>Início:</strong>
+                                                <strong>{{ __('home.start')}}:</strong>
                                                 {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->format('H:i a') }}
                                             </li>
                                             <li>
-                                                <strong>Final</strong>
+                                                <strong>{{ __('home.end') }}</strong>
                                                 {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->modify('+4 hours')->format('H:i a') }}
 
                                             </li>
@@ -111,9 +111,9 @@
                                                     <button class="btn btn-primary btn-xl text-uppercase"  type="submit">
                                                         <i class="fas fa-sad-tear fa-2x me-1"></i>
                                                         @auth
-                                                        Cancelar Inscrição
+                                                        {{ __('home.unsubscribe') }}
                                                         @else
-                                                        Login
+                                                        {{ __('home.login') }}
                                                         @endauth
                                                     </button>
                                                 </form>
@@ -130,18 +130,18 @@
                                                     <button class="btn btn-primary btn-xl text-uppercase"  type="submit">
                                                         <i class="fas fa-thumbs-up me-1"></i>
                                                         @auth
-                                                        Inscreva-se
+                                                        {{ __('home.sign_up') }}
                                                         @else
-                                                        Login
+                                                        {{ __('home.login') }}
                                                         @endauth
                                                     </button>
                                                 </form>
                                             @endif
 
                                         @elseif ($event->status == 3)
-                                            <h3>Incrições Encerradas</h3>
+                                            <h3>{{ __('home.subscriptions_closed ') }}</h3>
                                         @elseif ($event->status == 1)
-                                            <h3>Início das Incrições em {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date)->format('d/m/Y H:i a') }}</h3>
+                                            <h3>{{ __('home.start_subscribe') }} {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date)->format('d/m/Y H:i a') }}</h3>
                                         @endif
                                     </div>
                                 </div>
