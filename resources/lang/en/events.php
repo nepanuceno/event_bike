@@ -35,5 +35,5 @@ return [
     'error_expression' => 'Oops!',
     'choose_file' => 'Choose File',
     'choose_image' => 'Choose Image',
-    'select_an_option' => 'Selecione uma opção'
+    'select_an_option' => 'Select an Option'
 ];

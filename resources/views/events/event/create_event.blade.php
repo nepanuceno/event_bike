@@ -163,7 +163,7 @@
     <script>
         $(document).ready(function() {
             $('.select2').select2({
-                placeholder: 'Selecione uma opção',
+                placeholder: '{{ __('events.select_an_option') }}',
                 allowClear: true
             });
         });
