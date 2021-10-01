@@ -16,20 +16,20 @@
                     <h2>{{ $event->name }}</h2>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Data do Evento: </strong>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->format('d/m/Y H:i:s') }}</li>
-                    <li class="list-group-item"><strong>Modalidade: </strong>{{ $event->modality->name }}</li>
-                    <li class="list-group-item"><strong>Descrição: </strong>{{ $event->description }}</li>
+                    <li class="list-group-item"><strong>{{ __('events.event_date') }}: </strong>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->format('d/m/Y H:i:s') }}</li>
+                    <li class="list-group-item"><strong>{{ __('events.modality') }}: </strong>{{ $event->modality->name }}</li>
+                    <li class="list-group-item"><strong>{{ __('events.event_description')}}: </strong>{{ $event->description }}</li>
                 </ul>
                 <div class="card-body">
                     <div class="bg-white clearfix">
                         @can('manager')
-                            <a class="btn btn-success float-left mr-1 text-white" href="{{ route('event.edit',$event->id) }}">Editar</a>
+                            <a class="btn btn-success float-left mr-1 text-white" href="{{ route('event.edit',$event->id) }}">{{ __('events.edit_event') }}</a>
 
                             {!! Form::open(['method' => 'DELETE','route' => ['event.destroy', $event->id],'style'=>'display:inline']) !!}
-                                {!! Form::submit('Desativar', ['class' => 'btn btn-danger float-left']) !!}
+                                {!! Form::submit(__('events.disable'), ['class' => 'btn btn-danger float-left']) !!}
                             {!! Form::close() !!}
                         @endcan
-                        <a class="btn btn-default float-right" href="{{ url()->previous() }}">Voltar</a>
+                        <a class="btn btn-default float-right" href="{{ url()->previous() }}">{{ __('events.back_page') }}</a>
                     </div>
                 </div>
             </div>
@@ -38,14 +38,14 @@
             <div class="row">
                 <div class="col-md-6 col-lg-6 col-xl-4">
                     <div class="card">
-                        <h5 class="card-header bg-dark">Valores por Categoria</h5>
+                        <h5 class="card-header bg-dark">{{ __('events.event_values_by_category') }}</h5>
                         <div class="card-body form-group"  style="overflow:scroll; height:39em;">
                             <form action="{{ url('event/add_costs') }}" method="post" class="mb-3">
                                 @csrf
                                 <input type="hidden" id="event" name="event_id" value="{{ $event->id }}">
                                 @foreach ($event->categories as $category)
 
-                                <label for="{{ $category->id }}">Valor de {{ $category->name }}</label>
+                                <label for="{{ $category->id }}">{{ __('events.valueOf') }} {{ $category->name }}</label>
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
@@ -60,7 +60,7 @@
 
                                 @endforeach
                                 <hr>
-                                <button class="btn btn-primary" type="submit">Alterar</button>
+                                <button class="btn btn-primary" type="submit">{{ __('events.change') }}</button>
                             </form>
                         </div>
                     </div>
@@ -68,21 +68,21 @@
 
                 <div class="col-md-8">
                     <div class="card">
-                        <h5 class="card-header bg-dark">Vídeos dop Evento</h5>
+                        <h5 class="card-header bg-dark">{{ __('events.event_videos') }}</h5>
                         <div class="card-body form-group">
                             <form action="{{ url('event/add_video') }}" method="post" class="mb-3">
                                 @csrf
                                 <input type="hidden" id="event" name="event_id" value="{{ $event->id }}">
-                                <label for="url_video">Código do Vídeo - <a href="https://support.google.com/youtube/answer/171780?hl=pt-BR">Ajuda</a></label>
+                                <label for="url_video">{{ __('events.video_code') }} - <a href="https://support.google.com/youtube/answer/171780?hl=pt-BR">{{ __('events.help') }}</a></label>
                                 <div class="input-group">
                                     <input class="form-control" type="text" id="url_video" name="url_video">
                                 </div>
 
-                                <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+                                <button class="btn btn-primary mt-3" type="submit">{{ __('events.add') }}</button>
                                 <hr>
 
                                 <fieldset>
-                                    <label for="videos">Vídeos</label>
+                                    <label for="videos">{{ __('events.videos') }}</label>
                                     <div class="row" style="overflow:scroll; height:24em;">
                                         @foreach ($event->videos as $video)
                                             <div class="col-md-6">
@@ -108,7 +108,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header bg-dark">
-                                <h3 class="card-title">Upload de Imagens</h3>
+                                <h3 class="card-title">{{ __('events.image_upload') }}</h3>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('event.upload', $event->id) }}" class="dropzone" id="dropzoneFrom" style=" border: 2px dashed rgb(54, 183, 0);">
@@ -118,7 +118,7 @@
                         </div>
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h4 class="card-title">Geleria de Imagens</h4>
+                                <h4 class="card-title">{{ __('events.image_gallery') }}</h4>
                             </div>
                             <div class="card-body">
                                 <div class="row">

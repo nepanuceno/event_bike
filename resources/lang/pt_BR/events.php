@@ -3,6 +3,8 @@
 return [
     'events' => 'Eventos',
     'create_an_event' => 'Crair um evento',
+    'disable_event' => 'Desabilitar Evento',
+    'edit_event' => 'Editar Evento',
     'all_events_button' => 'Todos os Eventos',
     'all_events_label' => 'Todos os Eventos',
     'releases_button' => 'Lançamentos',
@@ -32,10 +34,22 @@ return [
     'event_save_edition_button' => 'Salvar Alterações',
     'event_cancel_edition_button' => 'Cancelar',
     'event_place' => 'Local do Evento',
+    'event_values_by_category' => 'Valores por Categoria',
+    'valueOf' => 'Valor de',
+    'years' => 'anos',
     'actions' => 'Ações',
     'data_error' => 'Houve algum problema com sua entrada de dados.',
     'error_expression' => 'Opa!',
     'choose_file' => 'Escolher Arquivo',
     'choose_image' => 'Escolher Imagem',
-    'select_an_option' => 'Selecione uma opção'
+    'select_an_option' => 'Selecione uma opção',
+    'change' => 'Alterar',
+    'disable' => 'Desativar',
+    'event_videos' => 'Videos do Evento',
+    'video_code' => 'Código do Vídeo',
+    'help' => 'Ajuda',
+    'add' => 'Adicionar',
+    'videos' => 'Vídeos',
+    'image_upload' => 'Upload de Imagens',
+    'image_gallery' => 'Galeria de Imagens'
 ];

@@ -3,6 +3,8 @@
 return [
     'events' => 'Events',
     'create_an_event' => 'Create an event',
+    'disable_event' => 'Disable Event',
+    'edit_event' => 'Edit Event',
     'all_events_button' => 'All',
     'all_events_label' => 'All Events',
     'releases_button' => 'Releases',
@@ -32,10 +34,22 @@ return [
     'event_save_edition_button' => 'Save editions',
     'event_cancel_edition_button' => 'Cancel',
     'event_place' => 'Event\'s place',
+    'event_values_by_category' => 'Values by Category',
+    'valueOf' => 'Value of',
+    'years' => 'Years',
     'actions' => 'Actions',
     'data_error' => 'There was some problem with your data entry.',
     'error_expression' => 'Oops!',
     'choose_file' => 'Choose File',
     'choose_image' => 'Choose Image',
-    'select_an_option' => 'Select an Option'
+    'select_an_option' => 'Select an Option',
+    'change' => 'Change',
+    'disable' => 'Desable',
+    'event_videos' => 'Event Videos',
+    'video_code' => 'Video Code',
+    'help' => 'Help',
+    'add' => 'Add',
+    'videos' => 'Videos',
+    'image_upload' => 'Image Upload',
+    'image_gallery' => 'Image Gallery'
 ];
