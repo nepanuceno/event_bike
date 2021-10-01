@@ -8,7 +8,7 @@
     <div class="col-md-6">
     @if (count($errors) > 0)
     <div class="alert alert-danger">
-        <strong>Whoops!</strong> Houve algum problema na sua enrada de dados.<br><br>
+        <strong>{{ __('events.error_expression') }}</strong> {{ __('events.data_error') }}<br><br>
         <ul>
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -28,17 +28,17 @@
                 {{ method_field('PUT') }}
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Nome do Evento</label>
+                        <label for="name">{{ __('events.event_name') }}</label>
                         <input type="name" class="form-control" id="name" name="name" value="{{ $event->name }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Descrição do Evento</label>
+                        <label for="description">{{ __('events.event_description') }}</label>
                         <textarea  class="form-control" name="description" id="description" cols="30" rows="4">{{ $event->description }}</textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="date">Data do Evento</label>
+                        <label for="date">{{ __('events.event_date') }}</label>
                         <div class="form-group">
                             <div class="input-group date datetimepicker" id="date_event" data-target-input="nearest">
                                 <input name="date_event" value="{{$event->date_event }}" type="text" class="form-control datetimepicker-input" data-target="#date_event"/>
@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="start_date">Data de início das inscrições</label>
+                        <label for="start_date">{{ __('events.registration_start_date') }}</label>
                         <div class="form-group">
                             <div class="input-group date datetimepicker" id="start_date" data-target-input="nearest">
                                 <input name="start_date" value="{{ $event->start_date }}" type="text" class="form-control datetimepicker-input" data-target="#start_date"/>
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="end_date">Data do fim das Inscrições</label>
+                        <label for="end_date">{{ __('events.enrollment_end_date') }}</label>
                         <div class="form-group">
                             <div class="input-group date datetimepicker" id="end_date" data-target-input="nearest">
                                 <input name="end_date" value="{{ $event->end_date }}" type="text" class="form-control datetimepicker-input" data-target="#end_date"/>
@@ -75,12 +75,12 @@
 
 
                     <div class="form-group">
-                        <label for="adress">Endereço do Evento</label>
+                        <label for="adress">{{ __('events.event_address') }}</label>
                         <input type="text" class="form-control" id="adress" name="adress" value="{{$event->adress }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="modality_id ">Modalidade</label>
+                        <label for="modality_id ">{{ __('events.modality') }}</label>
                         <select class="form-control select2" id="modality_id" name="modality_id">
                             @foreach($modalities as $modality)
                                 <option></option>
@@ -90,7 +90,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="category ">Categoria</label>
+                        <label for="category ">{{ __('events.category') }}</label>
                         <select class="form-control select2" id="category" name="category[]" multiple>
                             @foreach($categories as $category)
 
@@ -101,11 +101,11 @@
                     </div>
 
                     <div class=" row form-group shadow p-3">
-                        <label for="logo">Edital do Evento</label>
+                        <label for="logo">{{ __('events.event_notice') }}</label>
                         <div class="input-group">
                             <div class="custom-file col-md-7">
                                 <input type="file" onchange="readURL(this);" class="custom-file-input" id="event_notice" name="event_notice" value="{{ $event->event_notice }}">
-                                <label class="custom-file-label" for="event_notice">Escolher Arquivo</label>
+                                <label class="custom-file-label" for="event_notice">{{ __('events.choose_file') }}</label>
                             </div>
                             <div class="col-md-5 mt-2">
                                 <embed class="float-right img-fluid img-thumbnail" src="/storage/event_notices/{{ $event->event_notice }}" type="application/pdf" width="100%" height="100%">
@@ -114,11 +114,11 @@
                     </div>
 
                     <div class="row form-group shadow p-3">
-                        <label for="logo">Logo do Evento</label>
+                        <label for="logo">{{ __('events.event_logo') }}</label>
                         <div class="input-group">
                             <div class="custom-file col-md-7">
                                 <input type="file" onchange="readURL(this);" class="custom-file-input" id="logo" name="logo">
-                                <label class="custom-file-label" for="exampleInputFile">Escolher Arquivo</label>
+                                <label class="custom-file-label" for="exampleInputFile">{{ __('events.choose_image') }}</label>
                             </div>
                             <div class="col-md-5 mt-2">
                                 @if(isset($event->logo))
@@ -135,8 +135,8 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary float-left">Salvar Evento</button>
-                  <a class="btn btn-default float-right" href="{{ url()->previous() }}">Cancelar</a>
+                  <button type="submit" class="btn btn-primary float-left">{{ __('events.event_save_edition_button') }}</button>
+                  <a class="btn btn-default float-right" href="{{ url()->previous() }}">{{ __('events.event_cancel_edition_button') }}</a>
 
                 </div>
             </form>

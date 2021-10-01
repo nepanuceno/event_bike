@@ -29,6 +29,8 @@ return [
     'event_logo' => 'Logo do Evento',
     'event_save_button' => 'Salvar Evento',
     'back_page' => 'Voltar',
+    'event_save_edition_button' => 'Salvar Alterações',
+    'event_cancel_edition_button' => 'Cancelar',
     'event_place' => 'Local do Evento',
     'actions' => 'Ações',
     'data_error' => 'Houve algum problema com sua entrada de dados.',

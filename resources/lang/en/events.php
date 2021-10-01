@@ -29,6 +29,8 @@ return [
     'event_logo' => 'Event Logo',
     'event_save_button' => 'Save Event',
     'back_page' => 'Come back',
+    'event_save_edition_button' => 'Save editions',
+    'event_cancel_edition_button' => 'Cancel',
     'event_place' => 'Event\'s place',
     'actions' => 'Actions',
     'data_error' => 'There was some problem with your data entry.',
