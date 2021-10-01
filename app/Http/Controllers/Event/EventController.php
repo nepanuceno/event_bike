@@ -82,8 +82,12 @@ class EventController extends Controller
     //Filters events based on dates
     public function event_filter($id)
     {
-        $events = $this->event->where('active','<>', 0)
-            ->where('tenant_id', session()->get('tenant_id'));
+        if (session()->get('tenant_id') != 'administrator') {
+            $events = $this->event->where('active','<>', 0)
+                ->where('tenant_id', session()->get('tenant_id'));
+        } else {
+            $events = $this->event->where('active','<>', 0);
+        }
 
         $event_queries = $this->event_queries($events);
 
@@ -170,10 +174,10 @@ class EventController extends Controller
             $event->categories()->sync($request->input('category'));
 
             DB::commit();
-            return back()->with('success','Evento Criado com sucesso');
+            return redirect()->route('event.index')->with('success','Evento Criado com sucesso');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error','Erro ao cadastrar');
+            return redirect()->route('event.index')->with('error','Erro ao cadastrar. '.$th->getMessage());
 
             throw $th;
         }

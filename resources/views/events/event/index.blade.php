@@ -1,11 +1,15 @@
 @extends('adminlte::page')
 
-
 @section('content')
+
 <div class="card card-secondary" style="height: inherit; width: inherit; transition: all 0.15s ease 0s;">
     <div class="card-header pl-2 pr-0">
-        <a class="btn btn-app mb-2 ml-0 bg-olive mr-4" href="{{ route('event.create') }}"> <i class="fas fa-plus"></i> {{ __('events.create_an_event') }}</a>
-        <button type="button" class="btn btn-tool align-top float-right mr-0 ml-3" data-card-widget="maximize"><i class="fas fa-expand fa-2x"></i></button>
+        @can('manager')
+            @cannot('administrator')
+            <a class="btn btn-app mb-2 ml-0 bg-olive mr-4" href="{{ route('event.create') }}"> <i class="fas fa-plus"></i> {{ __('events.create_an_event') }}</a>
+            @endcannot
+        @endcan
+        <button type="button" class="btn btn-tool align-top float-right mr-0 ml-3" data-card-widget="maximize"><i class="fas fa-expand fa-2x"></i></button> <!-- Full Screen Activator Button !-->
 
         <div class="card-tools">
         <a class="btn btn-app  mb-1 bg-primary btn-tool" href="{{ url('event')}}">
@@ -82,44 +86,56 @@
                         <th>{{ __('events.registration_start_date') }}</th>
                         <th>{{ __('events.enrollment_end_date') }}</th>
                         <th>{{ __('events.modality') }}</th>
+                        @cannot('administrator')
                         <th class="text-middle">{{ __('events.actions') }}</th>
+                        @endcannot
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($events as $event)
                         <tr>
                             <td>
+                                @cannot('administrator')
                                 <a class="btn btn-outline-info" href="{{ route('event.show',$event->id) }}">
                                     <i class="fa fa-cogs mr-1"></i>{{ $event->name }}
                                 </a>
+                                @else
+                                {{ $event->name }}
+                                @endcannot()
+
                             </td>
                             <td>{{ $event->adress }}</td>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_event)->format('d/m/Y H:i:s') }}</td>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->start_date)->format('d/m/Y H:i:s') }}</td>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->end_date)->format('d/m/Y H:i:s') }}</td>
                             <td>{{ $event->modality->name }}</td>
+                            @cannot('administrator')
                             <td class="float-right">
                                 @if($event->active <> 0)
-                                <div class="btn-group">
+
 
                                     {{-- <a class="btn btn-success" href="{{ route('event.show',$event->id) }}"><i class="fa fa-cogs"> Configurações & Valores</i></a> --}}
                                     @can('manager')
-                                    <a class="btn btn-secondary" href="{{ route('event.edit',$event->id) }}"><i class="fa fa-edit"></i></a>
+                                        @cannot('administrator')
+                                            <a class="btn btn-secondary" href="{{ route('event.edit',$event->id) }}"><i class="fa fa-edit"></i></a>
+                                        @endcannot
                                     @endcan
+                                    @can('manager')
+                                        @cannot('administrator')
+                                            {!! Form::open(['method' => 'DELETE','route' => ['event.destroy', $event->id],'style'=>'display:inline']) !!}
+                                            {!! Form::button('<i class="fa fa-trash"></i>', ['type'=>'submit', 'class' => 'btn btn-danger']) !!}
+                                            {!! Form::close() !!}
+                                        @endcannot
+                                    @endcan
+                                    @else
                                     @can('manager')
                                     {!! Form::open(['method' => 'DELETE','route' => ['event.destroy', $event->id],'style'=>'display:inline']) !!}
-                                    {!! Form::button('<i class="fa fa-trash"></i>', ['type'=>'submit', 'class' => 'btn btn-danger']) !!}
+                                    {!! Form::button('<i class="fa fa-arrow-up"> Reativar</i>', ['type'=>'submit','class' => 'btn bg-indigo']) !!}
                                     {!! Form::close() !!}
                                     @endcan
-                                </div>
-                                @else
-                                    @can('manager')
-                                        {!! Form::open(['method' => 'DELETE','route' => ['event.destroy', $event->id],'style'=>'display:inline']) !!}
-                                            {!! Form::button('<i class="fa fa-arrow-up"> Reativar</i>', ['type'=>'submit','class' => 'btn bg-indigo']) !!}
-                                        {!! Form::close() !!}
-                                    @endcan
-                                @endif
+                                    @endif
                             </td>
+                            @endcannot
                         </tr>
                     @endforeach
                 </tbody>
