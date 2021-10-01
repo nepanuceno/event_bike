@@ -25,7 +25,7 @@
 
 <div class="card card-primary">
     <div class="card-header">
-      <h2 class="card-title">Gerenciamento de Usuários</h2>
+      <h2 class="card-title">{{ __('users.user_management') }}</h2>
 
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
@@ -38,11 +38,11 @@
       <table class="table table-bordered">
 
        <tr>
-         <th>No</th>
-         <th>Name</th>
-         <th>Email</th>
-         <th>Roles</th>
-         <th width="280px">Action</th>
+         <th>{{ __('users.id') }}</th>
+         <th>{{ __('users.name') }}</th>
+         <th>{{ __('users.email') }}</th>
+         <th>{{ __('users.roles') }}</th>
+         <th width="280px">{{ __('users.actions') }}</th>
        </tr>
 
        @foreach ($data as $key => $user)
@@ -58,10 +58,10 @@
             @endif
           </td>
           <td>
-             <a class="btn btn-info" href="{{ route('user.show',$user->id) }}"><span class="fas fa-eye"></span> Detalhes</a>
+             <a class="btn btn-info" href="{{ route('user.show',$user->id) }}"><span class="fas fa-eye"></span> {{ __('users.details')}}</a>
              <!-- <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a> -->
               {!! Form::open(['method' => 'DELETE','route' => ['user.destroy', $user->id],'style'=>'display:inline']) !!}
-                  {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
+                  {!! Form::submit(__('users.delete'), ['class' => 'btn btn-danger']) !!}
               {!! Form::close() !!}
           </td>
         </tr>
