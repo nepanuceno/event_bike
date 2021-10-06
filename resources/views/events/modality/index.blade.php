@@ -7,7 +7,7 @@
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
         @can('manager')
-            <a class="btn btn-success" href="{{ route('modality.create') }}"> Criar nova Modalidade</a>
+            <a class="btn btn-success" href="{{ route('modality.create') }}"> {{ __('modalities.create_new_modality') }}</a>
         @endcan
         </div>
     </div>
@@ -15,20 +15,20 @@
 
 @empty($modalities)
     <div class="alert alert-warning alert-dismissible fade show pb-3">
-        <p>Não existem Modalidades cadastradas</p>
+        <p>{{ __('modalities.no_modalities_registered') }}</p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
 @else
     <div class="card">
-        <h5 class="card-header bg-dark">Gerenciamento de Modalidades</h5>
+        <h5 class="card-header bg-dark">{{ __('modalities.modality_management') }}</h5>
         <div class="card-body">
             <table class="table table-bordered">
                 <tr>
-                    <th width="25px">No</th>
-                    <th>Nome</th>
-                    <th width="168px">Ação</th>
+                    <th width="25px">{{ __('modalities.id') }}</th>
+                    <th>{{ __('modalities.name') }}</th>
+                    <th width="168px">{{ __('modalities.action') }}</th>
                 </tr>
                     @foreach ($modalities as $key => $modality)
                     <tr>
@@ -36,11 +36,11 @@
                         <td>{{ $modality->name }}</td>
                         <td>
                             @can('manager')
-                                <a class="btn btn-primary" href="{{ route('modality.edit',$modality->id) }}">Editar</a>
+                                <a class="btn btn-primary" href="{{ route('modality.edit',$modality->id) }}">{{ __('modalities.edit') }}</a>
                             @endcan
                             @can('manager')
                                 {!! Form::open(['method' => 'DELETE','route' => ['modality.destroy', $modality->id],'style'=>'display:inline']) !!}
-                                    {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
+                                    {!! Form::submit( __('modalities.delete') , ['class' => 'btn btn-danger']) !!}
                                 {!! Form::close() !!}
                             @endcan
                         </td>

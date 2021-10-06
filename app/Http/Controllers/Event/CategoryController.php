@@ -59,7 +59,7 @@ class CategoryController extends Controller
 
         EventCategory::create(['name'=>$request->input('name')]);
 
-        return redirect()->route('category.index')->with('success','Categoria criada com sucesso');
+        return redirect()->route('category.index')->with('success', __('category.created_successfully'));
     }
 
     /**
@@ -104,7 +104,7 @@ class CategoryController extends Controller
         $permission->save();
 
         return redirect()->route('category.index')
-            ->with('success','Categoria alterada com sucesso!');
+            ->with('success',__('category.successfully_updated'));
     }
 
     /**
@@ -117,6 +117,6 @@ class CategoryController extends Controller
     {
         DB::table("event_categories")->where('id',$id)->delete();
         return redirect()->route('category.index')
-            ->with('success','Categoria excluída com sucesso!');
+            ->with('success',__('category.successfully_deleted'));
     }
 }

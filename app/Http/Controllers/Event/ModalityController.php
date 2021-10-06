@@ -45,9 +45,9 @@ class ModalityController extends Controller
 
         try {
             EventModality::create(['name'=>$request->input('name')]);
-            return redirect()->back()->with('success','Modalidade criado com sucesso!');
+            return redirect()->route('modality.index')->with('success',__('modalities.created_successfully').'!');
         } catch (\Throwable $th) {
-            return redirect()->back('error','Erro ao criar a Modalidade! '.$th);
+            return redirect()->route('modality.index')->with('error',__('modalities.error_creating_modality').'! '.$th);
             //throw $th;
         }
     }
@@ -94,9 +94,9 @@ class ModalityController extends Controller
             $modality->name = $request->input('name');
             $modality->save();
 
-            return redirect()->route('modality.index')->with('success', 'Modalidade atualizada com sucesso!');
+            return redirect()->route('modality.index')->with('success', __('modalities.successfully_updated'));
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Houve algum problema ao atualizar a Modalidade! '.$th);
+            return redirect()->route('modality.index')->with('error', __('modalities.problem_updating').'! '.$th);
         }
     }
 
@@ -110,6 +110,6 @@ class ModalityController extends Controller
     {
         DB::table("event_modalities")->where('id',$id)->delete();
         return redirect()->route('modality.index')
-            ->with('success','Modalidade excluída com sucesso!');
+            ->with('success',__('modalities.successfully_deleted').'!');
     }
 }

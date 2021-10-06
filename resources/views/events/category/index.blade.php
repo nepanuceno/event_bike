@@ -6,14 +6,14 @@
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
         @can('manager')
-            <a class="btn btn-success" href="{{ route('category.create') }}"> Criar nova Categoria</a>
+            <a class="btn btn-success" href="{{ route('category.create') }}"> {{ __('category.create_new_category') }}</a>
         @endcan
         </div>
     </div>
 </div>
 @empty($categories)
     <div class="alert alert-warning alert-dismissible fade show pb-3">
-        <p>Não existem Categorias cadastradas</p>
+        <p>{{ __('category.no_categories_registered') }}</p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -21,14 +21,14 @@
 @else
     <div class="card">
         <div class="card-header bg-dark">
-            <h3 class="card-title">Gerenciamento de Categorias</h3>
+            <h3 class="card-title">{{ __('category.category_management') }}</h3>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
                 <tr>
-                    <th width="25px">No</th>
-                    <th>Nome</th>
-                    <th width="168px">Ação</th>
+                    <th width="25px">{{ __('category.id') }}</th>
+                    <th>{{ __('category.name') }}</th>
+                    <th width="168px">{{ __('category.action') }}</th>
                 </tr>
                 @foreach ($categories as $key => $category)
                 <tr>
@@ -36,10 +36,10 @@
                     <td>{{ $category->name }}</td>
                     <td>
                         @can('manager')
-                            <a class="btn btn-primary" href="{{ route('category.edit',$category->id) }}">Editar</a>
+                            <a class="btn btn-primary" href="{{ route('category.edit',$category->id) }}">{{ __('category.edit') }}</a>
 
                             {!! Form::open(['method' => 'DELETE','route' => ['category.destroy', $category->id],'style'=>'display:inline']) !!}
-                                {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::submit(__('category.delete'), ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         @endcan
                     </td>

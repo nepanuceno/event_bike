@@ -5,7 +5,7 @@
 
 @if (count($errors) > 0)
     <div class="alert alert-danger">
-        <strong>Whoops!</strong> Houve algum problema na sua enrada de dados.<br><br>
+        <strong>{{ __('category.whoops') }}!</strong> {{ __('category.problem_with_data') }}.<br><br>
         <ul>
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -20,7 +20,7 @@
         <!-- general form elements -->
         <div class="card card-dark">
             <div class="card-header">
-                <h3 class="card-title">Criar Categoria</h3>
+                <h3 class="card-title">{{ __('category.create_category') }}</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -29,14 +29,14 @@
 
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Nome da Categoria</label>
+                        <label for="name">{{ __('category.category_name') }}</label>
                         <input type="name" class="form-control" id="name" name="name">
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="clearfix">
-                        <button type="submit" class="btn btn-secondary float-left">Salvar Categoria</button>
-                        <a href="{{ route('category.index') }}" type="button" class="btn btn-secondary float-right text-white">Cancelar</a>
+                        <button type="submit" class="btn btn-secondary float-left">{{ __('category.save_category') }}</button>
+                        <a href="{{ route('category.index') }}" type="button" class="btn btn-secondary float-right text-white">{{ __('category.cancel') }}</a>
                     </div>
                 </div>
             </form>

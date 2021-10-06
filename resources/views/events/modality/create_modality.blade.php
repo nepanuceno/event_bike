@@ -5,7 +5,7 @@
 
 @if (count($errors) > 0)
     <div class="alert alert-danger">
-        <strong>Whoops!</strong> Houve algum problema na sua enrada de dados.<br><br>
+        <strong>{{ __('modalities.whoops') }}!</strong> {{ __('modalities.problem_with_data') }}.<br><br>
         <ul>
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -20,7 +20,7 @@
         <!-- general form elements -->
         <div class="card card-dark">
             <div class="card-header">
-                <h3 class="card-title">Criar Modalidade</h3>
+                <h3 class="card-title">{{ __('modalities.create_modality') }}</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -29,15 +29,15 @@
 
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Nome da Modalidade</label>
+                        <label for="name">{{ __('modalities.modality_name') }}</label>
                         <input type="name" class="form-control" id="name" name="name">
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="card-footer">
                         <div class="clearfix">
-                            <button type="submit" class="btn btn-secondary float-left">Salvar Modalidade</button>
-                            <a href="{{ route('modality.index') }}" type="button" class="btn btn-secondary float-right text-white">Cancelar</a>
+                            <button type="submit" class="btn btn-secondary float-left">{{ __('modalities.save_modality') }}</button>
+                            <a href="{{ route('modality.index') }}" type="button" class="btn btn-secondary float-right text-white">{{ __('modalities.cancel') }}</a>
                         </div>
                     </div>
                 </div>
