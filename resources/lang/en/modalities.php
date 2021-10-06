@@ -15,6 +15,8 @@ return [
     'confirm_delete' => 'Confirm delte',
     'cancel' => 'Cancel',
     'whoops' => 'Whoops',
+    'success' => 'Success',
+    'error' => 'Error',
     'problem_with_data' => 'There was some problem with your data entry',
     'edit_modality' => 'Edit Modality',
     'modality_name' => 'Modality Name',
