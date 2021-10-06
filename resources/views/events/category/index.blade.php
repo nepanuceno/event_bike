@@ -39,7 +39,8 @@
                             <a class="btn btn-primary" href="{{ route('category.edit',$category->id) }}">{{ __('category.edit') }}</a>
 
                             {!! Form::open(['method' => 'DELETE','route' => ['category.destroy', $category->id],'style'=>'display:inline']) !!}
-                                {!! Form::submit(__('category.delete'), ['class' => 'btn btn-danger']) !!}
+                                {{-- {!! Form::submit(__('category.delete'), ['class' => 'btn btn-danger']) !!} --}}
+                                <a href='#' class="btn btn-danger">{{ __('category.delete') }}</a>
                             {!! Form::close() !!}
                         @endcan
                     </td>
@@ -53,19 +54,41 @@
 
 @if ($message = Session::get('success'))
     <span id="message" style="display: none">{{ $message }}</span>
+    <span id="msg_status" style="display: none">{{ __('category.success') }}</span>
 @endif
 
+@if ($message = Session::get('error'))
+    <span id="message" style="display: none">{{ $message }}</span>
+    <span id="msg_status" style="display: none">{{ __('category.error') }}</span>
+@endif
+
+<span id="title" style="display: none">{{ __('category.ara_you_sure') }}?</span>
+<span id="text" style="display: none">{{ __('category.alert_not_reversed') }}</span>
+<span id="text_button" style="display: none">{{ __('category.confirm_delete') }}</span>
 @endsection
 
 @section('js')
     <script src="/js/sweetalert.js"></script>
     @if ($message = Session::get('success'))
-    <script>MessageAlert(['message','success']);</script>
+        <script>
+            let msg_status = document.querySelector('#msg_status').textContent;
+            MessageAlert(['message','success', msg_status]);
+        </script>
     @endif
 
     @if ($message = Session::get('error'))
-        <script>MessageAlert(['message','error']);</script>
+        <script>
+            let msg_status = document.querySelector('#msg_status').textContent;
+            MessageAlert(['message','error', msg_status]);
+        </script>
     @endif
 
-    <script>deleteAlert('btn-danger')</script>
+    <script>
+        let title = document.querySelector('#title').textContent;
+        let text = document.querySelector('#text').textContent;
+        let text_button = document.querySelector('#text_button').textContent;
+
+        deleteAlert(['btn-danger',title, text, 'warning', text_button])
+    </script>
+
 @endsection

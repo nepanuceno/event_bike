@@ -1,15 +1,15 @@
 function deleteAlert(params = 'btn-danger')
 {
-    $('.'+params).click(function(event){
+    $('.'+params[0]).on('click',function(event){
         event.preventDefault(); //nao deixa o botao fazer o submit
         Swal.fire({
-            title: 'Tem certeza disso?',
-            text: "Esta ação não poderá ser revertida",
-            icon: 'warning',
+         title: params[1],
+            text: params[2],
+            icon: params[3],
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Sim, excluir!'
+            confirmButtonText: params[4] + '!'//'Sim, excluir!'
         }).then((result) => {
             if (result.value) {
                 this.parentNode.submit(); //submit do pai(form) do botao acionado
@@ -68,12 +68,12 @@ function confirmeUrlExcludeRoleUserAlert(params)
 
 function MessageAlert(params)
 {
-    let message = document.querySelector('#'+params).textContent;
+    let message = document.querySelector('#'+params[0]).textContent;
 
     if(params[1] == 'success') {
-        type_message = "Sucesso"
+        type_message = params[2]
     } else if(params[1] == 'error') {
-        type_message = "Opss!"
+        type_message = params[2] + '!'
     }
 
     Swal.fire(
