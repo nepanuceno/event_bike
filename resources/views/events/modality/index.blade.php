@@ -7,7 +7,7 @@
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
         @can('manager')
-            <a class="btn btn-success" href="{{ route('modality.create') }}"> {{ __('modalities.create_new_modality') }}</a>
+            <a class="btn btn-success" href="{{ route('modality.create') }}"><i class="fas fa-plus-square"></i> {{ __('modalities.create_new_modality') }}</a>
         @endcan
         </div>
     </div>
@@ -28,20 +28,20 @@
                 <tr>
                     <th width="25px">{{ __('modalities.id') }}</th>
                     <th>{{ __('modalities.name') }}</th>
-                    <th width="168px">{{ __('modalities.action') }}</th>
+                    <th width="200px">{{ __('modalities.action') }}</th>
                 </tr>
                     @foreach ($modalities as $key => $modality)
                     <tr>
-                        <td>{{ ++$key }}</td>
-                        <td>{{ $modality->name }}</td>
-                        <td>
+                        <td class="align-middle text-center">{{ ++$key }}</td>
+                        <td class="align-middle">{{ $modality->name }}</td>
+                        <td class="align-middle text-center">
                             @can('manager')
-                                <a class="btn btn-primary" href="{{ route('modality.edit',$modality->id) }}">{{ __('modalities.edit') }}</a>
+                                <a class="btn btn-primary" href="{{ route('modality.edit',$modality->id) }}"><i class="fas fa-edit"></i> {{ __('modalities.edit') }}</a>
                             @endcan
                             @can('manager')
                                 {!! Form::open(['method' => 'DELETE','route' => ['modality.destroy', $modality->id],'style'=>'display:inline']) !!}
                                     {{-- {!! Form::submit( __('modalities.delete') , ['class' => 'btn btn-danger']) !!} --}}
-                                    <a href='#' class="btn btn-danger">{{ __('modalities.delete') }}</a>
+                                    <a href='#' class="btn btn-danger"><i class="fas fa-trash-alt"></i> {{ __('modalities.delete') }}</a>
                                 {!! Form::close() !!}
                             @endcan
                         </td>

@@ -9,7 +9,7 @@
   </div>
   <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item"><h4>Permissões</h4></li>
+            <li class="list-group-item"><h4>{{ __('roles.permissions') }}</h4></li>
             @if(!empty($rolePermissions))
                 @foreach($rolePermissions as $v)
                     <li class="list-group-item">{{ $v->name }}</li>
@@ -19,7 +19,7 @@
   </div>
 
   <div class="card-footer text-muted">
-        <a class="btn btn-secondary" href="{{ route('roles.index') }}"> Voltar</a>
+        <a class="btn btn-secondary" href="{{ route('roles.index') }}"> {{ __('roles.back_button') }}</a>
   </div>
 </div>
 

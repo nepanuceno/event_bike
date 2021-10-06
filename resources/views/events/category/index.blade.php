@@ -6,7 +6,7 @@
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
         @can('manager')
-            <a class="btn btn-success" href="{{ route('category.create') }}"> {{ __('category.create_new_category') }}</a>
+            <a class="btn btn-success" href="{{ route('category.create') }}"><i class="fas fa-plus-square"></i> {{ __('category.create_new_category') }}</a>
         @endcan
         </div>
     </div>
@@ -28,19 +28,19 @@
                 <tr>
                     <th width="25px">{{ __('category.id') }}</th>
                     <th>{{ __('category.name') }}</th>
-                    <th width="168px">{{ __('category.action') }}</th>
+                    <th width="200px">{{ __('category.action') }}</th>
                 </tr>
                 @foreach ($categories as $key => $category)
                 <tr>
-                    <td>{{ ++$key }}</td>
-                    <td>{{ $category->name }}</td>
-                    <td>
+                    <td class="align-middle text-center">{{ ++$key }}</td>
+                    <td class="align-middle">{{ $category->name }}</td>
+                    <td class="align-middle text-center">
                         @can('manager')
-                            <a class="btn btn-primary" href="{{ route('category.edit',$category->id) }}">{{ __('category.edit') }}</a>
+                            <a class="btn btn-primary" href="{{ route('category.edit',$category->id) }}"><i class="fas fa-edit"></i> {{ __('category.edit') }}</a>
 
                             {!! Form::open(['method' => 'DELETE','route' => ['category.destroy', $category->id],'style'=>'display:inline']) !!}
                                 {{-- {!! Form::submit(__('category.delete'), ['class' => 'btn btn-danger']) !!} --}}
-                                <a href='#' class="btn btn-danger">{{ __('category.delete') }}</a>
+                                <a href='#' class="btn btn-danger"><i class="fas fa-trash-alt"></i> {{ __('category.delete') }}</a>
                             {!! Form::close() !!}
                         @endcan
                     </td>
