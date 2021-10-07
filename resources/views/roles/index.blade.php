@@ -6,8 +6,8 @@
 <nav class="navbar navbar-light bg-light">
     <div class="pull-right">
         @can('role-create')
-            <a class="btn btn-success" href="{{ route('roles.create') }}"> {{__('roles.new_role') }}</a>
-            @endcan
+            <a class="btn btn-success" href="{{ route('roles.create') }}"><i class="fas fa-plus-square"></i> {{__('roles.new_role') }}</a>
+        @endcan
     </div>
 </nav>
 
@@ -19,14 +19,14 @@
 
         <table class="table table-bordered">
             <tr>
-                <th>{{ __('roles.id') }}</th>
+                <th width="35px">{{ __('roles.id') }}</th>
                 <th>{{ __('roles.name') }}</th>
                 <th width="280px">{{ __('roles.actions') }}</th>
             </tr>
 
             @foreach ($roles as $key => $role)
             <tr>
-                <td width="35px" class="align-middle text-center">{{ ++$i }}</td>
+                <td class="align-middle text-center">{{ ++$i }}</td>
                 <td class="align-middle">{{ $role->name }}</td>
                 <td width="220px" class="align-middle text-center">
                     <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}"><i class="fas fa-info"></i> {{ __('roles.details') }}</a>

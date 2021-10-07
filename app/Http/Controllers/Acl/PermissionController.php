@@ -59,7 +59,7 @@ class PermissionController extends Controller
         $role = Permission::create(['name' => $request->input('name')]);
 
         return redirect()->route('permissions.index')
-            ->with('success','Permissão criada com sucesso');
+            ->with('success', __('permissions.create_success').'!');
     }
 
     /**
@@ -103,7 +103,7 @@ class PermissionController extends Controller
         $permission->save();
 
         return redirect()->route('permissions.index')
-            ->with('success','Permissão alterada com sucesso!');
+            ->with('success', __('permissions.update_success').'!');
     }
 
     /**
@@ -116,6 +116,6 @@ class PermissionController extends Controller
     {
         DB::table("permissions")->where('id',$id)->delete();
         return redirect()->route('permissions.index')
-            ->with('success','Permissão apagada com sucesso!');
+            ->with('success', __('permissions.delete_success').'!');
     }
 }

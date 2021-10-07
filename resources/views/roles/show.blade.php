@@ -19,7 +19,7 @@
   </div>
 
   <div class="card-footer text-muted">
-        <a class="btn btn-secondary" href="{{ route('roles.index') }}"> {{ __('roles.back_button') }}</a>
+        <a class="btn btn-secondary" href="{{ route('roles.index') }}"><i class="fas fa-arrow-circle-left"></i> {{ __('roles.back_button') }}</a>
   </div>
 </div>
 
