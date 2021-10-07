@@ -11,7 +11,7 @@
     @if (count($errors) > 0)
 
         <div class="alert alert-danger">
-            <strong>Whoops!</strong> Houve problemas nas suas entradas de dados.<br><br>
+            <strong>{{ __('roles_user.whoops') }}!</strong> {{ __('roles_user.problem_with_data') }}.<br><br>
             <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card">
-            <h5 class="card-header bg-dark">Perfis por usuário</h5>
+            <h5 class="card-header bg-dark">{{ __('roles_user.profiles_assing_user') }}</h5>
             <div class="card-body">
 
                 <div class="row">
@@ -34,16 +34,16 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Ususário</label>
+                                            <label>{{ __('roles_user.user') }}</label>
                                             <select class="select2bs4 select_input_users" id="user" name="user" data-placeholder="Pesquise por um usuário" style="width: 100%;">
-                                            <option value="null">Pesquise por um usuário</option>
+                                            <option value="null">{{ __('roles_user.search_user') }}</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Perfis para atribuir ao Usuário</label>
+                                            <label>{{ __('roles_user.profiles_assing_user') }}</label>
                                             <select class="select2 select_input_roles" multiple name="roles[]" id="roles" data-placeholder="Selecione as funções" style="width: 100%;">
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                             <hr>
-                            <button class="btn btn-secondary" type="submit">Assossiar Perfil</button>
+                            <button class="btn btn-secondary" type="submit"><i class="fas fa-sitemap"></i> {{ __('roles_user.associate_profile') }}</button>
 
                         </form>
                     </div>

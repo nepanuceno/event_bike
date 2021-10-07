@@ -1,19 +1,19 @@
 <?php
 
 return [
-    'new_role' => 'Criar nova função',
-    'role_management' => 'Gerenciamento de funções',
-    'id' => 'nº',
-    'name' => 'Nome',
-    'actions' => 'Ações',
-    'details' => 'Detalhes',
-    'edidt' => 'Editar',
+    'new_role' => 'Create new role',
+    'role_management' => 'Role management',
+    'id' => 'no',
+    'name' => 'Name',
+    'actions' => 'Actions',
+    'details' => 'Details',
+    'edidt' => 'Edit',
     'delete' => 'Delete',
-    'success' => 'Sucesso',
-    'error' => 'Erro',
-    'are_you_sure' => 'Tem certeza?',
-    'alert_not_reversed' => 'Esta ação não pode ser revertida.',
-    'confirm_delete' => 'Confirmar exclusão',
-    'permissions' => 'Permissões',
-    'back_button' => 'Volte'
+    'success' => 'Success',
+    'error' => 'Error',
+    'are_you_sure' => 'Are you sure?',
+    'alert_not_reversed' => 'This action cannot be reversed.',
+    'confirm_delete' => 'Confirm deletion',
+    'permissions' => 'Permissions',
+    'back_button' => 'Back'
 ];
