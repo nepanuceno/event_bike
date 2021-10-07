@@ -35,7 +35,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>{{ __('roles_user.user') }}</label>
-                                            <select class="select2bs4 select_input_users" id="user" name="user" data-placeholder="Pesquise por um usuário" style="width: 100%;">
+                                            <select class="select2bs4 select_input_users" id="user" name="user" data-placeholder="{{ __('roles_user.search_user') }}" style="width: 100%;">
                                             <option value="null">{{ __('roles_user.search_user') }}</option>
                                             </select>
                                         </div>
@@ -44,7 +44,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>{{ __('roles_user.profiles_assing_user') }}</label>
-                                            <select class="select2 select_input_roles" multiple name="roles[]" id="roles" data-placeholder="Selecione as funções" style="width: 100%;">
+                                            <select class="select2 select_input_roles" multiple name="roles[]" id="roles" data-placeholder="{{ __('roles_user.select_profiles') }}" style="width: 100%;">
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
                                             @endforeach
