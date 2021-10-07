@@ -43,10 +43,10 @@ class RoleUserController extends Controller
             $user = User::find($request->user);
             $user->assignRole([$request->roles]);
 
-            return back()->with('success','Vínculo efetivado com sucesso!');
+            return back()->with('success', __('roles_user.link_successfully_completed').'!');
         } catch (Throwable $e) {
             report($e);
-            return back()->with('error','Erro: '.$e);
+            return back()->with('error', __('roles_user.error').': '.$e);
             // return false;
         }
     }
@@ -109,10 +109,10 @@ class RoleUserController extends Controller
 
             try {
                 $user->removeRole($role);
-                return redirect()->back()->with('success', "Função [".$role."] desvinculada de ".$user->name);
+                return redirect()->back()->with('success', __('roles_user.function') ." [".$role."] ". __('roles_user.unlinked_from') ." ".$user->name);
             } catch (\Throwable $th) {
 
-                return redirect()->back()->with('error', "Função [".$role."] não pôde ser desvinculada de ".$user->name);
+                return redirect()->back()->with('error', __('roles_user.function') ."[".$role."] ".__('roles_user.could_unlinked_from')." ".$user->name);
                 //throw $th;
             }
         }

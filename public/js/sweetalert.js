@@ -21,42 +21,44 @@ function deleteAlert(params = 'btn-danger')
     });
 }
 
-function confirmeUrlExcludeRoleUserAlert(params)
+function confirmeUrlExcludeRoleUserAlert(context, params)
 {
+    console.log(params)
     Swal.fire({
-        title: 'Tem certeza?',
-        text: "Após a confirmação positiva o usuário não terá mais as permissões fornecidas por esse Perfil do sistema.",
+        title: params[2], //params[3]
+        text: params[3],
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, desvincule o perfil!'
+        confirmButtonText: params[4],
+        cancelButtonText: params[9]
     }).then((result) => {
 
-        console.log(result);
+        // console.log(result);
         if (result.value) {
 
-            fetch('delete_roles_user/'+params[1]+'/'+params[2]).then(function(response) {
+            fetch('delete_roles_user/'+params[0]+'/'+params[1]).then(function(response) {
                 if(response.ok) {
                     Swal.fire(
-                        'Desvinculado!',
-                        'O usuário desvinculado do Perfil',
+                        params[5],
+                        params[6],
                         'success'
                     )
-                    params[0].remove();//Exclui o botao da div
+                    context.remove();//Exclui o botao da div
 
                 } else {
-                  console.log('Network response was not ok.');
+                //   console.log('Network response was not ok.');
                   Swal.fire(
-                    'Erro ao tentar Desvincular!',
-                    'O usuário não pôde desvinculado do Perfil',
+                    params[7],
+                    params[8],
                     'error'
                   )
                 }
             }).catch(function(error) {
-                console.log('There has been a problem with your fetch operation: ' + error.message);
+                // console.log('There has been a problem with your fetch operation: ' + error.message);
                 Swal.fire(
-                    'Erro ao tentar Desvincular!',
+                    params[7],
                     error.message,
                     'error'
                   )
