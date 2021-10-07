@@ -255,6 +255,22 @@ return [
             'icon' => 'fas fa-fw fa-home',
             'topnav' => true,
         ],
+        // [
+        //     'icon'  => 'fas fa-flag',
+        //     'icon_color' => 'blue',
+        //     'text'    => 'language',
+        //     'topnav_right' => true,
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Português',
+        //             'url'  => 'language/pt_BR',
+        //         ],
+        //         [
+        //             'text' => 'English',
+        //             'url'  => 'language/en',
+        //         ],
+        //     ],
+        // ],
 
         // [
         //     'text' => 'blog',

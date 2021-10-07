@@ -13,5 +13,6 @@ return [
     'roles_and_permissions' => 'Roles and Permissions',
     'roles' => 'Roles',
     'permissions' => 'Permissions',
-    'profiles_by_user' => 'Profiles by User'
+    'profiles_by_user' => 'Profiles by User',
+    'language' => 'Language'
 ];

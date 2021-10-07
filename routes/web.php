@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\TenantController;
@@ -68,6 +70,11 @@ Route::get('choices',[TenantController::class, 'choices'])
 
 Route::get('notifications/get', [NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
 Route::get('notifications/tenatjoin', [NotificationsController::class, 'getNotificationsTenantJoin'])->name('notificationstenantjoin.get');
+// Route::get('language/{id}', function(Request $request, $id) {
+//     Session::put('language','pt_BR');
+//     // dd('Aqui');
+//     return back();
+// });
 
 Route::get('setTenantId/{id}', [TenantController::class, 'setTenantId'])->name('setTenantId');
 
