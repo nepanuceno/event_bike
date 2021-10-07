@@ -2,12 +2,13 @@
 
 return [
     'new_role' => 'Create new role',
+    'save_role' => 'Save Role',
     'role_management' => 'Role management',
     'id' => 'no',
     'name' => 'Name',
     'actions' => 'Actions',
     'details' => 'Details',
-    'edidt' => 'Edit',
+    'edit' => 'Edit',
     'delete' => 'Delete',
     'success' => 'Success',
     'error' => 'Error',
@@ -15,5 +16,8 @@ return [
     'alert_not_reversed' => 'This action cannot be reversed.',
     'confirm_delete' => 'Confirm deletion',
     'permissions' => 'Permissions',
-    'back_button' => 'Back'
+    'back_button' => 'Come Back',
+    'whoops' => 'Whoops!',
+    'problem_with_data' => 'There was a problem with your data entry',
+    'cancel' => 'Cancel'
 ];
