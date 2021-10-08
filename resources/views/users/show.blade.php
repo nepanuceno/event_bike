@@ -37,18 +37,17 @@
               </div>
               <div class="card-footer p-0">
                 <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      Funções
-                      <!-- <span class="float-right badge bg-primary">31</span> -->
-                      @if(!empty($user->getRoleNames()))
-                            @foreach($user->getRoleNames() as $v)
-                                <span class="float-right badge bg-primary">{{ $v }}</span>
-                            @endforeach
-                        @endif
-                    </a>
-                  </li>
-
+                    <!-- <span class="float-right badge bg-primary">31</span> -->
+                    @if(!empty($user->getRoleNames()))
+                    <h2>{{ __('users.roles') }}</h2>
+                        @foreach($user->getRoleNames() as $v)
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <h5><span class="float-right badge bg-primary ml-1">{{ $v }}</span></h5>
+                                </a>
+                            </li>
+                        @endforeach
+                    @endif
                 </ul>
               </div>
             </div>
